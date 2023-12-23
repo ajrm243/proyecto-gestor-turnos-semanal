@@ -27,6 +27,8 @@ class Vista:
         self.tree.heading("Edad", text="Edad")
         self.tree.grid(row=3, column=0, columnspan=2, pady=10)
 
+        self.tree.bind("<<TreeviewSelect>>", self.llenar_campos_seleccionados)
+
     def agregar_usuario(self):
         nombre = self.entry_nombre.get()
         edad = self.entry_edad.get()
@@ -39,6 +41,17 @@ class Vista:
         self.tree.delete(*self.tree.get_children())
         for usuario in usuarios:
             self.tree.insert("", "end", values=usuario)
+
+    def llenar_campos_seleccionados(self, event):
+        # Obtener la fila seleccionada
+        item = self.tree.selection()
+        if item:
+            # Obtener los valores de la fila seleccionada y llenar los campos correspondientes
+            values = self.tree.item(item, "values")
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_nombre.insert(0, values[1])  # Nombre
+            self.entry_edad.delete(0, tk.END)
+            self.entry_edad.insert(0, values[2])  # Edad
 
     def iniciar_aplicacion(self):
         self.ventana.mainloop()
