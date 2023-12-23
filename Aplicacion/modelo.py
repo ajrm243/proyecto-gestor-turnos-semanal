@@ -22,5 +22,9 @@ class Modelo:
         self.c.execute("DELETE FROM usuarios WHERE id=?", (id))
         self.conn.commit()
 
+    def actualizar_usuario(self, id_usuario, nombre, edad):
+        self.c.execute("UPDATE usuarios SET nombre=?, edad=? WHERE id=?", (nombre, edad, id_usuario))
+        self.conn.commit()
+
     def cerrar_conexion(self):
         self.conn.close()

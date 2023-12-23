@@ -11,6 +11,10 @@ class Controlador:
     def agregar_usuario(self, nombre, edad):
         self.modelo.agregar_usuario(nombre, edad)
         self.vista.actualizar_lista_usuarios()
+
+    def actualizar_usuario(self, id, nombre, edad):
+        self.modelo.actualizar_usuario(id, nombre, edad)
+        self.vista.actualizar_lista_usuarios()    
     
     def eliminar_usuario(self, id):
         self.modelo.eliminar_usuario(id)
