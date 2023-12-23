@@ -35,6 +35,9 @@ class Vista:
         if nombre and edad:
             self.controlador.agregar_usuario(nombre, edad)
             self.actualizar_lista_usuarios()
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_edad.delete(0, tk.END)
+           
 
     def actualizar_lista_usuarios(self):
         usuarios = self.controlador.obtener_usuarios()
