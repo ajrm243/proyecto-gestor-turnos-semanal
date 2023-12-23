@@ -18,5 +18,9 @@ class Modelo:
         self.c.execute("SELECT * FROM usuarios")
         return self.c.fetchall()
 
+    def eliminar_usuario(self, id):
+        self.c.execute("DELETE FROM usuarios WHERE id=?", (id))
+        self.conn.commit()
+
     def cerrar_conexion(self):
         self.conn.close()
