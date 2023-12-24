@@ -7,37 +7,35 @@ class Vista:
         self.controlador = controlador
         self.ventana_inicial = tk.Tk()
         self.ventana_inicial.title("Ventana Inicial")
-        self.ventana_inicial.configure(bg="white")
 
-        self.ventana_inicial.geometry('500x370+{}+{}'.format((self.ventana_inicial.winfo_screenwidth() - 500) // 2, 
-                                                      (self.ventana_inicial.winfo_screenheight() - 370) // 2))
+        self.ventana_inicial.geometry('500x370+{}+{}'.format((self.ventana_inicial.winfo_screenwidth() - 500) // 2,
+                                                              (self.ventana_inicial.winfo_screenheight() - 370) // 2))
         self.ventana_inicial.resizable(width=False, height=False)
 
-        self.btn_colaboradores = tk.Button(self.ventana_inicial, activebackground="#f3e3e3", activeforeground="#fceeee",
-                            anchor="center", bg="#4E5485",
-                            fg="#e9e4e4", justify="center", text="Colaboradores", relief="raised",
-                            command=self.abrir_ventana_principal)
-        self.btn_colaboradores.place(x=190, y=80, width=120, height=35)
+        self.crear_boton(self.ventana_inicial, x=190, y=80, text="Colaboradores", command=self.abrir_ventana_principal)
+        self.crear_boton(self.ventana_inicial, x=190, y=130, text="Roles")
+        self.crear_boton(self.ventana_inicial, x=190, y=180, text="Turnos")
+        self.crear_boton(self.ventana_inicial, x=190, y=230, text="Disponibilidades")
+        self.crear_boton(self.ventana_inicial, x=190, y=280, text="Cargar Colaboradores")
 
-        self.btn_roles = tk.Button(self.ventana_inicial, bg="#4E5485",fg="#e9e4e4", justify="center", text="Roles")
-        self.btn_roles.place(x=190, y=130, width=120, height=35)
-
-        self.btn_turnos = tk.Button(self.ventana_inicial, bg="#4E5485",fg="#e9e4e4", justify="center", text="Turnos")
-        self.btn_turnos.place(x=190, y=180, width=120, height=35)
-
-        self.btn_disponibilidades = tk.Button(self.ventana_inicial, bg="#4E5485",fg="#e9e4e4", justify="center", text="Disponibilidades")
-        self.btn_disponibilidades.place(x=190, y=230, width=120, height=35)
-
-        self.btn_cargar_colaboradores = tk.Button(self.ventana_inicial, bg="#4E5485",fg="#e9e4e4", justify="center", text="Cargar Colaboradores")
-        self.btn_cargar_colaboradores.place(x=190, y=280, width=120, height=35)
-
+    def crear_boton(self, ventana, x, y, text, command=None):
+        boton = tk.Button(
+            ventana,
+            bg="#4E5485",
+            fg="#e9e4e4",
+            justify="center",
+            text=text,
+            command=command
+        )
+        boton.place(x=x, y=y, width=120, height=35)
+        return boton
 
     def abrir_ventana_principal(self):
         self.ventana_inicial.withdraw()
-        
+
         self.ventana = tk.Tk()
         self.ventana.title("Opciones de Usuario")
-        self.ventana.geometry('780x470+{}+{}'.format((self.ventana.winfo_screenwidth() - 500) // 2, 
+        self.ventana.geometry('780x470+{}+{}'.format((self.ventana.winfo_screenwidth() - 500) // 2,
                                                       (self.ventana.winfo_screenheight() - 370) // 2))
         self.ventana.resizable(width=False, height=False)
 
@@ -56,17 +54,10 @@ class Vista:
         self.entry_edad = ttk.Entry(self.ventana)
         self.entry_edad.place(x=230, y=100)
 
-        self.btn_agregar = tk.Button(self.ventana,bg="#4E5485",fg="#e9e4e4", justify="center", text="Agregar Usuario", command=self.agregar_usuario)
-        self.btn_agregar.place(x=480, y=10,width=120)
-
-        self.btn_actualizar = tk.Button(self.ventana,bg="#4E5485",fg="#e9e4e4", justify="center", text="Actualizar Usuario", command=self.actualizar_usuario)
-        self.btn_actualizar.place(x=480, y=50,width=120)
-
-        self.btn_eliminar = tk.Button(self.ventana, bg="#4E5485",fg="#e9e4e4", justify="center",text="Eliminar Usuario", command=self.eliminar_usuario)
-        self.btn_eliminar.place(x=480, y=90,width=120)
-
-        self.btn_regresar = tk.Button(self.ventana,bg="#4E5485",fg="#e9e4e4", justify="center", text="Regresar a Ventana Inicial", command=self.regresar_a_ventana_inicial)
-        self.btn_regresar.place(x=330, y=400)
+        self.crear_boton(self.ventana, x=480, y=10, text="Agregar Usuario", command=self.agregar_usuario)
+        self.crear_boton(self.ventana, x=480, y=50, text="Actualizar Usuario", command=self.actualizar_usuario)
+        self.crear_boton(self.ventana, x=480, y=90, text="Eliminar Usuario", command=self.eliminar_usuario)
+        self.crear_boton(self.ventana, x=330, y=400, text="Regresar", command=self.regresar_a_ventana_inicial)
 
         self.tree = ttk.Treeview(self.ventana, columns=("ID", "Nombre", "Edad"), show="headings")
         self.tree.heading("ID", text="ID")
