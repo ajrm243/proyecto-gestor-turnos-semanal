@@ -5,7 +5,6 @@ class Controlador:
     def __init__(self):
         self.modelo = Modelo("usuarios.db")
         self.vista = Vista(self)
-        #self.vista.actualizar_lista_usuarios()
         self.vista.iniciar_aplicacion()
 
     def agregar_usuario(self, nombre, edad):
