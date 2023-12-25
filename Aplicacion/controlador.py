@@ -3,16 +3,16 @@ from vista import Vista
 
 class Controlador:
     def __init__(self):
-        self.modelo = Modelo("usuarios.db")
+        self.modelo = Modelo("proyecto_verano.db")
         self.vista = Vista(self)
         self.vista.iniciar_aplicacion()
 
-    def agregar_usuario(self, nombre, edad):
-        self.modelo.agregar_usuario(nombre, edad)
+    def agregar_usuario(self, username, password):
+        self.modelo.agregar_usuario(username, password)
         self.vista.actualizar_lista_usuarios()
 
-    def actualizar_usuario(self, id, nombre, edad):
-        self.modelo.actualizar_usuario(id, nombre, edad)
+    def actualizar_usuario(self, id, username, password):
+        self.modelo.actualizar_usuario(id, username, password)
         self.vista.actualizar_lista_usuarios()    
     
     def eliminar_usuario(self, id):
