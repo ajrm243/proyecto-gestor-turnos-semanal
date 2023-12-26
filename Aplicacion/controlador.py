@@ -8,7 +8,6 @@ class Controlador:
         self.vista.iniciar_aplicacion()
 
     #--------USUARIOS------------
-
     def agregar_usuario(self, username, password):
         self.modelo.agregar_usuario(username, password)
         self.vista.actualizar_lista_usuarios()
@@ -39,9 +38,24 @@ class Controlador:
 
     def obtener_roles(self):
         return self.modelo.obtener_roles()
+    
+    #--------DISPONIBILIDADES-----------
 
+    def agregar_disponibilidad(self, nombre, descripcion):
+        self.modelo.agregar_disponibilidad(nombre, descripcion)
+        self.vista.actualizar_lista_disponibilidades()
+
+    def actualizar_disponibilidad(self, id, nombre, descripcion):
+        self.modelo.actualizar_disponibilidad(id, nombre, descripcion)
+        self.vista.actualizar_lista_disponibilidades()    
     
+    def eliminar_disponibilidad(self, id):
+        self.modelo.eliminar_disponibilidad(id)
+        self.vista.actualizar_lista_disponibilidades()
+
+    def obtener_disponibilidades(self):
+        return self.modelo.obtener_disponibilidades()
+
 #--------MAIN----------
-    
 if __name__ == "__main__":
     controlador = Controlador()

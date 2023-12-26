@@ -4,16 +4,28 @@ class Modelo:
     def __init__(self, db_file):
         self.conn = sqlite3.connect(db_file)
         self.c = self.conn.cursor()
+
+        #-----------------TABLAS-------------------------
+
         self.c.execute('''CREATE TABLE IF NOT EXISTS Usuario 
                           (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                            Username TEXT, 
                            Password TEXT)''')
         self.conn.commit()
+
         self.c.execute('''CREATE TABLE IF NOT EXISTS Rol 
                           (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                            Nombre TEXT, 
                            Descripcion TEXT)''')
         self.conn.commit()
+
+        self.c.execute('''CREATE TABLE IF NOT EXISTS Disponibilidad 
+                          (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                           Nombre TEXT, 
+                           Descripcion TEXT)''')
+        self.conn.commit()
+
+     #-----------------USUARIOS-------------------------
 
     def agregar_usuario(self, username, password):
         self.c.execute("INSERT INTO Usuario (Username, Password) VALUES (?, ?)", (username, password))
@@ -31,6 +43,8 @@ class Modelo:
         self.c.execute("UPDATE Usuario SET Username=?, Password=? WHERE ID_Usuario=?", (username, password, id_usuario))
         self.conn.commit()
 
+    #-----------------ROLES-------------------------
+
     def agregar_rol(self, nombre, descripcion):
         self.c.execute("INSERT INTO Rol (Nombre, Descripcion) VALUES (?, ?)", (nombre, descripcion))
         self.conn.commit()
@@ -46,6 +60,26 @@ class Modelo:
     def actualizar_rol(self, id_rol, nombre, descripcion):
         self.c.execute("UPDATE Rol SET Nombre=?, Descripcion=? WHERE ID_Rol=?", (nombre, descripcion, id_rol))
         self.conn.commit()
+
+    #-----------------DISPONIBILIDADES-------------------------
+
+    def agregar_disponibilidad(self, nombre, descripcion):
+        self.c.execute("INSERT INTO Disponibilidad (Nombre, Descripcion) VALUES (?, ?)", (nombre, descripcion))
+        self.conn.commit()
+
+    def obtener_disponibilidades(self):
+        self.c.execute("SELECT * FROM Disponibilidad")
+        return self.c.fetchall()
+
+    def eliminar_disponibilidad(self, id):
+        self.c.execute("DELETE FROM Disponibilidad WHERE ID_Disponibilidad=?", (id))
+        self.conn.commit()
+
+    def actualizar_disponibilidad(self, id_disponibilidad, nombre, descripcion):
+        self.c.execute("UPDATE Disponibilidad SET Nombre=?, Descripcion=? WHERE ID_Disponibilidad=?", (nombre, descripcion, id_disponibilidad))
+        self.conn.commit()
+
+     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):
         self.conn.close()
