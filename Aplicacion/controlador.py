@@ -1,5 +1,7 @@
 from modelo import Modelo
 from vista import Vista
+# Es para la carga de colaboradores
+import pandas as pd
 
 class Controlador:
     def __init__(self):
@@ -55,6 +57,34 @@ class Controlador:
 
     def obtener_disponibilidades(self):
         return self.modelo.obtener_disponibilidades()
+    
+    #--------COLABORADORES-----------
+    
+    def agregar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad):
+        self.modelo.agregar_colaborador(nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad)
+        self.vista.actualizar_lista_colaboradores() #TODO
+    
+    def actualizar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad):
+        self.modelo.actualizar_colaborador(nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad)
+        self.vista.actualizar_lista_colaboradores() #TODO
+    
+    def eliminar_colaborador(self, id):
+        self.modelo.eliminar_colaborador(id)
+        self.vista.actualizar_lista_colaboradores() #TODO
+    
+    def obtener_colaboradores(self):
+        self.modelo.obtener_colaboradores()
+        self.vista.actualizar_lista_colaboradores() #TODO
+    
+    def cargar_lista_colaboradores(self, ruta):
+        file = pd.ExcelFile(ruta)
+        df = pd.read_excel(file)
+        for row in df.to_records(index=False):
+            #print(row["Nombre"], type(row["Nombre"]))
+            self.modelo.agregar_colaborador(row["Nombre"], row["Correo"], row["Telefono"]
+                                            , row["Rol"], row["Turno"], row["Disponibilidad"]
+                                            , row["Modalidad"])
+        
 
 #--------MAIN----------
 if __name__ == "__main__":

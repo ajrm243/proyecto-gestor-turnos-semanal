@@ -5,7 +5,7 @@ class Modelo:
         self.conn = sqlite3.connect(db_file)
         self.c = self.conn.cursor()
 
-        #-----------------TABLAS-------------------------
+    #-----------------TABLAS-------------------------
 
         self.c.execute('''CREATE TABLE IF NOT EXISTS Usuario 
                           (id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -24,8 +24,22 @@ class Modelo:
                            Nombre TEXT, 
                            Descripcion TEXT)''')
         self.conn.commit()
+        
+        self.c.execute('''CREATE TABLE IF NOT EXISTS Colaborador
+                          (ID_Colaborador INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                          Nombre TEXT(128) NOT NULL,
+                          Correo TEXT(128) NOT NULL,
+                          Telefono TEXT DEFAULT (2256-2222) NOT NULL,
+                          ID_Rol INTEGER NOT NULL,
+                          ID_Turno INTEGER NOT NULL,
+                          ID_Disponibilidad INTEGER NOT NULL,
+                          Modalidad INTEGER DEFAULT (1) NOT NULL,
+                          CONSTRAINT Colaborador_FK_3 FOREIGN KEY (ID_Rol) REFERENCES Rol(ID_Rol),
+                          CONSTRAINT Colaborador_FK_4 FOREIGN KEY (ID_Turno) REFERENCES Turno(ID_Turno),
+                          CONSTRAINT Colaborador_FK_5 FOREIGN KEY (ID_Disponibilidad) REFERENCES Disponibilidad(ID_Disponibilidad))''')
+        self.conn.commit()
 
-     #-----------------USUARIOS-------------------------
+    #-----------------USUARIOS-------------------------
 
     def agregar_usuario(self, username, password):
         self.c.execute("INSERT INTO Usuario (Username, Password) VALUES (?, ?)", (username, password))
@@ -79,7 +93,25 @@ class Modelo:
         self.c.execute("UPDATE Disponibilidad SET Nombre=?, Descripcion=? WHERE ID_Disponibilidad=?", (nombre, descripcion, id_disponibilidad))
         self.conn.commit()
 
-     #-----------------OTROS-------------------------
+    #-----------------COLABORADORES-------------------------
+    
+    def agregar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad):
+        self.c.execute("INSERT INTO Colaborador (Nombre, Correo, Telefono, ID_Rol, ID_Turno, ID_Disponibilidad, Modalidad) VALUES(?, ?, ?, ?, ?, ?, ?)", (nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad))
+        self.conn.commit()
+    
+    def obtener_colaboradores(self):
+        self.c.execute("SELECT * FROM Colaborador")
+        return self.c.fetchall()
+    
+    def eliminar_colaborador(self, id):
+        self.c.execute("DELETE FROM Colaborador WHERE ID_Colaborador=?", (id))
+        self.conn.commit()
+    
+    def actualizar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad, id_colaborador):
+        self.c.execute("UPDATE Colaborador SET Nombre=?, Correo=?, Telefono=?, ID_Rol=?, ID_Turno=?, ID_Disponibilidad=?, Modalidad=? WHERE ID_Colaborador=?", (nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad, id_colaborador))
+        self.conn.commit()
+    
+    #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):
         self.conn.close()

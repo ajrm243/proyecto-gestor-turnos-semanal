@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter.filedialog import askopenfilename
 
 
 class Vista:
@@ -58,7 +59,7 @@ class Vista:
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=130, text="Roles", command=self.abrir_ventana_roles)
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=180, text="Turnos")
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=230, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=280, text="Cargar Colaboradores")
+        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=280, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
 
 #--------USUARIOS----------
     def abrir_ventana_usuarios(self):
@@ -346,3 +347,9 @@ class Vista:
 
     def iniciar_aplicacion(self):
         self.ventana_login.mainloop()
+    
+    def abrir_ventana_explorador_archivos(self):
+        tk.Tk().withdraw()
+        filename = askopenfilename()
+        print("Filename:",filename)
+        self.controlador.cargar_lista_colaboradores(filename)
