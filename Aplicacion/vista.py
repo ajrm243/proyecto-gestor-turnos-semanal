@@ -55,7 +55,7 @@ class Vista:
                                                               (self.ventana_opcionesColaborador.winfo_screenheight() - 370) // 2))
         self.ventana_opcionesColaborador.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=80, text="Colaboradores")
+        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=80, text="Colaboradores", command=self.abrir_ventana_colaboradores)
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=130, text="Roles", command=self.abrir_ventana_roles)
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=180, text="Turnos")
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=230, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
@@ -342,6 +342,189 @@ class Vista:
     def regresar_disponibilidades(self):
         self.ventana_disponibilidades.destroy()
         self.ventana_menuPrincipal.deiconify()            
+
+#--------COLABORADORES----------
+    def abrir_ventana_colaboradores(self):
+        self.ventana_menuPrincipal.withdraw()
+
+        self.ventana_colaboradores = tk.Tk()
+        self.ventana_colaboradores.title("Opciones de Colaborador")
+        self.ventana_colaboradores.geometry('780x470+{}+{}'.format((self.ventana_colaboradores.winfo_screenwidth() - 500) // 2,
+                                                      (self.ventana_colaboradores.winfo_screenheight() - 370) // 2))
+        self.ventana_colaboradores.resizable(width=False, height=False)
+
+        self.label_id = ttk.Label(self.ventana_colaboradores, text="Id:")
+        self.label_id.place(x=120, y=20)
+        self.label_info_id = ttk.Label(self.ventana_colaboradores, text="")
+        self.label_info_id.place(x=230, y=20)
+
+        self.label_nombre = ttk.Label(self.ventana_colaboradores, text="Nombre:")
+        self.label_nombre.place(x=120, y=60)
+        self.entry_nombre = ttk.Entry(self.ventana_colaboradores)
+        self.entry_nombre.place(x=230, y=60)
+
+        self.label_correo = ttk.Label(self.ventana_colaboradores, text="Correo:")
+        self.label_correo.place(x=120, y=100)
+        self.entry_correo = ttk.Entry(self.ventana_colaboradores)
+        self.entry_correo.place(x=230, y=100)
+        
+        self.label_telefono = ttk.Label(self.ventana_colaboradores, text="Telefono:")
+        self.label_telefono.place(x=120, y=140)
+        self.entry_telefono = ttk.Entry(self.ventana_colaboradores)
+        self.entry_telefono.place(x=230, y=140)
+        
+        self.label_id_rol = ttk.Label(self.ventana_colaboradores, text="Rol:")
+        self.label_id_rol.place(x=120, y=180)
+        self.entry_id_rol = ttk.Entry(self.ventana_colaboradores)
+        self.entry_id_rol.place(x=230, y=180)
+        
+        self.label_id_turno = ttk.Label(self.ventana_colaboradores, text="Turno:")
+        self.label_id_turno.place(x=120, y=220)
+        self.entry_id_turno = ttk.Entry(self.ventana_colaboradores)
+        self.entry_id_turno.place(x=230, y=220)
+        
+        self.label_id_disponibilidad = ttk.Label(self.ventana_colaboradores, text="Disponibilidad:")
+        self.label_id_disponibilidad.place(x=120, y=220)
+        self.entry_id_disponibilidad = ttk.Entry(self.ventana_colaboradores)
+        self.entry_id_disponibilidad.place(x=230, y=220)
+        
+        self.label_modalidad = ttk.Label(self.ventana_colaboradores, text="Modalidad:")
+        self.label_modalidad.place(x=120, y=260)
+        self.entry_modalidad = ttk.Entry(self.ventana_colaboradores)
+        self.entry_modalidad.place(x=230, y=260)
+
+        self.crear_boton(self.ventana_colaboradores, x=480, y=10, text="Agregar Colaborador", command=self.agregar_colaborador)
+        self.crear_boton(self.ventana_colaboradores, x=480, y=50, text="Actualizar Colaborador", command=self.actualizar_colaborador)
+        self.crear_boton(self.ventana_colaboradores, x=480, y=90, text="Eliminar Colaborador", command=self.eliminar_colaborador)
+        self.crear_boton(self.ventana_colaboradores, x=330, y=400, text="Regresar", command=self.regresar_colaboradores)
+
+
+        self.tree = ttk.Treeview(self.ventana_colaboradores, columns=("ID", "Nombre", "Correo", "Telefono", "Rol", "Turno", "Disponibilidad", "Modalidad"), show="headings")
+        self.tree.column("ID", width=50, anchor="center")
+        self.tree.heading("ID", text="ID")
+        
+        self.tree.column("Nombre", width=115, anchor="center")
+        self.tree.heading("Nombre", text="Nombre")
+        
+        self.tree.column("Correo", width=115, anchor="center")
+        self.tree.heading("Correo", text="Correo")
+        
+        self.tree.column("Telefono", width=80, anchor="center")
+        self.tree.heading("Telefono", text="Telefono")
+        
+        self.tree.column("Rol", width=50, anchor="center")
+        self.tree.heading("Rol", text="Rol")
+        
+        self.tree.column("Turno", width=50, anchor="center")
+        self.tree.heading("Turno", text="Turno")
+        
+        self.tree.column("Disponibilidad", width=90, anchor="center")
+        self.tree.heading("Disponibilidad", text="Disponibilidad")
+        
+        self.tree.column("Modalidad", width=90, anchor="center")
+        self.tree.heading("Modalidad", text="Modalidad")
+        
+        self.tree.place(x=50, y=310, width=640, height=200)
+        self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_colaboradores)
+        self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
+        self.tree.tag_configure("impar", background="white", foreground="black")
+
+        self.actualizar_lista_colaboradores()
+        self.ventana_colaboradores.mainloop()
+
+    def agregar_colaborador(self):
+        nombre = self.entry_nombre.get()
+        correo = self.entry_correo.get()
+        telefono = self.entry_telefono.get()
+        rol = self.entry_id_rol.get()
+        turno = self.entry_id_turno.get()
+        disponibilidad = self.entry_id_disponibilidad.get()
+        modalidad = self.entry_modalidad.get()
+        label_values = (nombre, correo, telefono, rol, turno, disponibilidad, modalidad)
+        print("Get values:", label_values)
+        if nombre and correo and telefono and rol and turno and disponibilidad and modalidad:
+            print("pase el if de los label!")
+            self.controlador.agregar_colaborador(
+                nombre, correo, telefono, rol, turno, disponibilidad, modalidad
+            )
+            self.actualizar_lista_colaboradores()
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_correo.delete(0, tk.END)
+            self.entry_telefono.delete(0, tk.END)
+            self.entry_id_rol.delete(0, tk.END)
+            self.entry_id_turno.delete(0, tk.END)
+            self.entry_id_disponibilidad.delete(0, tk.END)
+            self.entry_modalidad.delete(0, tk.END)
+           
+
+    def actualizar_lista_colaboradores(self):
+        colaboradores = self.controlador.obtener_colaboradores()
+        print(colaboradores)
+        self.tree.delete(*self.tree.get_children())
+        for i, colaborador in enumerate(colaboradores):
+            etiqueta_estilo = "par" if i % 2 == 0 else "impar"
+            self.tree.insert("", "end", values=colaborador, tags=(etiqueta_estilo,))
+
+    def seleccionar_campos_colaboradores(self, event):
+        item = self.tree.selection()
+        if item:
+            values = self.tree.item(item, "values")
+            self.label_info_id.config(text = values[0])
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_nombre.insert(0, values[1])
+            self.entry_correo.delete(0, tk.END)
+            self.entry_correo.insert(0, values[2])
+            self.entry_telefono.delete(0, tk.END)
+            self.entry_telefono.insert(0, values[3])
+            self.entry_id_rol.delete(0, tk.END)
+            self.entry_id_rol.insert(0, values[4])
+            self.entry_id_turno.delete(0, tk.END)
+            self.entry_id_turno.insert(0, values[5])
+            self.entry_id_disponibilidad.delete(0, tk.END)
+            self.entry_id_disponibilidad.insert(0, values[6])
+            self.entry_modalidad.delete(0, tk.END)
+            self.entry_modalidad.insert(0, values[7])
+            
+    def eliminar_colaborador(self):
+        id_colaborador = self.label_info_id.cget("text")
+        if id_colaborador:
+            self.controlador.eliminar_colaborador(id_colaborador)
+            self.actualizar_lista_colaboradores()
+            self.label_info_id.config(text="")
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_correo.delete(0, tk.END)
+            self.entry_telefono.delete(0, tk.END)
+            self.entry_id_rol.delete(0, tk.END)
+            self.entry_id_turno.delete(0, tk.END)
+            self.entry_id_disponibilidad.delete(0, tk.END)
+            self.entry_modalidad.delete(0, tk.END)
+
+    def actualizar_colaborador(self):
+        id_colaborador = self.label_info_id.cget("text")
+        nombre = self.entry_nombre.get()
+        correo = self.entry_correo.get()
+        telefono = self.entry_telefono.get()
+        rol = self.entry_id_rol.get()
+        turno = self.entry_id_turno.get()
+        disponibilidad = self.entry_id_disponibilidad.get()
+        modalidad = self.entry_modalidad.get()
+        if id_colaborador:
+            self.controlador.agregar_colaborador(
+                nombre, correo, telefono, rol, turno, disponibilidad, modalidad, id_colaborador
+            )
+            self.actualizar_lista_colaboradores()
+            self.label_info_id.config(text="")
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_correo.delete(0, tk.END)
+            self.entry_telefono.delete(0, tk.END)
+            self.entry_id_rol.delete(0, tk.END)
+            self.entry_id_turno.delete(0, tk.END)
+            self.entry_id_disponibilidad.delete(0, tk.END)
+            self.entry_modalidad.delete(0, tk.END)
+
+    def regresar_colaboradores(self):
+        self.ventana_colaboradores.destroy()
+        self.ventana_menuPrincipal.deiconify()    
 
 #-------OTROS-----------
 
