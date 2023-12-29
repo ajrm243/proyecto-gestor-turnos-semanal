@@ -11,12 +11,11 @@ class Vista:
         self.ventana_login = tk.Tk()
         self.ventana_login.title("Login")
 
-        self.ventana_login.geometry('500x370+{}+{}'.format((self.ventana_login.winfo_screenwidth() - 500) // 2,
-                                                              (self.ventana_login.winfo_screenheight() - 370) // 2))
+        self.ventana_login.geometry('500x370')
         self.ventana_login.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_login, x=190, y=80, text="Inicio Admin", command=self.abrir_menuPrincipal)
-        self.crear_boton(self.ventana_login, x=190, y=130, text="Inicio Usuario")
+        self.crear_boton(self.ventana_login, x=170, y=80, text="Inicio Admin", command= self.abrir_menuPrincipal)
+        self.crear_boton(self.ventana_login, x=170, y=130, text="Inicio Usuario")
 
     #Crear boton   
     def crear_boton(self, ventana, x, y, text, command=None):
@@ -28,7 +27,7 @@ class Vista:
             text=text,
             command=command
         )
-        boton.place(x=x, y=y, width=120, height=35)
+        boton.place(x=x, y=y, width=150, height=35)
         return boton
     
     #Ventana Menú Principal
@@ -37,13 +36,12 @@ class Vista:
         self.ventana_menuPrincipal = tk.Tk()
         self.ventana_menuPrincipal.title("Menú Principal")
 
-        self.ventana_menuPrincipal.geometry('500x370+{}+{}'.format((self.ventana_menuPrincipal.winfo_screenwidth() - 500) // 2,
-                                                              (self.ventana_menuPrincipal.winfo_screenheight() - 370) // 2))
+        self.ventana_menuPrincipal.geometry('500x370')
         self.ventana_menuPrincipal.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_menuPrincipal, x=190, y=80, text="Opciones de Colaborador", command=self.abrir_ventana_opcionesColaborador)
-        self.crear_boton(self.ventana_menuPrincipal, x=190, y=130, text="Opciones de Horario")
-        self.crear_boton(self.ventana_menuPrincipal, x=190, y=180, text="Opciones de Usuario", command=self.abrir_ventana_usuarios)
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=80, text="Opciones de Colaborador", command=self.abrir_ventana_opcionesColaborador)
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=130, text="Opciones de Horario")
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=180, text="Opciones de Usuario", command=self.abrir_ventana_usuarios)
     
     #Ventana opciones de colaborador
     def abrir_ventana_opcionesColaborador(self):
@@ -51,15 +49,14 @@ class Vista:
         self.ventana_opcionesColaborador = tk.Tk()
         self.ventana_opcionesColaborador.title("Ventana Inicial")
 
-        self.ventana_opcionesColaborador.geometry('500x370+{}+{}'.format((self.ventana_opcionesColaborador.winfo_screenwidth() - 500) // 2,
-                                                              (self.ventana_opcionesColaborador.winfo_screenheight() - 370) // 2))
+        self.ventana_opcionesColaborador.geometry('500x370')
         self.ventana_opcionesColaborador.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=80, text="Colaboradores", command=self.abrir_ventana_colaboradores)
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=130, text="Roles", command=self.abrir_ventana_roles)
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=180, text="Turnos", command=self.abrir_ventana_turnos)
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=230, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=280, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=80, text="Colaboradores", command=self.abrir_ventana_colaboradores)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=130, text="Roles", command=self.abrir_ventana_roles)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=180, text="Turnos", command=self.abrir_ventana_turnos)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=230, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=280, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
 
 #--------USUARIOS----------
         
@@ -68,8 +65,7 @@ class Vista:
 
         self.ventana_usuarios = tk.Tk()
         self.ventana_usuarios.title("Opciones de Usuario")
-        self.ventana_usuarios.geometry('780x470+{}+{}'.format((self.ventana_usuarios.winfo_screenwidth() - 500) // 2,
-                                                      (self.ventana_usuarios.winfo_screenheight() - 370) // 2))
+        self.ventana_usuarios.geometry('780x470')
         self.ventana_usuarios.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_usuarios, text="Id:")
@@ -159,12 +155,11 @@ class Vista:
 #--------ROLES----------
             
     def abrir_ventana_roles(self):
-        self.ventana_menuPrincipal.withdraw()
+        self.ventana_opcionesColaborador.withdraw()
 
         self.ventana_roles = tk.Tk()
         self.ventana_roles.title("Opciones de Roles")
-        self.ventana_roles.geometry('780x470+{}+{}'.format((self.ventana_roles.winfo_screenwidth() - 500) // 2,
-                                                      (self.ventana_roles.winfo_screenheight() - 370) // 2))
+        self.ventana_roles.geometry('780x470')
         self.ventana_roles.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_roles, text="Id:")
@@ -248,17 +243,16 @@ class Vista:
 
     def regresar_roles(self):
         self.ventana_roles.destroy()
-        self.ventana_menuPrincipal.deiconify()  
+        self.ventana_opcionesColaborador.deiconify()  
 
 #--------DISPONIBILIDADES----------
             
     def abrir_ventana_disponibilidades(self):
-        self.ventana_menuPrincipal.withdraw()
+        self.ventana_opcionesColaborador.withdraw()
 
         self.ventana_disponibilidades = tk.Tk()
         self.ventana_disponibilidades.title("Opciones de Disponibilidades")
-        self.ventana_disponibilidades.geometry('780x470+{}+{}'.format((self.ventana_disponibilidades.winfo_screenwidth() - 500) // 2,
-                                                      (self.ventana_disponibilidades.winfo_screenheight() - 370) // 2))
+        self.ventana_disponibilidades.geometry('780x470')
         self.ventana_disponibilidades.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_disponibilidades, text="Id:")
@@ -342,12 +336,12 @@ class Vista:
 
     def regresar_disponibilidades(self):
         self.ventana_disponibilidades.destroy()
-        self.ventana_menuPrincipal.deiconify()      
+        self.ventana_opcionesColaborador.deiconify()      
 
 #--------TURNOS-----------------  
 
     def abrir_ventana_turnos(self):
-        self.ventana_menuPrincipal.withdraw()
+        self.ventana_opcionesColaborador.withdraw()
 
         self.ventana_turnos = tk.Tk()
         self.ventana_turnos.title("Opciones de Turnos")
@@ -372,42 +366,42 @@ class Vista:
         self.entry_lunes_salida = ttk.Entry(self.ventana_turnos)
         self.entry_lunes_salida.place(x=350, y=100)
 
-        self.label_martes = ttk.Label(self.ventana_turnos, text=f"Martes:")
+        self.label_martes = ttk.Label(self.ventana_turnos, text="Martes:")
         self.label_martes.place(x=120, y=140) 
         self.entry_martes_ingreso = ttk.Entry(self.ventana_turnos)
         self.entry_martes_ingreso.place(x=230, y=140)
         self.entry_martes_salida = ttk.Entry(self.ventana_turnos)
         self.entry_martes_salida.place(x=350, y=140)
 
-        self.label_miercoles = ttk.Label(self.ventana_turnos, text=f"Miércoles:")
+        self.label_miercoles = ttk.Label(self.ventana_turnos, text="Miércoles:")
         self.label_miercoles.place(x=120, y=180) 
         self.entry_miercoles_ingreso = ttk.Entry(self.ventana_turnos)
         self.entry_miercoles_ingreso.place(x=230, y=180)
         self.entry_miercoles_salida = ttk.Entry(self.ventana_turnos)
         self.entry_miercoles_salida.place(x=350, y=180)
 
-        self.label_jueves = ttk.Label(self.ventana_turnos, text=f"Jueves:")
+        self.label_jueves = ttk.Label(self.ventana_turnos, text="Jueves:")
         self.label_jueves.place(x=120, y=220) 
         self.entry_jueves_ingreso = ttk.Entry(self.ventana_turnos)
         self.entry_jueves_ingreso.place(x=230, y=220)
         self.entry_jueves_salida = ttk.Entry(self.ventana_turnos)
         self.entry_jueves_salida.place(x=350, y=220)
 
-        self.label_viernes = ttk.Label(self.ventana_turnos, text=f"Viernes:")
+        self.label_viernes = ttk.Label(self.ventana_turnos, text="Viernes:")
         self.label_viernes.place(x=120, y=260) 
         self.entry_viernes_ingreso = ttk.Entry(self.ventana_turnos)
         self.entry_viernes_ingreso.place(x=230, y=260)
         self.entry_viernes_salida = ttk.Entry(self.ventana_turnos)
         self.entry_viernes_salida.place(x=350, y=260)
 
-        self.label_sabado = ttk.Label(self.ventana_turnos, text=f"Sábado:")
+        self.label_sabado = ttk.Label(self.ventana_turnos, text="Sábado:")
         self.label_sabado.place(x=120, y=300) 
         self.entry_sabado_ingreso = ttk.Entry(self.ventana_turnos)
         self.entry_sabado_ingreso.place(x=230, y=300)
         self.entry_sabado_salida = ttk.Entry(self.ventana_turnos)
         self.entry_sabado_salida.place(x=350, y=300)
 
-        self.label_domingo = ttk.Label(self.ventana_turnos, text=f"Domingo:")
+        self.label_domingo = ttk.Label(self.ventana_turnos, text="Domingo:")
         self.label_domingo.place(x=120, y=340) 
         self.entry_domingo_ingreso = ttk.Entry(self.ventana_turnos)
         self.entry_domingo_ingreso.place(x=230, y=340)
@@ -623,16 +617,15 @@ class Vista:
 
     def regresar_turnos(self):
         self.ventana_turnos.destroy()
-        self.ventana_menuPrincipal.deiconify()        
+        self.ventana_opcionesColaborador.deiconify()        
 
 #--------COLABORADORES----------
     def abrir_ventana_colaboradores(self):
-        self.ventana_menuPrincipal.withdraw()
+        self.ventana_opcionesColaborador.withdraw()
 
         self.ventana_colaboradores = tk.Tk()
         self.ventana_colaboradores.title("Opciones de Colaborador")
-        self.ventana_colaboradores.geometry('780x670+{}+{}'.format((self.ventana_colaboradores.winfo_screenwidth() - 500) // 2,
-                                                      (self.ventana_colaboradores.winfo_screenheight() - 370) // 2))
+        self.ventana_colaboradores.geometry('780x670')
         self.ventana_colaboradores.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_colaboradores, text="Id:")
@@ -806,7 +799,7 @@ class Vista:
 
     def regresar_colaboradores(self):
         self.ventana_colaboradores.destroy()
-        self.ventana_menuPrincipal.deiconify()    
+        self.ventana_opcionesColaborador.deiconify()    
 
 #-------OTROS-----------
 
