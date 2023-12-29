@@ -50,7 +50,7 @@ class Modelo:
         return self.c.fetchall()
 
     def eliminar_usuario(self, id):
-        self.c.execute("DELETE FROM Usuario WHERE ID_Usuario=?", (id))
+        self.c.execute("DELETE FROM Usuario WHERE ID_Usuario=?", (id,))
         self.conn.commit()
 
     def actualizar_usuario(self, id_usuario, username, password):
@@ -68,7 +68,7 @@ class Modelo:
         return self.c.fetchall()
 
     def eliminar_rol(self, id):
-        self.c.execute("DELETE FROM Rol WHERE ID_Rol=?", (id))
+        self.c.execute("DELETE FROM Rol WHERE ID_Rol=?", (id,))
         self.conn.commit()
 
     def actualizar_rol(self, id_rol, nombre, descripcion):
@@ -86,7 +86,7 @@ class Modelo:
         return self.c.fetchall()
 
     def eliminar_disponibilidad(self, id):
-        self.c.execute("DELETE FROM Disponibilidad WHERE ID_Disponibilidad=?", (id))
+        self.c.execute("DELETE FROM Disponibilidad WHERE ID_Disponibilidad=?", (id,))
         self.conn.commit()
 
     def actualizar_disponibilidad(self, id_disponibilidad, nombre, descripcion):
@@ -104,7 +104,7 @@ class Modelo:
         return self.c.fetchall()
     
     def eliminar_colaborador(self, id):
-        self.c.execute("DELETE FROM Colaborador WHERE ID_Colaborador=?", (id))
+        self.c.execute("DELETE FROM Colaborador WHERE ID_Colaborador=?", (id,))
         self.conn.commit()
     
     def actualizar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad, id_colaborador):

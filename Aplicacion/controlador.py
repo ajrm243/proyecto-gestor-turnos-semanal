@@ -73,7 +73,7 @@ class Controlador:
         self.vista.actualizar_lista_colaboradores()
     
     def obtener_colaboradores(self):
-        self.modelo.obtener_colaboradores()
+        return self.modelo.obtener_colaboradores()
         #self.vista.actualizar_lista_colaboradores()
     
     def cargar_lista_colaboradores(self, ruta):
