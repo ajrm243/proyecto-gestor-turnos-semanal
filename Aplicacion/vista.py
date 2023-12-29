@@ -14,8 +14,18 @@ class Vista:
         self.ventana_login.geometry('500x370')
         self.ventana_login.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_login, x=170, y=80, text="Inicio Admin", command= self.abrir_menuPrincipal)
-        self.crear_boton(self.ventana_login, x=170, y=130, text="Inicio Usuario")
+        self.label_nombre = ttk.Label(self.ventana_login, text="Nombre:")
+        self.label_nombre.place(x=100, y=90)
+        self.entry_nombre = ttk.Entry(self.ventana_login)
+        self.entry_nombre.place(x=180, y=90, width=200)
+
+        self.label_password = ttk.Label(self.ventana_login, text="Password:")
+        self.label_password.place(x=100, y=130)
+        self.entry_password = ttk.Entry(self.ventana_login)
+        self.entry_password.place(x=180, y=130, width=200)
+
+        self.crear_boton(self.ventana_login, x=190, y=200, text="Inicio Admin", command= self.abrir_menuPrincipal)
+        self.crear_boton(self.ventana_login, x=190, y=250, text="Inicio Usuario")
 
     #Crear boton   
     def crear_boton(self, ventana, x, y, text, command=None):
@@ -39,9 +49,9 @@ class Vista:
         self.ventana_menuPrincipal.geometry('500x370')
         self.ventana_menuPrincipal.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_menuPrincipal, x=170, y=80, text="Opciones de Colaborador", command=self.abrir_ventana_opcionesColaborador)
-        self.crear_boton(self.ventana_menuPrincipal, x=170, y=130, text="Opciones de Horario")
-        self.crear_boton(self.ventana_menuPrincipal, x=170, y=180, text="Opciones de Usuario", command=self.abrir_ventana_usuarios)
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=110, text="Opciones de Colaborador", command=self.abrir_ventana_opcionesColaborador)
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=160, text="Opciones de Horario")
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=210, text="Opciones de Usuario", command=self.abrir_ventana_usuarios)
     
     #Ventana opciones de colaborador
     def abrir_ventana_opcionesColaborador(self):
@@ -52,11 +62,11 @@ class Vista:
         self.ventana_opcionesColaborador.geometry('500x370')
         self.ventana_opcionesColaborador.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=80, text="Colaboradores", command=self.abrir_ventana_colaboradores)
-        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=130, text="Roles", command=self.abrir_ventana_roles)
-        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=180, text="Turnos", command=self.abrir_ventana_turnos)
-        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=230, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
-        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=280, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=60, text="Colaboradores", command=self.abrir_ventana_colaboradores)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=110, text="Roles", command=self.abrir_ventana_roles)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=160, text="Turnos", command=self.abrir_ventana_turnos)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=210, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=260, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
 
 #--------USUARIOS----------
         
@@ -165,34 +175,35 @@ class Vista:
 
         self.ventana_roles = tk.Tk()
         self.ventana_roles.title("Opciones de Roles")
-        self.ventana_roles.geometry('780x470')
+        self.ventana_roles.geometry('800x530')
         self.ventana_roles.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_roles, text="Id:")
-        self.label_id.place(x=120, y=20)
+        self.label_id.place(x=120, y=50)
         self.label_info_id = ttk.Label(self.ventana_roles, text="")
-        self.label_info_id.place(x=230, y=20)
+        self.label_info_id.place(x=230, y=50)
 
         self.label_nombre = ttk.Label(self.ventana_roles, text="Nombre:")
-        self.label_nombre.place(x=120, y=60)
+        self.label_nombre.place(x=120, y=90)
         self.entry_nombre = ttk.Entry(self.ventana_roles)
-        self.entry_nombre.place(x=230, y=60)
+        self.entry_nombre.place(x=230, y=90)
 
         self.label_descripcion = ttk.Label(self.ventana_roles, text="Descripcion:")
-        self.label_descripcion.place(x=120, y=100)
+        self.label_descripcion.place(x=120, y=130)
         self.entry_descripcion = ttk.Entry(self.ventana_roles)
-        self.entry_descripcion.place(x=230, y=100)
+        self.entry_descripcion.place(x=230, y=130)
 
-        self.crear_boton(self.ventana_roles, x=480, y=10, text="Agregar Rol", command=self.agregar_rol)
-        self.crear_boton(self.ventana_roles, x=480, y=50, text="Actualizar Rol", command=self.actualizar_rol)
-        self.crear_boton(self.ventana_roles, x=480, y=90, text="Eliminar Rol", command=self.eliminar_rol)
-        self.crear_boton(self.ventana_roles, x=330, y=400, text="Regresar", command=self.regresar_roles)
+        self.crear_boton(self.ventana_roles, x=480, y=20, text="Agregar Rol", command=self.agregar_rol)
+        self.crear_boton(self.ventana_roles, x=480, y=60, text="Actualizar Rol", command=self.actualizar_rol)
+        self.crear_boton(self.ventana_roles, x=480, y=100, text="Eliminar Rol", command=self.eliminar_rol)
+        self.crear_boton(self.ventana_roles, x=480, y=140, text="Limpiar Datos", command=self.limpiar_datos_rol)
+        self.crear_boton(self.ventana_roles, x=330, y=470, text="Regresar", command=self.regresar_roles)
 
         self.tree = ttk.Treeview(self.ventana_roles, columns=("ID", "Nombre", "Descripcion"), show="headings")
         self.tree.heading("ID", text="ID")
         self.tree.heading("Nombre", text="Nombre")
         self.tree.heading("Descripcion", text="Descripcion")
-        self.tree.place(x=100, y=150)
+        self.tree.place(x=100, y=210)
 
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_roles)
         self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
@@ -247,6 +258,11 @@ class Vista:
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
 
+    def limpiar_datos_rol(self):     
+        self.label_info_id.config(text="")
+        self.entry_nombre.delete(0, tk.END)
+        self.entry_descripcion.delete(0, tk.END)   
+
     def regresar_roles(self):
         self.ventana_roles.destroy()
         self.ventana_opcionesColaborador.deiconify()  
@@ -258,34 +274,35 @@ class Vista:
 
         self.ventana_disponibilidades = tk.Tk()
         self.ventana_disponibilidades.title("Opciones de Disponibilidades")
-        self.ventana_disponibilidades.geometry('780x470')
+        self.ventana_disponibilidades.geometry('800x530')
         self.ventana_disponibilidades.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_disponibilidades, text="Id:")
-        self.label_id.place(x=120, y=20)
+        self.label_id.place(x=120, y=50)
         self.label_info_id = ttk.Label(self.ventana_disponibilidades, text="")
-        self.label_info_id.place(x=230, y=20)
+        self.label_info_id.place(x=230, y=50)
 
         self.label_nombre = ttk.Label(self.ventana_disponibilidades, text="Nombre:")
-        self.label_nombre.place(x=120, y=60)
+        self.label_nombre.place(x=120, y=90)
         self.entry_nombre = ttk.Entry(self.ventana_disponibilidades)
-        self.entry_nombre.place(x=230, y=60)
+        self.entry_nombre.place(x=230, y=90)
 
         self.label_descripcion = ttk.Label(self.ventana_disponibilidades, text="Descripcion:")
-        self.label_descripcion.place(x=120, y=100)
+        self.label_descripcion.place(x=120, y=130)
         self.entry_descripcion = ttk.Entry(self.ventana_disponibilidades)
-        self.entry_descripcion.place(x=230, y=100)
+        self.entry_descripcion.place(x=230, y=130)
 
-        self.crear_boton(self.ventana_disponibilidades, x=480, y=10, text="Agregar Disponibilidad", command=self.agregar_disponibilidad)
-        self.crear_boton(self.ventana_disponibilidades, x=480, y=50, text="Actualizar Disponibilidad", command=self.actualizar_disponibilidad)
-        self.crear_boton(self.ventana_disponibilidades, x=480, y=90, text="Eliminar Disponibilidad", command=self.eliminar_disponibilidad)
-        self.crear_boton(self.ventana_disponibilidades, x=330, y=400, text="Regresar", command=self.regresar_disponibilidades)
+        self.crear_boton(self.ventana_disponibilidades, x=480, y=20, text="Agregar Disponibilidad", command=self.agregar_disponibilidad)
+        self.crear_boton(self.ventana_disponibilidades, x=480, y=60, text="Actualizar Disponibilidad", command=self.actualizar_disponibilidad)
+        self.crear_boton(self.ventana_disponibilidades, x=480, y=100, text="Eliminar Disponibilidad", command=self.eliminar_disponibilidad)
+        self.crear_boton(self.ventana_disponibilidades, x=480, y=140, text="Limpiar Datos", command=self.limpiar_datos_rol)
+        self.crear_boton(self.ventana_disponibilidades, x=330, y=470, text="Regresar", command=self.regresar_disponibilidades)
 
         self.tree = ttk.Treeview(self.ventana_disponibilidades, columns=("ID", "Nombre", "Descripcion"), show="headings")
         self.tree.heading("ID", text="ID")
         self.tree.heading("Nombre", text="Nombre")
         self.tree.heading("Descripcion", text="Descripcion")
-        self.tree.place(x=100, y=150)
+        self.tree.place(x=100, y=210)
 
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_disponibilidades)
         self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
@@ -340,6 +357,11 @@ class Vista:
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
 
+    def limpiar_datos_disponibilidad(self):     
+        self.label_info_id.config(text="")
+        self.entry_nombre.delete(0, tk.END)
+        self.entry_descripcion.delete(0, tk.END)           
+
     def regresar_disponibilidades(self):
         self.ventana_disponibilidades.destroy()
         self.ventana_opcionesColaborador.deiconify()      
@@ -365,7 +387,7 @@ class Vista:
         self.entry_nombre = ttk.Entry(self.ventana_turnos)
         self.entry_nombre.place(x=230, y=60)
 
-        self.label_lunes = ttk.Label(self.ventana_turnos, text=f"Lunes:")
+        self.label_lunes = ttk.Label(self.ventana_turnos, text="Lunes:")
         self.label_lunes.place(x=120, y=100) 
         self.entry_lunes_ingreso = ttk.Entry(self.ventana_turnos)
         self.entry_lunes_ingreso.place(x=230, y=100)
