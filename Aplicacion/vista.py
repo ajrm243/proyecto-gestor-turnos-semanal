@@ -349,7 +349,7 @@ class Vista:
 
         self.ventana_colaboradores = tk.Tk()
         self.ventana_colaboradores.title("Opciones de Colaborador")
-        self.ventana_colaboradores.geometry('780x470+{}+{}'.format((self.ventana_colaboradores.winfo_screenwidth() - 500) // 2,
+        self.ventana_colaboradores.geometry('780x670+{}+{}'.format((self.ventana_colaboradores.winfo_screenwidth() - 500) // 2,
                                                       (self.ventana_colaboradores.winfo_screenheight() - 370) // 2))
         self.ventana_colaboradores.resizable(width=False, height=False)
 
@@ -396,7 +396,7 @@ class Vista:
         self.crear_boton(self.ventana_colaboradores, x=480, y=10, text="Agregar Colaborador", command=self.agregar_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=480, y=50, text="Actualizar Colaborador", command=self.actualizar_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=480, y=90, text="Eliminar Colaborador", command=self.eliminar_colaborador)
-        self.crear_boton(self.ventana_colaboradores, x=330, y=400, text="Regresar", command=self.regresar_colaboradores)
+        self.crear_boton(self.ventana_colaboradores, x=330, y=610, text="Regresar", command=self.regresar_colaboradores)
 
 
         self.tree = ttk.Treeview(self.ventana_colaboradores, columns=("ID", "Nombre", "Correo", "Telefono", "Rol", "Turno", "Disponibilidad", "Modalidad"), show="headings")
