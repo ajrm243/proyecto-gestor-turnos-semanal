@@ -65,34 +65,35 @@ class Vista:
 
         self.ventana_usuarios = tk.Tk()
         self.ventana_usuarios.title("Opciones de Usuario")
-        self.ventana_usuarios.geometry('780x470')
+        self.ventana_usuarios.geometry('800x530')
         self.ventana_usuarios.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_usuarios, text="Id:")
-        self.label_id.place(x=120, y=20)
+        self.label_id.place(x=120, y=50)
         self.label_info_id = ttk.Label(self.ventana_usuarios, text="")
-        self.label_info_id.place(x=230, y=20)
+        self.label_info_id.place(x=230, y=50)
 
         self.label_username = ttk.Label(self.ventana_usuarios, text="Username:")
-        self.label_username.place(x=120, y=60)
+        self.label_username.place(x=120, y=90)
         self.entry_username = ttk.Entry(self.ventana_usuarios)
-        self.entry_username.place(x=230, y=60)
+        self.entry_username.place(x=230, y=90)
 
         self.label_password = ttk.Label(self.ventana_usuarios, text="Password:")
-        self.label_password.place(x=120, y=100)
+        self.label_password.place(x=120, y=130)
         self.entry_password = ttk.Entry(self.ventana_usuarios)
-        self.entry_password.place(x=230, y=100)
+        self.entry_password.place(x=230, y=130)
 
-        self.crear_boton(self.ventana_usuarios, x=480, y=10, text="Agregar Usuario", command=self.agregar_usuario)
-        self.crear_boton(self.ventana_usuarios, x=480, y=50, text="Actualizar Usuario", command=self.actualizar_usuario)
-        self.crear_boton(self.ventana_usuarios, x=480, y=90, text="Eliminar Usuario", command=self.eliminar_usuario)
-        self.crear_boton(self.ventana_usuarios, x=330, y=400, text="Regresar", command=self.regresar_usuarios)
+        self.crear_boton(self.ventana_usuarios, x=480, y=20, text="Agregar Usuario", command=self.agregar_usuario)
+        self.crear_boton(self.ventana_usuarios, x=480, y=60, text="Actualizar Usuario", command=self.actualizar_usuario)
+        self.crear_boton(self.ventana_usuarios, x=480, y=100, text="Eliminar Usuario", command=self.eliminar_usuario)
+        self.crear_boton(self.ventana_usuarios, x=480, y=140, text="Limpiar Datos", command=self.limpiar_datos_usuario)
+        self.crear_boton(self.ventana_usuarios, x=330, y=470, text="Regresar", command=self.regresar_usuarios)
 
         self.tree = ttk.Treeview(self.ventana_usuarios, columns=("ID", "Username", "Password"), show="headings")
         self.tree.heading("ID", text="ID")
         self.tree.heading("Username", text="Username")
         self.tree.heading("Password", text="Password")
-        self.tree.place(x=100, y=150)
+        self.tree.place(x=100, y=210)
 
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_usuarios)
         self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
@@ -147,6 +148,11 @@ class Vista:
             self.label_info_id.config(text="")
             self.entry_username.delete(0, tk.END)
             self.entry_password.delete(0, tk.END)
+
+    def limpiar_datos_usuario(self):     
+        self.label_info_id.config(text="")
+        self.entry_username.delete(0, tk.END)
+        self.entry_password.delete(0, tk.END)   
 
     def regresar_usuarios(self):
         self.ventana_usuarios.destroy()
