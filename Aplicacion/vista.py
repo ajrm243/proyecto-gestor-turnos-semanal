@@ -57,11 +57,12 @@ class Vista:
 
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=80, text="Colaboradores", command=self.abrir_ventana_colaboradores)
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=130, text="Roles", command=self.abrir_ventana_roles)
-        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=180, text="Turnos")
+        self.crear_boton(self.ventana_opcionesColaborador, x=190, y=180, text="Turnos", command=self.abrir_ventana_turnos)
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=230, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
         self.crear_boton(self.ventana_opcionesColaborador, x=190, y=280, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
 
 #--------USUARIOS----------
+        
     def abrir_ventana_usuarios(self):
         self.ventana_menuPrincipal.withdraw()
 
@@ -341,7 +342,288 @@ class Vista:
 
     def regresar_disponibilidades(self):
         self.ventana_disponibilidades.destroy()
-        self.ventana_menuPrincipal.deiconify()            
+        self.ventana_menuPrincipal.deiconify()      
+
+#--------TURNOS-----------------  
+
+    def abrir_ventana_turnos(self):
+        self.ventana_menuPrincipal.withdraw()
+
+        self.ventana_turnos = tk.Tk()
+        self.ventana_turnos.title("Opciones de Turnos")
+        self.ventana_turnos.geometry('1000x670+{}+{}'.format((self.ventana_turnos.winfo_screenwidth() - 500) // 2,
+                                                      (self.ventana_turnos.winfo_screenheight() - 370) // 2))
+        self.ventana_turnos.resizable(width=False, height=False)
+
+        self.label_id = ttk.Label(self.ventana_turnos, text="Id:")
+        self.label_id.place(x=120, y=20)
+        self.label_info_id = ttk.Label(self.ventana_turnos, text="")
+        self.label_info_id.place(x=230, y=20)
+
+        self.label_nombre = ttk.Label(self.ventana_turnos, text="Nombre:")
+        self.label_nombre.place(x=120, y=60)
+        self.entry_nombre = ttk.Entry(self.ventana_turnos)
+        self.entry_nombre.place(x=230, y=60)
+
+        self.label_lunes = ttk.Label(self.ventana_turnos, text=f"Lunes:")
+        self.label_lunes.place(x=120, y=100) 
+        self.entry_lunes_ingreso = ttk.Entry(self.ventana_turnos)
+        self.entry_lunes_ingreso.place(x=230, y=100)
+        self.entry_lunes_salida = ttk.Entry(self.ventana_turnos)
+        self.entry_lunes_salida.place(x=350, y=100)
+
+        self.label_martes = ttk.Label(self.ventana_turnos, text=f"Martes:")
+        self.label_martes.place(x=120, y=140) 
+        self.entry_martes_ingreso = ttk.Entry(self.ventana_turnos)
+        self.entry_martes_ingreso.place(x=230, y=140)
+        self.entry_martes_salida = ttk.Entry(self.ventana_turnos)
+        self.entry_martes_salida.place(x=350, y=140)
+
+        self.label_miercoles = ttk.Label(self.ventana_turnos, text=f"Miércoles:")
+        self.label_miercoles.place(x=120, y=180) 
+        self.entry_miercoles_ingreso = ttk.Entry(self.ventana_turnos)
+        self.entry_miercoles_ingreso.place(x=230, y=180)
+        self.entry_miercoles_salida = ttk.Entry(self.ventana_turnos)
+        self.entry_miercoles_salida.place(x=350, y=180)
+
+        self.label_jueves = ttk.Label(self.ventana_turnos, text=f"Jueves:")
+        self.label_jueves.place(x=120, y=220) 
+        self.entry_jueves_ingreso = ttk.Entry(self.ventana_turnos)
+        self.entry_jueves_ingreso.place(x=230, y=220)
+        self.entry_jueves_salida = ttk.Entry(self.ventana_turnos)
+        self.entry_jueves_salida.place(x=350, y=220)
+
+        self.label_viernes = ttk.Label(self.ventana_turnos, text=f"Viernes:")
+        self.label_viernes.place(x=120, y=260) 
+        self.entry_viernes_ingreso = ttk.Entry(self.ventana_turnos)
+        self.entry_viernes_ingreso.place(x=230, y=260)
+        self.entry_viernes_salida = ttk.Entry(self.ventana_turnos)
+        self.entry_viernes_salida.place(x=350, y=260)
+
+        self.label_sabado = ttk.Label(self.ventana_turnos, text=f"Sábado:")
+        self.label_sabado.place(x=120, y=300) 
+        self.entry_sabado_ingreso = ttk.Entry(self.ventana_turnos)
+        self.entry_sabado_ingreso.place(x=230, y=300)
+        self.entry_sabado_salida = ttk.Entry(self.ventana_turnos)
+        self.entry_sabado_salida.place(x=350, y=300)
+
+        self.label_domingo = ttk.Label(self.ventana_turnos, text=f"Domingo:")
+        self.label_domingo.place(x=120, y=340) 
+        self.entry_domingo_ingreso = ttk.Entry(self.ventana_turnos)
+        self.entry_domingo_ingreso.place(x=230, y=340)
+        self.entry_domingo_salida = ttk.Entry(self.ventana_turnos)
+        self.entry_domingo_salida.place(x=350, y=340)
+
+        self.crear_boton(self.ventana_turnos, x=480, y=10, text="Agregar Turno", command=self.agregar_turno)
+        self.crear_boton(self.ventana_turnos, x=480, y=50, text="Actualizar Turno", command=self.actualizar_turno)
+        self.crear_boton(self.ventana_turnos, x=480, y=90, text="Eliminar Turno", command=self.eliminar_turno)
+        self.crear_boton(self.ventana_turnos, x=330, y=610, text="Regresar", command=self.regresar_turnos)
+
+
+        self.tree = ttk.Treeview(self.ventana_turnos, columns=("ID", "Nombre", "Lunes Ingreso", "Lunes Salida", "Martes Ingreso", "Martes Salida", "Miércoles Ingreso", "Miércoles Salida", "Jueves Ingreso", "Jueves Salida", "Viernes Ingreso", "Viernes Salida", "Sábado Ingreso", "Sábado Salida", "Domingo Ingreso", "Domingo Salida"), show="headings")
+        self.tree.column("ID", width=50, anchor="center")
+        self.tree.heading("ID", text="ID")
+        
+        self.tree.column("Nombre", width=115, anchor="center")
+        self.tree.heading("Nombre", text="Nombre")
+        
+        self.tree.column("Lunes Ingreso", width=115, anchor="center")
+        self.tree.heading("Lunes Ingreso", text="Lunes Ingreso")
+        
+        self.tree.column("Lunes Salida", width=80, anchor="center")
+        self.tree.heading("Lunes Salida", text="Lunes Salida")
+        
+        self.tree.column("Martes Ingreso", width=50, anchor="center")
+        self.tree.heading("Martes Ingreso", text="Martes Ingreso")
+        
+        self.tree.column("Martes Salida", width=50, anchor="center")
+        self.tree.heading("Martes Salida", text="Martes Salida")
+        
+        self.tree.column("Miércoles Ingreso", width=90, anchor="center")
+        self.tree.heading("Miércoles Ingreso", text="Miércoles Ingreso")
+        
+        self.tree.column("Miércoles Salida", width=90, anchor="center")
+        self.tree.heading("Miércoles Salida", text="Miércoles Salida")
+
+        self.tree.column("Jueves Ingreso", width=90, anchor="center")
+        self.tree.heading("Jueves Ingreso", text="Jueves Ingreso")
+
+        self.tree.column("Jueves Salida", width=90, anchor="center")
+        self.tree.heading("Jueves Salida", text="Jueves Salida")
+
+        self.tree.column("Viernes Ingreso", width=90, anchor="center")
+        self.tree.heading("Viernes Ingreso", text="Viernes Ingreso")
+
+        self.tree.column("Viernes Salida", width=90, anchor="center")
+        self.tree.heading("Viernes Salida", text="Viernes Salida")
+
+        self.tree.column("Sábado Ingreso", width=90, anchor="center")
+        self.tree.heading("Sábado Ingreso", text="Sábado Ingreso")
+
+        self.tree.column("Sábado Salida", width=90, anchor="center")
+        self.tree.heading("Sábado Salida", text="Sábado Salida")
+
+        self.tree.column("Domingo Ingreso", width=90, anchor="center")
+        self.tree.heading("Domingo Ingreso", text="Domingo Ingreso")
+
+        self.tree.column("Domingo Salida", width=90, anchor="center")
+        self.tree.heading("Domingo Salida", text="Domingo Salida")
+        
+        self.tree.place(x=50, y=310, width=640, height=200)
+        self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_turnos)
+        self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
+        self.tree.tag_configure("impar", background="white", foreground="black")
+
+        self.actualizar_lista_turnos()
+        self.ventana_turnos.mainloop()
+
+    def agregar_turno(self):
+        nombre = self.entry_nombre.get()
+        lunes_ingreso = self.entry_lunes_ingreso.get()
+        lunes_salida = self.entry_lunes_salida.get()
+        martes_ingreso = self.entry_martes_ingreso.get()
+        martes_salida = self.entry_martes_salida.get()
+        miercoles_ingreso = self.entry_miercoles_ingreso.get()
+        miercoles_salida = self.entry_miercoles_salida.get()
+        jueves_ingreso = self.entry_jueves_ingreso.get()
+        jueves_salida = self.entry_jueves_salida.get()
+        viernes_ingreso = self.entry_viernes_ingreso.get()
+        viernes_salida = self.entry_viernes_salida.get()
+        sabado_ingreso = self.entry_sabado_ingreso.get()
+        sabado_salida = self.entry_sabado_salida.get()
+        domingo_ingreso = self.entry_domingo_ingreso.get()
+        domingo_salida = self.entry_domingo_salida.get()
+        label_values = (nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida)
+        print("Get values:", label_values)
+        if nombre:
+            print("pase el if de los label!")
+            self.controlador.agregar_turno(
+                nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida
+            )
+            self.actualizar_lista_turnos()
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_lunes_ingreso.delete(0, tk.END)
+            self.entry_lunes_salida.delete(0, tk.END)
+            self.entry_martes_ingreso.delete(0, tk.END)
+            self.entry_martes_salida.delete(0, tk.END)
+            self.entry_miercoles_ingreso.delete(0, tk.END)
+            self.entry_miercoles_salida.delete(0, tk.END)
+            self.entry_jueves_ingreso.delete(0, tk.END)
+            self.entry_jueves_salida.delete(0, tk.END)
+            self.entry_viernes_ingreso.delete(0, tk.END)
+            self.entry_viernes_salida.delete(0, tk.END)
+            self.entry_sabado_ingreso.delete(0, tk.END)
+            self.entry_sabado_salida.delete(0, tk.END)
+            self.entry_domingo_ingreso.delete(0, tk.END)
+            self.entry_domingo_salida.delete(0, tk.END)
+
+    def actualizar_lista_turnos(self):
+        turnos = self.controlador.obtener_turnos()
+        self.tree.delete(*self.tree.get_children())
+        for i, turno in enumerate(turnos):
+            etiqueta_estilo = "par" if i % 2 == 0 else "impar"
+            self.tree.insert("", "end", values=turno, tags=(etiqueta_estilo,))
+
+    def seleccionar_campos_turnos(self, event):
+        item = self.tree.selection()
+        if item:
+            values = self.tree.item(item, "values")
+            self.label_info_id.config(text = values[0])
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_nombre.insert(0, values[1])
+            self.entry_lunes_ingreso.delete(0, tk.END)
+            self.entry_lunes_ingreso.insert(0, values[2])
+            self.entry_lunes_salida.delete(0, tk.END)
+            self.entry_lunes_salida.insert(0, values[3])
+            self.entry_martes_ingreso.delete(0, tk.END)
+            self.entry_martes_ingreso.insert(0, values[4])
+            self.entry_martes_salida.delete(0, tk.END)
+            self.entry_martes_salida.insert(0, values[5])
+            self.entry_miercoles_ingreso.delete(0, tk.END)
+            self.entry_miercoles_ingreso.insert(0, values[6])
+            self.entry_miercoles_salida.delete(0, tk.END)
+            self.entry_miercoles_salida.insert(0, values[7])
+            self.entry_jueves_ingreso.delete(0, tk.END)
+            self.entry_jueves_ingreso.insert(0, values[8])
+            self.entry_jueves_salida.delete(0, tk.END)
+            self.entry_jueves_salida.insert(0, values[9])
+            self.entry_viernes_ingreso.delete(0, tk.END)
+            self.entry_viernes_ingreso.insert(0, values[10])
+            self.entry_viernes_salida.delete(0, tk.END)
+            self.entry_viernes_salida.insert(0, values[11])
+            self.entry_sabado_ingreso.delete(0, tk.END)
+            self.entry_sabado_ingreso.insert(0, values[12])
+            self.entry_sabado_salida.delete(0, tk.END)
+            self.entry_sabado_salida.insert(0, values[13])
+            self.entry_domingo_ingreso.delete(0, tk.END)
+            self.entry_domingo_ingreso.insert(0, values[14])
+            self.entry_domingo_salida.delete(0, tk.END)
+            self.entry_domingo_salida.insert(0, values[15])
+            
+    def eliminar_turno(self):
+        id_turno = self.label_info_id.cget("text")
+        if id_turno:
+            self.controlador.eliminar_turno(id_turno)
+            self.actualizar_lista_turnos()
+            self.label_info_id.config(text="")
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_lunes_ingreso.delete(0, tk.END)
+            self.entry_lunes_salida.delete(0, tk.END)
+            self.entry_martes_ingreso.delete(0, tk.END)
+            self.entry_martes_salida.delete(0, tk.END)
+            self.entry_miercoles_ingreso.delete(0, tk.END)
+            self.entry_miercoles_salida.delete(0, tk.END)
+            self.entry_jueves_ingreso.delete(0, tk.END)
+            self.entry_jueves_salida.delete(0, tk.END)
+            self.entry_viernes_ingreso.delete(0, tk.END)
+            self.entry_viernes_salida.delete(0, tk.END)
+            self.entry_sabado_ingreso.delete(0, tk.END)
+            self.entry_sabado_salida.delete(0, tk.END)
+            self.entry_domingo_ingreso.delete(0, tk.END)
+            self.entry_domingo_salida.delete(0, tk.END)
+
+    def actualizar_turno(self):
+        id_turno = self.label_info_id.cget("text")
+        nombre = self.entry_nombre.get()
+        lunes_ingreso = self.entry_lunes_ingreso.get()
+        lunes_salida = self.entry_lunes_salida.get()
+        martes_ingreso = self.entry_martes_ingreso.get()
+        martes_salida = self.entry_martes_salida.get()
+        miercoles_ingreso = self.entry_miercoles_ingreso.get()
+        miercoles_salida = self.entry_miercoles_salida.get()
+        jueves_ingreso = self.entry_jueves_ingreso.get()
+        jueves_salida = self.entry_jueves_salida.get()
+        viernes_ingreso = self.entry_viernes_ingreso.get()
+        viernes_salida = self.entry_viernes_salida.get()
+        sabado_ingreso = self.entry_sabado_ingreso.get()
+        sabado_salida = self.entry_sabado_salida.get()
+        domingo_ingreso = self.entry_domingo_ingreso.get()
+        domingo_salida = self.entry_domingo_salida.get()
+        if id_turno:
+            self.controlador.actualizar_turno(
+                nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id_turno
+            )
+            self.actualizar_lista_turnos()
+            self.label_info_id.config(text="")
+            self.entry_nombre.delete(0, tk.END)
+            self.entry_lunes_ingreso.delete(0, tk.END)
+            self.entry_lunes_salida.delete(0, tk.END)
+            self.entry_martes_ingreso.delete(0, tk.END)
+            self.entry_martes_salida.delete(0, tk.END)
+            self.entry_miercoles_ingreso.delete(0, tk.END)
+            self.entry_miercoles_salida.delete(0, tk.END)
+            self.entry_jueves_ingreso.delete(0, tk.END)
+            self.entry_jueves_salida.delete(0, tk.END)
+            self.entry_viernes_ingreso.delete(0, tk.END)
+            self.entry_viernes_salida.delete(0, tk.END)
+            self.entry_sabado_ingreso.delete(0, tk.END)
+            self.entry_sabado_salida.delete(0, tk.END)
+            self.entry_domingo_ingreso.delete(0, tk.END)
+            self.entry_domingo_salida.delete(0, tk.END)
+
+    def regresar_turnos(self):
+        self.ventana_turnos.destroy()
+        self.ventana_menuPrincipal.deiconify()        
 
 #--------COLABORADORES----------
     def abrir_ventana_colaboradores(self):

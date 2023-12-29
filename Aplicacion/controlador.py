@@ -58,6 +58,24 @@ class Controlador:
     def obtener_disponibilidades(self):
         return self.modelo.obtener_disponibilidades()
     
+    #--------TURNOS-----------
+    
+    def agregar_turno(self, nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida):
+        self.modelo.agregar_turno(nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida)
+        self.vista.actualizar_lista_turnos()
+    
+    def actualizar_turno(self, nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id):
+        self.modelo.actualizar_turno(nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id)
+        self.vista.actualizar_lista_colaboradores()
+    
+    def eliminar_turno(self, id):
+        self.modelo.eliminar_turno(id)
+        self.vista.actualizar_lista_turnos()
+    
+    def obtener_turnos(self):
+        return self.modelo.obtener_turnos()
+        #self.vista.actualizar_lista_colaboradores()
+    
     #--------COLABORADORES-----------
     
     def agregar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad):
