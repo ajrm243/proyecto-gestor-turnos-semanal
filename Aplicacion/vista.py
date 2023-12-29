@@ -373,8 +373,7 @@ class Vista:
 
         self.ventana_turnos = tk.Tk()
         self.ventana_turnos.title("Opciones de Turnos")
-        self.ventana_turnos.geometry('1000x670+{}+{}'.format((self.ventana_turnos.winfo_screenwidth() - 500) // 2,
-                                                      (self.ventana_turnos.winfo_screenheight() - 370) // 2))
+        self.ventana_turnos.geometry('1000x670')
         self.ventana_turnos.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_turnos, text="Id:")
@@ -653,7 +652,7 @@ class Vista:
 
         self.ventana_colaboradores = tk.Tk()
         self.ventana_colaboradores.title("Opciones de Colaborador")
-        self.ventana_colaboradores.geometry('780x670')
+        self.ventana_colaboradores.geometry('780x600')
         self.ventana_colaboradores.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_colaboradores, text="Id:")
@@ -696,10 +695,11 @@ class Vista:
         self.entry_modalidad = ttk.Entry(self.ventana_colaboradores)
         self.entry_modalidad.place(x=230, y=260)
 
-        self.crear_boton(self.ventana_colaboradores, x=480, y=10, text="Agregar Colaborador", command=self.agregar_colaborador)
-        self.crear_boton(self.ventana_colaboradores, x=480, y=50, text="Actualizar Colaborador", command=self.actualizar_colaborador)
-        self.crear_boton(self.ventana_colaboradores, x=480, y=90, text="Eliminar Colaborador", command=self.eliminar_colaborador)
-        self.crear_boton(self.ventana_colaboradores, x=330, y=610, text="Regresar", command=self.regresar_colaboradores)
+        self.crear_boton(self.ventana_colaboradores, x=480, y=90, text="Agregar Colaborador", command=self.agregar_colaborador)
+        self.crear_boton(self.ventana_colaboradores, x=480, y=130, text="Actualizar Colaborador", command=self.actualizar_colaborador)
+        self.crear_boton(self.ventana_colaboradores, x=480, y=170, text="Eliminar Colaborador", command=self.eliminar_colaborador)
+        self.crear_boton(self.ventana_colaboradores, x=480, y=210, text="Limpiar Datos", command=self.limpiar_datos_colaborador)
+        self.crear_boton(self.ventana_colaboradores, x=320, y=530, text="Regresar", command=self.regresar_colaboradores)
 
 
         self.tree = ttk.Treeview(self.ventana_colaboradores, columns=("ID", "Nombre", "Correo", "Telefono", "Rol", "Turno", "Disponibilidad", "Modalidad"), show="headings")
@@ -727,7 +727,7 @@ class Vista:
         self.tree.column("Modalidad", width=90, anchor="center")
         self.tree.heading("Modalidad", text="Modalidad")
         
-        self.tree.place(x=50, y=310, width=640, height=200)
+        self.tree.place(x=60, y=310, width=640, height=200)
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_colaboradores)
         self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
         self.tree.tag_configure("impar", background="white", foreground="black")
@@ -824,6 +824,17 @@ class Vista:
             self.entry_id_turno.delete(0, tk.END)
             self.entry_id_disponibilidad.delete(0, tk.END)
             self.entry_modalidad.delete(0, tk.END)
+
+    def limpiar_datos_colaborador(self):     
+        self.actualizar_lista_colaboradores()
+        self.label_info_id.config(text="")
+        self.entry_nombre.delete(0, tk.END)
+        self.entry_correo.delete(0, tk.END)
+        self.entry_telefono.delete(0, tk.END)
+        self.entry_id_rol.delete(0, tk.END)
+        self.entry_id_turno.delete(0, tk.END)
+        self.entry_id_disponibilidad.delete(0, tk.END)
+        self.entry_modalidad.delete(0, tk.END) 
 
     def regresar_colaboradores(self):
         self.ventana_colaboradores.destroy()
