@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter.filedialog import askopenfilename
+import re #para validacion de datos
 
 
 class Vista:
@@ -892,8 +893,22 @@ class Vista:
         label_values = (nombre, correo, telefono, rol, turno, disponibilidad, modalidad)
         print("Get values:", label_values)
         if nombre and correo and telefono and rol and turno and disponibilidad and modalidad:
-            print("pase el if de los label!")
-            estado_consulta =  self.controlador.agregar_colaborador(
+            
+            #Validacion datos de nombre y telefono
+            regex_nombre = r"^[a-zA-Z ,.'-]+$"
+            if not (re.fullmatch(regex_nombre, nombre)):
+                messagebox.showerror("Error", "Por favor digite un nombre válido")
+                return
+            regex_correo = r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+"
+            if not (re.fullmatch(regex_correo, correo)):
+                messagebox.showerror("Error", "Por favor digite un correo válido")
+                return
+            regex_telefono = r"[0-9]{4}(-)?[0-9]{4}"
+            if not (re.fullmatch(regex_telefono, telefono)):
+                messagebox.showerror("Error", "Por favor digite un número de teléfono válido")
+                return
+            
+            estado_consulta = self.controlador.agregar_colaborador(
                 nombre, correo, telefono, rol, turno, disponibilidad, modalidad
             )
             if estado_consulta:
