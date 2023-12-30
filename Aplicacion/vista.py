@@ -152,8 +152,9 @@ class Vista:
             self.actualizar_lista_usuarios()
             self.entry_username.delete(0, tk.END)
             self.entry_password.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe rellenar todos los campos")
            
-
     def actualizar_lista_usuarios(self):
         usuarios = self.controlador.obtener_usuarios()
         self.tree.delete(*self.tree.get_children())
@@ -179,6 +180,8 @@ class Vista:
             self.label_info_id.config(text="")
             self.entry_username.delete(0, tk.END)
             self.entry_password.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un usuario")
 
     def actualizar_usuario(self):
         id_usuario = self.label_info_id.cget("text")
@@ -190,6 +193,8 @@ class Vista:
             self.label_info_id.config(text="")
             self.entry_username.delete(0, tk.END)
             self.entry_password.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un usuario")
 
     def limpiar_datos_usuario(self):     
         self.label_info_id.config(text="")
@@ -252,6 +257,8 @@ class Vista:
             self.actualizar_lista_roles()
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe rellenar todos los campos")
            
     def actualizar_lista_roles(self):
         roles = self.controlador.obtener_roles()
@@ -278,6 +285,8 @@ class Vista:
             self.label_info_id.config(text="")
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un rol")
 
     def actualizar_rol(self):
         id_rol = self.label_info_id.cget("text")
@@ -289,6 +298,8 @@ class Vista:
             self.label_info_id.config(text="")
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un rol")
 
     def limpiar_datos_rol(self):     
         self.label_info_id.config(text="")
@@ -351,6 +362,8 @@ class Vista:
             self.actualizar_lista_disponibilidades()
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe rellenar todos los campos")
            
     def actualizar_lista_disponibilidades(self):
         disponibilidades = self.controlador.obtener_disponibilidades()
@@ -367,7 +380,9 @@ class Vista:
             self.entry_nombre.delete(0, tk.END)
             self.entry_nombre.insert(0, values[1])  
             self.entry_descripcion.delete(0, tk.END)
-            self.entry_descripcion.insert(0, values[2])  
+            self.entry_descripcion.insert(0, values[2])
+        else:
+            messagebox.showerror("Error", "Debe seleccionar una disponibilidad")  
     
     def eliminar_disponibilidad(self):
         id_disponibilidad = self.label_info_id.cget("text")
@@ -377,6 +392,8 @@ class Vista:
             self.label_info_id.config(text="")
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar una disponibilidad")
 
     def actualizar_disponibilidad(self):
         id_disponibilidad = self.label_info_id.cget("text")
@@ -388,6 +405,8 @@ class Vista:
             self.label_info_id.config(text="")
             self.entry_nombre.delete(0, tk.END)
             self.entry_descripcion.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar una disponibilidad")
 
     def limpiar_datos_disponibilidad(self):     
         self.label_info_id.config(text="")
@@ -640,6 +659,8 @@ class Vista:
             self.entry_sabado_salida.delete(0, tk.END)
             self.entry_domingo_ingreso.delete(0, tk.END)
             self.entry_domingo_salida.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un turno")
 
     def actualizar_turno(self):
         id_turno = self.label_info_id.cget("text")
@@ -679,6 +700,8 @@ class Vista:
             self.entry_sabado_salida.delete(0, tk.END)
             self.entry_domingo_ingreso.delete(0, tk.END)
             self.entry_domingo_salida.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un turno")
 
     def limpiar_datos_turno(self):
         self.label_info_id.config(text="")     
@@ -823,6 +846,8 @@ class Vista:
             self.combobox_id_turno.delete(0, tk.END)
             self.combobox_id_disponibilidad.delete(0, tk.END)
             self.entry_modalidad.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe rellenar todos los campos")
            
     def actualizar_lista_colaboradores(self):
         colaboradores = self.controlador.obtener_colaboradores()
@@ -865,6 +890,8 @@ class Vista:
             self.combobox_id_turno.delete(0, tk.END)
             self.combobox_id_disponibilidad.delete(0, tk.END)
             self.entry_modalidad.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un colaborador")
 
     def actualizar_colaborador(self):
         id_colaborador = self.label_info_id.cget("text")
@@ -888,6 +915,8 @@ class Vista:
             self.combobox_id_turno.delete(0, tk.END)
             self.combobox_id_disponibilidad.delete(0, tk.END)
             self.entry_modalidad.delete(0, tk.END)
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un colaborador")
 
     def limpiar_datos_colaborador(self):     
         self.actualizar_lista_colaboradores()
