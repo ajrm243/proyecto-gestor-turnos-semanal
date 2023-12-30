@@ -9,6 +9,14 @@ class Controlador:
         self.vista = Vista(self)
         self.vista.iniciar_aplicacion()
 
+    #----------LOGIN-------------
+    def inicio_usuario(self, username, password):
+        resultado = self.modelo.inicio_usuario(username, password)
+        self.vista.procesar_inicio_usuario(resultado)
+            
+    def inicio_admin(self, username, password):
+        autenticado = username == "admin" and password == "admin"
+        self.vista.procesar_inicio_admin(autenticado)
     #--------USUARIOS------------
     def agregar_usuario(self, username, password):
         self.modelo.agregar_usuario(username, password)

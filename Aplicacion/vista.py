@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from tkinter.filedialog import askopenfilename
 
 
@@ -14,19 +14,43 @@ class Vista:
         self.ventana_login.geometry('500x370')
         self.ventana_login.resizable(width=False, height=False)
 
-        self.label_nombre = ttk.Label(self.ventana_login, text="Nombre:")
+        self.label_nombre = ttk.Label(self.ventana_login, text="Usuario:")
         self.label_nombre.place(x=100, y=90)
         self.entry_nombre = ttk.Entry(self.ventana_login)
         self.entry_nombre.place(x=180, y=90, width=200)
 
         self.label_password = ttk.Label(self.ventana_login, text="Password:")
         self.label_password.place(x=100, y=130)
-        self.entry_password = ttk.Entry(self.ventana_login)
+        self.entry_password = ttk.Entry(self.ventana_login,show="*")
         self.entry_password.place(x=180, y=130, width=200)
 
-        self.crear_boton(self.ventana_login, x=190, y=200, text="Inicio Admin", command= self.abrir_menuPrincipal)
-        self.crear_boton(self.ventana_login, x=190, y=250, text="Inicio Usuario")
+        self.crear_boton(self.ventana_login, x=190, y=200, text="Inicio Admin", command= self.inicio_admin)
+        self.crear_boton(self.ventana_login, x=190, y=250, text="Inicio Usuario", command=self.inicio_usuario)
 
+#--------LOGIN--------------
+    def inicio_usuario(self):
+        usuario = self.entry_nombre.get()
+        password = self.entry_password.get()
+        self.controlador.inicio_usuario(usuario, password)
+
+    def procesar_inicio_usuario(self, resultado):
+        if resultado == 1:
+            self.abrir_ventana_horario() #cambiar a la ventana de usuario cuando esté lista
+        else:
+            messagebox.showerror("Error", "Credenciales incorrectas")
+
+    def inicio_admin(self):
+        usuario = self.entry_nombre.get()
+        password = self.entry_password.get()
+        self.controlador.inicio_admin(usuario, password)
+
+    def procesar_inicio_admin(self, resultado):
+        print("resultado:", resultado)
+        if resultado:
+            self.abrir_menuPrincipal()
+        else:
+            messagebox.showerror("Error", "Credenciales incorrectas")
+        
     #Crear boton   
     def crear_boton(self, ventana, x, y, text, command=None):
         boton = tk.Button(
@@ -68,6 +92,14 @@ class Vista:
         self.crear_boton(self.ventana_opcionesColaborador, x=170, y=210, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
         self.crear_boton(self.ventana_opcionesColaborador, x=170, y=260, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
 
+
+    def abrir_ventana_horario(self):
+        self.ventana_login.withdraw()
+        self.ventana_menuPrincipal = tk.Tk()
+        self.ventana_menuPrincipal.title("Opciones Horario")
+
+        self.ventana_menuPrincipal.geometry('500x370')
+        self.ventana_menuPrincipal.resizable(width=False, height=False)
 #--------USUARIOS----------
         
     def abrir_ventana_usuarios(self):
@@ -373,73 +405,78 @@ class Vista:
 
         self.ventana_turnos = tk.Tk()
         self.ventana_turnos.title("Opciones de Turnos")
-        self.ventana_turnos.geometry('1000x600')
+        self.ventana_turnos.geometry('1000x620')
         self.ventana_turnos.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_turnos, text="Id:")
-        self.label_id.place(x=120, y=20)
+        self.label_id.place(x=120, y=10)
         self.label_info_id = ttk.Label(self.ventana_turnos, text="")
-        self.label_info_id.place(x=230, y=20)
+        self.label_info_id.place(x=230, y=10)
 
         self.label_nombre = ttk.Label(self.ventana_turnos, text="Nombre:")
-        self.label_nombre.place(x=270, y=20)
+        self.label_nombre.place(x=270, y=10)
         self.entry_nombre = ttk.Entry(self.ventana_turnos)
-        self.entry_nombre.place(x=370, y=20)
+        self.entry_nombre.place(x=370, y=10)
+
+        self.label_ingreso = ttk.Label(self.ventana_turnos, text="Ingreso")
+        self.label_ingreso.place(x=275, y=55) 
+        self.label_salida = ttk.Label(self.ventana_turnos, text="Salida")
+        self.label_salida.place(x=415, y=55) 
 
         self.label_lunes = ttk.Label(self.ventana_turnos, text="Lunes:")
-        self.label_lunes.place(x=120, y=60) 
+        self.label_lunes.place(x=120, y=80) 
         self.entry_lunes_ingreso = ttk.Entry(self.ventana_turnos)
-        self.entry_lunes_ingreso.place(x=230, y=60)
+        self.entry_lunes_ingreso.place(x=230, y=80)
         self.entry_lunes_salida = ttk.Entry(self.ventana_turnos)
-        self.entry_lunes_salida.place(x=370, y=60)
+        self.entry_lunes_salida.place(x=370, y=80)
 
         self.label_martes = ttk.Label(self.ventana_turnos, text="Martes:")
-        self.label_martes.place(x=120, y=100) 
+        self.label_martes.place(x=120, y=120) 
         self.entry_martes_ingreso = ttk.Entry(self.ventana_turnos)
-        self.entry_martes_ingreso.place(x=230, y=100)
+        self.entry_martes_ingreso.place(x=230, y=120)
         self.entry_martes_salida = ttk.Entry(self.ventana_turnos)
-        self.entry_martes_salida.place(x=370, y=100)
+        self.entry_martes_salida.place(x=370, y=120)
 
         self.label_miercoles = ttk.Label(self.ventana_turnos, text="Miércoles:")
-        self.label_miercoles.place(x=120, y=140) 
+        self.label_miercoles.place(x=120, y=160) 
         self.entry_miercoles_ingreso = ttk.Entry(self.ventana_turnos)
-        self.entry_miercoles_ingreso.place(x=230, y=140)
+        self.entry_miercoles_ingreso.place(x=230, y=160)
         self.entry_miercoles_salida = ttk.Entry(self.ventana_turnos)
-        self.entry_miercoles_salida.place(x=370, y=140)
+        self.entry_miercoles_salida.place(x=370, y=160)
 
         self.label_jueves = ttk.Label(self.ventana_turnos, text="Jueves:")
-        self.label_jueves.place(x=120, y=180) 
+        self.label_jueves.place(x=120, y=200) 
         self.entry_jueves_ingreso = ttk.Entry(self.ventana_turnos)
-        self.entry_jueves_ingreso.place(x=230, y=180)
+        self.entry_jueves_ingreso.place(x=230, y=200)
         self.entry_jueves_salida = ttk.Entry(self.ventana_turnos)
-        self.entry_jueves_salida.place(x=370, y=180)
+        self.entry_jueves_salida.place(x=370, y=200)
 
         self.label_viernes = ttk.Label(self.ventana_turnos, text="Viernes:")
-        self.label_viernes.place(x=120, y=220) 
+        self.label_viernes.place(x=120, y=240) 
         self.entry_viernes_ingreso = ttk.Entry(self.ventana_turnos)
-        self.entry_viernes_ingreso.place(x=230, y=220)
+        self.entry_viernes_ingreso.place(x=230, y=240)
         self.entry_viernes_salida = ttk.Entry(self.ventana_turnos)
-        self.entry_viernes_salida.place(x=370, y=220)
+        self.entry_viernes_salida.place(x=370, y=240)
 
         self.label_sabado = ttk.Label(self.ventana_turnos, text="Sábado:")
-        self.label_sabado.place(x=120, y=260) 
+        self.label_sabado.place(x=120, y=280) 
         self.entry_sabado_ingreso = ttk.Entry(self.ventana_turnos)
-        self.entry_sabado_ingreso.place(x=230, y=260)
+        self.entry_sabado_ingreso.place(x=230, y=280)
         self.entry_sabado_salida = ttk.Entry(self.ventana_turnos)
-        self.entry_sabado_salida.place(x=370, y=260)
+        self.entry_sabado_salida.place(x=370, y=280)
 
         self.label_domingo = ttk.Label(self.ventana_turnos, text="Domingo:")
-        self.label_domingo.place(x=120, y=300) 
+        self.label_domingo.place(x=120, y=320) 
         self.entry_domingo_ingreso = ttk.Entry(self.ventana_turnos)
-        self.entry_domingo_ingreso.place(x=230, y=300)
+        self.entry_domingo_ingreso.place(x=230, y=320)
         self.entry_domingo_salida = ttk.Entry(self.ventana_turnos)
-        self.entry_domingo_salida.place(x=370, y=300)
+        self.entry_domingo_salida.place(x=370, y=320)
 
         self.crear_boton(self.ventana_turnos, x=650, y=90, text="Agregar Turno", command=self.agregar_turno)
         self.crear_boton(self.ventana_turnos, x=650, y=130, text="Actualizar Turno", command=self.actualizar_turno)
         self.crear_boton(self.ventana_turnos, x=650, y=170, text="Eliminar Turno", command=self.eliminar_turno)
         self.crear_boton(self.ventana_turnos, x=650, y=210, text="Limpiar Datos", command=self.limpiar_datos_turno)
-        self.crear_boton(self.ventana_turnos, x=390, y=550, text="Regresar", command=self.regresar_turnos)
+        self.crear_boton(self.ventana_turnos, x=400, y=570, text="Regresar", command=self.regresar_turnos)
 
 
         self.tree = ttk.Treeview(self.ventana_turnos, columns=("ID", "Nombre", "Lunes Ingreso", "Lunes Salida", "Martes Ingreso", "Martes Salida", "Miércoles Ingreso", "Miércoles Salida", "Jueves Ingreso", "Jueves Salida", "Viernes Ingreso", "Viernes Salida", "Sábado Ingreso", "Sábado Salida", "Domingo Ingreso", "Domingo Salida"), show="headings")
@@ -491,7 +528,7 @@ class Vista:
         self.tree.column("Domingo Salida", width=90, anchor="center")
         self.tree.heading("Domingo Salida", text="Domingo Salida")
         
-        self.tree.place(x=40, y=360, width=920, height=170)
+        self.tree.place(x=40, y=380, width=920, height=170)
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_turnos)
         self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
         self.tree.tag_configure("impar", background="white", foreground="black")

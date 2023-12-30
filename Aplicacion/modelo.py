@@ -63,6 +63,16 @@ class Modelo:
                             CONSTRAINT "Colaborador_FK_5" FOREIGN KEY("ID_Disponibilidad") REFERENCES "Disponibilidad"("ID_Disponibilidad"));''')
         self.conn.commit()
 
+    #-------------------LOGIN--------------------------
+    def inicio_usuario(self, username, password):
+        self.c.execute("SELECT * FROM Usuario WHERE Username=? AND Password=?", (username, password))
+        user = self.c.fetchone()
+        return 1 if user else 0
+
+    def inicio_admin(self):
+        self.c.execute("SELECT * FROM Usuario")
+        return self.c.fetchall()
+
     #-----------------USUARIOS-------------------------
 
     def agregar_usuario(self, username, password):
