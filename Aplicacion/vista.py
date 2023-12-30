@@ -76,7 +76,11 @@ class Vista:
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=110, text="Opciones de Colaborador", command=self.abrir_ventana_opcionesColaborador)
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=160, text="Opciones de Horario")
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=210, text="Opciones de Usuario", command=self.abrir_ventana_usuarios)
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=260, text="Salir", command=self.salir_aplicacion)
     
+    def salir_aplicacion(self):
+        self.ventana_menuPrincipal.quit()
+        
     #Ventana opciones de colaborador
     def abrir_ventana_opcionesColaborador(self):
         self.ventana_menuPrincipal.withdraw()
@@ -91,7 +95,11 @@ class Vista:
         self.crear_boton(self.ventana_opcionesColaborador, x=170, y=160, text="Turnos", command=self.abrir_ventana_turnos)
         self.crear_boton(self.ventana_opcionesColaborador, x=170, y=210, text="Disponibilidades", command=self.abrir_ventana_disponibilidades)
         self.crear_boton(self.ventana_opcionesColaborador, x=170, y=260, text="Cargar Colaboradores", command=self.abrir_ventana_explorador_archivos)
-
+        self.crear_boton(self.ventana_opcionesColaborador, x=170, y=310, text="Regresar", command=self.regresar_opcionesColaborador)
+        
+    def regresar_opcionesColaborador(self):
+        self.ventana_opcionesColaborador.destroy()
+        self.ventana_menuPrincipal.deiconify()
 
     def abrir_ventana_horario(self):
         self.ventana_login.withdraw()
@@ -805,7 +813,7 @@ class Vista:
         
         self.label_id_rol = ttk.Label(self.ventana_colaboradores, text="Rol:")
         self.label_id_rol.place(x=120, y=180)
-        self.combobox_id_rol = ttk.Combobox(self.ventana_colaboradores)
+        self.combobox_id_rol = ttk.Combobox(self.ventana_colaboradores, state="readonly")
         self.combobox_id_rol['values'] = tuple(ids_roles)
         self.combobox_id_rol.place(x=230, y=180)
         
@@ -813,7 +821,7 @@ class Vista:
 
         self.label_id_turno = ttk.Label(self.ventana_colaboradores, text="Turno:")
         self.label_id_turno.place(x=120, y=220)
-        self.combobox_id_turno = ttk.Combobox(self.ventana_colaboradores)
+        self.combobox_id_turno = ttk.Combobox(self.ventana_colaboradores, state="readonly")
         self.combobox_id_turno['values'] = tuple(ids_turnos)
         self.combobox_id_turno.place(x=230, y=220)
         
@@ -821,14 +829,17 @@ class Vista:
         
         self.label_id_disponibilidad = ttk.Label(self.ventana_colaboradores, text="Disponibilidad:")
         self.label_id_disponibilidad.place(x=120, y=260)
-        self.combobox_id_disponibilidad = ttk.Combobox(self.ventana_colaboradores)
+        self.combobox_id_disponibilidad = ttk.Combobox(self.ventana_colaboradores, state="readonly")
         self.combobox_id_disponibilidad['values'] = tuple(ids_disponibilidades)
         self.combobox_id_disponibilidad.place(x=230, y=260)
         
         self.label_modalidad = ttk.Label(self.ventana_colaboradores, text="Modalidad:")
         self.label_modalidad.place(x=120, y=300)
-        self.entry_modalidad = ttk.Entry(self.ventana_colaboradores)
-        self.entry_modalidad.place(x=230, y=300)
+        self.combobox_modalidad = ttk.Combobox(self.ventana_colaboradores, state="readonly")
+        self.combobox_modalidad['values'] = (1, 2) # hard wired porque solo consideramos presencial y virtual (wfh)
+        self.combobox_modalidad.place(x=230, y=300)
+        #self.entry_modalidad = ttk.Entry(self.ventana_colaboradores)
+        #self.entry_modalidad.place(x=230, y=300)
 
         self.crear_boton(self.ventana_colaboradores, x=480, y=90, text="Agregar Colaborador", command=self.agregar_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=480, y=130, text="Actualizar Colaborador", command=self.actualizar_colaborador)
@@ -877,7 +888,7 @@ class Vista:
         rol = self.combobox_id_rol.get()
         turno = self.combobox_id_turno.get()
         disponibilidad = self.combobox_id_disponibilidad.get()
-        modalidad = self.entry_modalidad.get()
+        modalidad = self.combobox_modalidad.get()
         label_values = (nombre, correo, telefono, rol, turno, disponibilidad, modalidad)
         print("Get values:", label_values)
         if nombre and correo and telefono and rol and turno and disponibilidad and modalidad:
@@ -894,7 +905,7 @@ class Vista:
                 self.combobox_id_rol.delete(0, tk.END)
                 self.combobox_id_turno.delete(0, tk.END)
                 self.combobox_id_disponibilidad.delete(0, tk.END)
-                self.entry_modalidad.delete(0, tk.END)
+                self.combobox_modalidad.delete(0, tk.END)
             else:
                 messagebox.showerror("Error", "Hubo un problema al agregar el colaborador")
         else:
@@ -925,8 +936,8 @@ class Vista:
             self.combobox_id_turno.insert(0, values[5])
             self.combobox_id_disponibilidad.delete(0, tk.END)
             self.combobox_id_disponibilidad.insert(0, values[6])
-            self.entry_modalidad.delete(0, tk.END)
-            self.entry_modalidad.insert(0, values[7])
+            self.combobox_modalidad.delete(0, tk.END)
+            self.combobox_modalidad.insert(0, values[7])
             
     def eliminar_colaborador(self):
         id_colaborador = self.label_info_id.cget("text")
@@ -942,7 +953,7 @@ class Vista:
                 self.combobox_id_rol.delete(0, tk.END)
                 self.combobox_id_turno.delete(0, tk.END)
                 self.combobox_id_disponibilidad.delete(0, tk.END)
-                self.entry_modalidad.delete(0, tk.END)
+                self.combobox_modalidad.delete(0, tk.END)
             else: 
                 messagebox.showerror("Error", "Hubo un problema al eliminar el colaborador")
         else:
@@ -956,7 +967,7 @@ class Vista:
         rol = self.combobox_id_rol.get()
         turno = self.combobox_id_turno.get()
         disponibilidad = self.combobox_id_disponibilidad.get()
-        modalidad = self.entry_modalidad.get()
+        modalidad = self.combobox_modalidad.get()
         if id_colaborador:
             estado_consulta= self.controlador.actualizar_colaborador(
                 nombre, correo, telefono, rol, turno, disponibilidad, modalidad, id_colaborador
@@ -971,7 +982,7 @@ class Vista:
                 self.combobox_id_rol.delete(0, tk.END)
                 self.combobox_id_turno.delete(0, tk.END)
                 self.combobox_id_disponibilidad.delete(0, tk.END)
-                self.entry_modalidad.delete(0, tk.END)
+                self.combobox_modalidad.delete(0, tk.END)
             else:
                 messagebox.showerror("Error", "Hubo un problema al actualizar el colaborador")
         else:
@@ -986,7 +997,7 @@ class Vista:
         self.combobox_id_rol.delete(0, tk.END)
         self.combobox_id_turno.delete(0, tk.END)
         self.combobox_id_disponibilidad.delete(0, tk.END)
-        self.entry_modalidad.delete(0, tk.END) 
+        self.combobox_modalidad.delete(0, tk.END) 
 
     def regresar_colaboradores(self):
         self.ventana_colaboradores.destroy()
