@@ -34,7 +34,7 @@ class Vista:
         self.controlador.inicio_usuario(usuario, password)
 
     def procesar_inicio_usuario(self, resultado):
-        if resultado == 1:
+        if resultado:
             self.abrir_ventana_horario() #cambiar a la ventana de usuario cuando esté lista
         else:
             messagebox.showerror("Error", "Credenciales incorrectas")
@@ -148,10 +148,14 @@ class Vista:
         username = self.entry_username.get()
         password = self.entry_password.get()
         if username and password:
-            self.controlador.agregar_usuario(username, password)
-            self.actualizar_lista_usuarios()
-            self.entry_username.delete(0, tk.END)
-            self.entry_password.delete(0, tk.END)
+            estado_consulta = self.controlador.agregar_usuario(username, password)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Usuario agregado con éxito")
+                self.actualizar_lista_usuarios()
+                self.entry_username.delete(0, tk.END)
+                self.entry_password.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al agregar el usuario")
         else:
             messagebox.showerror("Error", "Debe rellenar todos los campos")
            
@@ -175,11 +179,15 @@ class Vista:
     def eliminar_usuario(self):
         id_usuario = self.label_info_id.cget("text")
         if id_usuario:
-            self.controlador.eliminar_usuario(id_usuario)
-            self.actualizar_lista_usuarios()
-            self.label_info_id.config(text="")
-            self.entry_username.delete(0, tk.END)
-            self.entry_password.delete(0, tk.END)
+            estado_consulta = self.controlador.eliminar_usuario(id_usuario)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Usuario eliminado con éxito")
+                self.actualizar_lista_usuarios()
+                self.label_info_id.config(text="")
+                self.entry_username.delete(0, tk.END)
+                self.entry_password.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al eliminar el usuario")
         else:
             messagebox.showerror("Error", "Debe seleccionar un usuario")
 
@@ -188,11 +196,15 @@ class Vista:
         username = self.entry_username.get()
         password = self.entry_password.get()
         if id_usuario:
-            self.controlador.actualizar_usuario(id_usuario,username,password)
-            self.actualizar_lista_usuarios()
-            self.label_info_id.config(text="")
-            self.entry_username.delete(0, tk.END)
-            self.entry_password.delete(0, tk.END)
+            estado_consulta = self.controlador.actualizar_usuario(id_usuario, username, password)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Usuario actualizado con éxito")
+                self.actualizar_lista_usuarios()
+                self.label_info_id.config(text="")
+                self.entry_username.delete(0, tk.END)
+                self.entry_password.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al actualizar el usuario")
         else:
             messagebox.showerror("Error", "Debe seleccionar un usuario")
 
@@ -253,10 +265,14 @@ class Vista:
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
         if nombre and descripcion:
-            self.controlador.agregar_rol(nombre, descripcion)
-            self.actualizar_lista_roles()
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_descripcion.delete(0, tk.END)
+            estado_consulta = self.controlador.agregar_rol(nombre, descripcion)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Rol agregado con éxito")
+                self.actualizar_lista_roles()
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_descripcion.delete(0, tk.END)
+            else: 
+                messagebox.showerror("Error", "Hubo un problema al agregar el rol")
         else:
             messagebox.showerror("Error", "Debe rellenar todos los campos")
            
@@ -280,11 +296,15 @@ class Vista:
     def eliminar_rol(self):
         id_rol = self.label_info_id.cget("text")
         if id_rol:
-            self.controlador.eliminar_rol(id_rol)
-            self.actualizar_lista_roles()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_descripcion.delete(0, tk.END)
+            estado_consulta=self.controlador.eliminar_rol(id_rol)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Rol eliminado con éxito")
+                self.actualizar_lista_roles()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_descripcion.delete(0, tk.END)
+            else: 
+                messagebox.showerror("Error", "Hubo un problema al eliminando el rol")
         else:
             messagebox.showerror("Error", "Debe seleccionar un rol")
 
@@ -293,11 +313,15 @@ class Vista:
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
         if id_rol:
-            self.controlador.actualizar_rol(id_rol,nombre,descripcion)
-            self.actualizar_lista_roles()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_descripcion.delete(0, tk.END)
+            estado_consulta = self.controlador.actualizar_rol(id_rol,nombre,descripcion)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Rol actualizado con éxito")
+                self.actualizar_lista_roles()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_descripcion.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al actualizar el rol")
         else:
             messagebox.showerror("Error", "Debe seleccionar un rol")
 
@@ -358,10 +382,14 @@ class Vista:
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
         if nombre and descripcion:
-            self.controlador.agregar_disponibilidad(nombre, descripcion)
-            self.actualizar_lista_disponibilidades()
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_descripcion.delete(0, tk.END)
+            estado_consulta= self.controlador.agregar_disponibilidad(nombre, descripcion)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Disponibilidad agregada con éxito")
+                self.actualizar_lista_disponibilidades()
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_descripcion.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al agregar disponibilidad")
         else:
             messagebox.showerror("Error", "Debe rellenar todos los campos")
            
@@ -387,11 +415,15 @@ class Vista:
     def eliminar_disponibilidad(self):
         id_disponibilidad = self.label_info_id.cget("text")
         if id_disponibilidad:
-            self.controlador.eliminar_disponibilidad(id_disponibilidad)
-            self.actualizar_lista_disponibilidades()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_descripcion.delete(0, tk.END)
+            estado_consulta = self.controlador.eliminar_disponibilidad(id_disponibilidad)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Disponibilidad elimindada con éxito")
+                self.actualizar_lista_disponibilidades()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_descripcion.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al eliminar disponibilidad")
         else:
             messagebox.showerror("Error", "Debe seleccionar una disponibilidad")
 
@@ -400,11 +432,15 @@ class Vista:
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
         if id_disponibilidad:
-            self.controlador.actualizar_disponibilidad(id_disponibilidad,nombre,descripcion)
-            self.actualizar_lista_disponibilidades()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_descripcion.delete(0, tk.END)
+            estado_consulta = self.controlador.actualizar_disponibilidad(id_disponibilidad,nombre,descripcion)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Disponibilidad actualizada con éxito")
+                self.actualizar_lista_disponibilidades()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_descripcion.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al actualizar disponibilidad")
         else:
             messagebox.showerror("Error", "Debe seleccionar una disponibilidad")
 
@@ -575,25 +611,29 @@ class Vista:
         print("Get values:", label_values)
         if nombre:
             print("pase el if de los label!")
-            self.controlador.agregar_turno(
+            estado_consulta = self.controlador.agregar_turno(
                 nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida
             )
-            self.actualizar_lista_turnos()
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_lunes_ingreso.delete(0, tk.END)
-            self.entry_lunes_salida.delete(0, tk.END)
-            self.entry_martes_ingreso.delete(0, tk.END)
-            self.entry_martes_salida.delete(0, tk.END)
-            self.entry_miercoles_ingreso.delete(0, tk.END)
-            self.entry_miercoles_salida.delete(0, tk.END)
-            self.entry_jueves_ingreso.delete(0, tk.END)
-            self.entry_jueves_salida.delete(0, tk.END)
-            self.entry_viernes_ingreso.delete(0, tk.END)
-            self.entry_viernes_salida.delete(0, tk.END)
-            self.entry_sabado_ingreso.delete(0, tk.END)
-            self.entry_sabado_salida.delete(0, tk.END)
-            self.entry_domingo_ingreso.delete(0, tk.END)
-            self.entry_domingo_salida.delete(0, tk.END)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Turno agregado con éxito")
+                self.actualizar_lista_turnos()
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_lunes_ingreso.delete(0, tk.END)
+                self.entry_lunes_salida.delete(0, tk.END)
+                self.entry_martes_ingreso.delete(0, tk.END)
+                self.entry_martes_salida.delete(0, tk.END)
+                self.entry_miercoles_ingreso.delete(0, tk.END)
+                self.entry_miercoles_salida.delete(0, tk.END)
+                self.entry_jueves_ingreso.delete(0, tk.END)
+                self.entry_jueves_salida.delete(0, tk.END)
+                self.entry_viernes_ingreso.delete(0, tk.END)
+                self.entry_viernes_salida.delete(0, tk.END)
+                self.entry_sabado_ingreso.delete(0, tk.END)
+                self.entry_sabado_salida.delete(0, tk.END)
+                self.entry_domingo_ingreso.delete(0, tk.END)
+                self.entry_domingo_salida.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al agregar turno")
 
     def actualizar_lista_turnos(self):
         turnos = self.controlador.obtener_turnos()
@@ -641,24 +681,28 @@ class Vista:
     def eliminar_turno(self):
         id_turno = self.label_info_id.cget("text")
         if id_turno:
-            self.controlador.eliminar_turno(id_turno)
-            self.actualizar_lista_turnos()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_lunes_ingreso.delete(0, tk.END)
-            self.entry_lunes_salida.delete(0, tk.END)
-            self.entry_martes_ingreso.delete(0, tk.END)
-            self.entry_martes_salida.delete(0, tk.END)
-            self.entry_miercoles_ingreso.delete(0, tk.END)
-            self.entry_miercoles_salida.delete(0, tk.END)
-            self.entry_jueves_ingreso.delete(0, tk.END)
-            self.entry_jueves_salida.delete(0, tk.END)
-            self.entry_viernes_ingreso.delete(0, tk.END)
-            self.entry_viernes_salida.delete(0, tk.END)
-            self.entry_sabado_ingreso.delete(0, tk.END)
-            self.entry_sabado_salida.delete(0, tk.END)
-            self.entry_domingo_ingreso.delete(0, tk.END)
-            self.entry_domingo_salida.delete(0, tk.END)
+            estado_consulta =  self.controlador.eliminar_turno(id_turno)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Turno eliminado con éxito")
+                self.actualizar_lista_turnos()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_lunes_ingreso.delete(0, tk.END)
+                self.entry_lunes_salida.delete(0, tk.END)
+                self.entry_martes_ingreso.delete(0, tk.END)
+                self.entry_martes_salida.delete(0, tk.END)
+                self.entry_miercoles_ingreso.delete(0, tk.END)
+                self.entry_miercoles_salida.delete(0, tk.END)
+                self.entry_jueves_ingreso.delete(0, tk.END)
+                self.entry_jueves_salida.delete(0, tk.END)
+                self.entry_viernes_ingreso.delete(0, tk.END)
+                self.entry_viernes_salida.delete(0, tk.END)
+                self.entry_sabado_ingreso.delete(0, tk.END)
+                self.entry_sabado_salida.delete(0, tk.END)
+                self.entry_domingo_ingreso.delete(0, tk.END)
+                self.entry_domingo_salida.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al aliminar el turno")
         else:
             messagebox.showerror("Error", "Debe seleccionar un turno")
 
@@ -680,26 +724,30 @@ class Vista:
         domingo_ingreso = self.entry_domingo_ingreso.get()
         domingo_salida = self.entry_domingo_salida.get()
         if id_turno:
-            self.controlador.actualizar_turno(
+            estado_consulta= self.controlador.actualizar_turno(
                 nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id_turno
             )
-            self.actualizar_lista_turnos()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_lunes_ingreso.delete(0, tk.END)
-            self.entry_lunes_salida.delete(0, tk.END)
-            self.entry_martes_ingreso.delete(0, tk.END)
-            self.entry_martes_salida.delete(0, tk.END)
-            self.entry_miercoles_ingreso.delete(0, tk.END)
-            self.entry_miercoles_salida.delete(0, tk.END)
-            self.entry_jueves_ingreso.delete(0, tk.END)
-            self.entry_jueves_salida.delete(0, tk.END)
-            self.entry_viernes_ingreso.delete(0, tk.END)
-            self.entry_viernes_salida.delete(0, tk.END)
-            self.entry_sabado_ingreso.delete(0, tk.END)
-            self.entry_sabado_salida.delete(0, tk.END)
-            self.entry_domingo_ingreso.delete(0, tk.END)
-            self.entry_domingo_salida.delete(0, tk.END)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Turno actualizado con éxito")
+                self.actualizar_lista_turnos()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_lunes_ingreso.delete(0, tk.END)
+                self.entry_lunes_salida.delete(0, tk.END)
+                self.entry_martes_ingreso.delete(0, tk.END)
+                self.entry_martes_salida.delete(0, tk.END)
+                self.entry_miercoles_ingreso.delete(0, tk.END)
+                self.entry_miercoles_salida.delete(0, tk.END)
+                self.entry_jueves_ingreso.delete(0, tk.END)
+                self.entry_jueves_salida.delete(0, tk.END)
+                self.entry_viernes_ingreso.delete(0, tk.END)
+                self.entry_viernes_salida.delete(0, tk.END)
+                self.entry_sabado_ingreso.delete(0, tk.END)
+                self.entry_sabado_salida.delete(0, tk.END)
+                self.entry_domingo_ingreso.delete(0, tk.END)
+                self.entry_domingo_salida.delete(0, tk.END)
+            else: 
+                messagebox.showerror("Error", "Hubo un problema al actualizar el turno")
         else:
             messagebox.showerror("Error", "Debe seleccionar un turno")
 
@@ -835,17 +883,21 @@ class Vista:
         print("Get values:", label_values)
         if nombre and correo and telefono and rol and turno and disponibilidad and modalidad:
             print("pase el if de los label!")
-            self.controlador.agregar_colaborador(
+            estado_consulta =  self.controlador.agregar_colaborador(
                 nombre, correo, telefono, rol, turno, disponibilidad, modalidad
             )
-            self.actualizar_lista_colaboradores()
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_correo.delete(0, tk.END)
-            self.entry_telefono.delete(0, tk.END)
-            self.combobox_id_rol.delete(0, tk.END)
-            self.combobox_id_turno.delete(0, tk.END)
-            self.combobox_id_disponibilidad.delete(0, tk.END)
-            self.entry_modalidad.delete(0, tk.END)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Colaborador agregado con éxito")
+                self.actualizar_lista_colaboradores()
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_correo.delete(0, tk.END)
+                self.entry_telefono.delete(0, tk.END)
+                self.combobox_id_rol.delete(0, tk.END)
+                self.combobox_id_turno.delete(0, tk.END)
+                self.combobox_id_disponibilidad.delete(0, tk.END)
+                self.entry_modalidad.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al agregar el colaborador")
         else:
             messagebox.showerror("Error", "Debe rellenar todos los campos")
            
@@ -880,16 +932,20 @@ class Vista:
     def eliminar_colaborador(self):
         id_colaborador = self.label_info_id.cget("text")
         if id_colaborador:
-            self.controlador.eliminar_colaborador(id_colaborador)
-            self.actualizar_lista_colaboradores()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_correo.delete(0, tk.END)
-            self.entry_telefono.delete(0, tk.END)
-            self.combobox_id_rol.delete(0, tk.END)
-            self.combobox_id_turno.delete(0, tk.END)
-            self.combobox_id_disponibilidad.delete(0, tk.END)
-            self.entry_modalidad.delete(0, tk.END)
+            estado_consulta = self.controlador.eliminar_colaborador(id_colaborador)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Colaborador eliminado con éxito")
+                self.actualizar_lista_colaboradores()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_correo.delete(0, tk.END)
+                self.entry_telefono.delete(0, tk.END)
+                self.combobox_id_rol.delete(0, tk.END)
+                self.combobox_id_turno.delete(0, tk.END)
+                self.combobox_id_disponibilidad.delete(0, tk.END)
+                self.entry_modalidad.delete(0, tk.END)
+            else: 
+                messagebox.showerror("Error", "Hubo un problema al eliminar el colaborador")
         else:
             messagebox.showerror("Error", "Debe seleccionar un colaborador")
 
@@ -903,18 +959,22 @@ class Vista:
         disponibilidad = self.combobox_id_disponibilidad.get()
         modalidad = self.entry_modalidad.get()
         if id_colaborador:
-            self.controlador.actualizar_colaborador(
+            estado_consulta= self.controlador.actualizar_colaborador(
                 nombre, correo, telefono, rol, turno, disponibilidad, modalidad, id_colaborador
             )
-            self.actualizar_lista_colaboradores()
-            self.label_info_id.config(text="")
-            self.entry_nombre.delete(0, tk.END)
-            self.entry_correo.delete(0, tk.END)
-            self.entry_telefono.delete(0, tk.END)
-            self.combobox_id_rol.delete(0, tk.END)
-            self.combobox_id_turno.delete(0, tk.END)
-            self.combobox_id_disponibilidad.delete(0, tk.END)
-            self.entry_modalidad.delete(0, tk.END)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Colaborador actualizado con éxito")
+                self.actualizar_lista_colaboradores()
+                self.label_info_id.config(text="")
+                self.entry_nombre.delete(0, tk.END)
+                self.entry_correo.delete(0, tk.END)
+                self.entry_telefono.delete(0, tk.END)
+                self.combobox_id_rol.delete(0, tk.END)
+                self.combobox_id_turno.delete(0, tk.END)
+                self.combobox_id_disponibilidad.delete(0, tk.END)
+                self.entry_modalidad.delete(0, tk.END)
+            else:
+                messagebox.showerror("Error", "Hubo un problema al actualizar el colaborador")
         else:
             messagebox.showerror("Error", "Debe seleccionar un colaborador")
 

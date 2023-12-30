@@ -67,35 +67,69 @@ class Modelo:
     def inicio_usuario(self, username, password):
         self.c.execute("SELECT * FROM Usuario WHERE Username=? AND Password=?", (username, password))
         user = self.c.fetchone()
-        return 1 if user else 0
-
-    def inicio_admin(self):
-        self.c.execute("SELECT * FROM Usuario")
-        return self.c.fetchall()
+        return True if user else False
 
     #-----------------USUARIOS-------------------------
 
     def agregar_usuario(self, username, password):
-        self.c.execute("INSERT INTO Usuario (Username, Password) VALUES (?, ?)", (username, password))
-        self.conn.commit()
+        try:
+            self.c.execute("INSERT INTO Usuario (Username, Password) VALUES (?, ?)", (username, password))
+            self.conn.commit()
+            return True  
+        except Exception as e:
+            print(f"Error agregando usuario: {e}")
+            return False  
+
+    def eliminar_usuario(self, id):
+        try:
+            self.c.execute("DELETE FROM Usuario WHERE ID_Usuario=?", (id,))
+            self.conn.commit()
+            return True  
+        except Exception as e:
+            print(f"Error eliminando usuario: {e}")
+            return False 
+
+    def actualizar_usuario(self, id_usuario, username, password):
+        try:
+            self.c.execute("UPDATE Usuario SET Username=?, Password=? WHERE ID_Usuario=?", (username, password, id_usuario))
+            self.conn.commit()
+            return True  
+        except Exception as e:
+            print(f"Error actualizando usuario: {e}")
+            return False
 
     def obtener_usuarios(self):
         self.c.execute("SELECT * FROM Usuario")
         return self.c.fetchall()
 
-    def eliminar_usuario(self, id):
-        self.c.execute("DELETE FROM Usuario WHERE ID_Usuario=?", (id,))
-        self.conn.commit()
-
-    def actualizar_usuario(self, id_usuario, username, password):
-        self.c.execute("UPDATE Usuario SET Username=?, Password=? WHERE ID_Usuario=?", (username, password, id_usuario))
-        self.conn.commit()
-
     #-----------------ROLES-------------------------
 
     def agregar_rol(self, nombre, descripcion):
-        self.c.execute("INSERT INTO Rol (Nombre, Descripcion) VALUES (?, ?)", (nombre, descripcion))
-        self.conn.commit()
+        try:
+            self.c.execute("INSERT INTO Rol (Nombre, Descripcion) VALUES (?, ?)", (nombre, descripcion))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error agregando rol: {e}")
+            return False        
+
+    def eliminar_rol(self, id):
+        try:
+            self.c.execute("DELETE FROM Rol WHERE ID_Rol=?", (id,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error eliminando rol: {e}")
+            return False      
+
+    def actualizar_rol(self, id_rol, nombre, descripcion):
+        try:
+            self.c.execute("UPDATE Rol SET Nombre=?, Descripcion=? WHERE ID_Rol=?", (nombre, descripcion, id_rol))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error actualizando rol: {e}")
+            return False  
 
     def obtener_roles(self):
         self.c.execute("SELECT * FROM Rol")
@@ -103,22 +137,36 @@ class Modelo:
     
     def obtener_id_roles(self):
         self.c.execute("SELECT ID_Rol FROM Rol")
-        return self.c.fetchall()
-
-
-    def eliminar_rol(self, id):
-        self.c.execute("DELETE FROM Rol WHERE ID_Rol=?", (id,))
-        self.conn.commit()
-
-    def actualizar_rol(self, id_rol, nombre, descripcion):
-        self.c.execute("UPDATE Rol SET Nombre=?, Descripcion=? WHERE ID_Rol=?", (nombre, descripcion, id_rol))
-        self.conn.commit()
+        return self.c.fetchall()    
 
     #-----------------DISPONIBILIDADES-------------------------
 
     def agregar_disponibilidad(self, nombre, descripcion):
-        self.c.execute("INSERT INTO Disponibilidad (Nombre, Descripcion) VALUES (?, ?)", (nombre, descripcion))
-        self.conn.commit()
+        try:
+            self.c.execute("INSERT INTO Disponibilidad (Nombre, Descripcion) VALUES (?, ?)", (nombre, descripcion))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error agregando disponibilidad: {e}")
+            return False  
+
+    def eliminar_disponibilidad(self, id):
+        try:
+            self.c.execute("DELETE FROM Disponibilidad WHERE ID_Disponibilidad=?", (id,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error eliminadno disponibilidad: {e}")
+            return False  
+
+    def actualizar_disponibilidad(self, id_disponibilidad, nombre, descripcion):
+        try:
+            self.c.execute("UPDATE Disponibilidad SET Nombre=?, Descripcion=? WHERE ID_Disponibilidad=?", (nombre, descripcion, id_disponibilidad))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error aactualizando disponibilidad: {e}")
+            return False  
 
     def obtener_disponibilidades(self):
         self.c.execute("SELECT * FROM Disponibilidad")
@@ -126,22 +174,37 @@ class Modelo:
     
     def obtener_id_disponibilidades(self):
         self.c.execute("SELECT ID_Disponibilidad FROM Disponibilidad")
-        return self.c.fetchall()
-
-    def eliminar_disponibilidad(self, id):
-        self.c.execute("DELETE FROM Disponibilidad WHERE ID_Disponibilidad=?", (id,))
-        self.conn.commit()
-
-    def actualizar_disponibilidad(self, id_disponibilidad, nombre, descripcion):
-        self.c.execute("UPDATE Disponibilidad SET Nombre=?, Descripcion=? WHERE ID_Disponibilidad=?", (nombre, descripcion, id_disponibilidad))
-        self.conn.commit()
+        return self.c.fetchall()     
 
     #-----------------TURNOS-------------------------
         
     def agregar_turno(self, nombre, lunes_ingreso, lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida):
-        self.c.execute("INSERT INTO Turno (Nombre, Lunes_Ingreso, Lunes_Salida, Martes_Ingreso, Martes_Salida, Miercoles_Ingreso, Miercoles_Salida, Jueves_Ingreso, Jueves_Salida, Viernes_Ingreso, Viernes_Salida, Sabado_Ingreso, Sabado_Salida, Domingo_Ingreso, Domingo_Salida) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (nombre, lunes_ingreso, lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida))
-        self.conn.commit()
+        try:
+            self.c.execute("INSERT INTO Turno (Nombre, Lunes_Ingreso, Lunes_Salida, Martes_Ingreso, Martes_Salida, Miercoles_Ingreso, Miercoles_Salida, Jueves_Ingreso, Jueves_Salida, Viernes_Ingreso, Viernes_Salida, Sabado_Ingreso, Sabado_Salida, Domingo_Ingreso, Domingo_Salida) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (nombre, lunes_ingreso, lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error agregando turno: {e}")
+            return False  
     
+    def eliminar_turno(self, id):
+        try:
+            self.c.execute("DELETE FROM Turno WHERE ID_Turno=?", (id,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error eliminando turno: {e}")
+            return False  
+    
+    def actualizar_turno(self, nombre, lunes_ingreso, lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id_turno ):
+        try:
+            self.c.execute("UPDATE Turno SET Nombre=?, Lunes_Ingreso=?, Lunes_Salida=?, Martes_Ingreso=?, Martes_Salida=?, Miercoles_Ingreso=?, Miercoles_Salida=?, Jueves_Ingreso=?, Jueves_Salida=?, Viernes_Ingreso=?, Viernes_Salida=?, Sabado_Ingreso=?, Sabado_Salida=?, Domingo_Ingreso=?, Domingo_Salida=? WHERE ID_Turno=?", (nombre, lunes_ingreso, lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id_turno))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error actualizando turno: {e}")
+            return False  
+
     def obtener_turnos(self):
         self.c.execute("SELECT * FROM Turno")
         return self.c.fetchall()
@@ -150,32 +213,38 @@ class Modelo:
         self.c.execute("SELECT ID_Turno FROM Turno")
         return self.c.fetchall()
     
-    def eliminar_turno(self, id):
-        self.c.execute("DELETE FROM Turno WHERE ID_Turno=?", (id,))
-        self.conn.commit()
-    
-    def actualizar_turno(self, nombre, lunes_ingreso, lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id_turno ):
-        self.c.execute("UPDATE Turno SET Nombre=?, Lunes_Ingreso=?, Lunes_Salida=?, Martes_Ingreso=?, Martes_Salida=?, Miercoles_Ingreso=?, Miercoles_Salida=?, Jueves_Ingreso=?, Jueves_Salida=?, Viernes_Ingreso=?, Viernes_Salida=?, Sabado_Ingreso=?, Sabado_Salida=?, Domingo_Ingreso=?, Domingo_Salida=? WHERE ID_Turno=?", (nombre, lunes_ingreso, lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida, id_turno))
-        self.conn.commit()
-
     #-----------------COLABORADORES-------------------------
     
     def agregar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad):
-        self.c.execute("INSERT INTO Colaborador (Nombre, Correo, Telefono, ID_Rol, ID_Turno, ID_Disponibilidad, Modalidad) VALUES(?, ?, ?, ?, ?, ?, ?)", (nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad))
-        self.conn.commit()
+        try:
+            self.c.execute("INSERT INTO Colaborador (Nombre, Correo, Telefono, ID_Rol, ID_Turno, ID_Disponibilidad, Modalidad) VALUES(?, ?, ?, ?, ?, ?, ?)", (nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error agregando colaborador: {e}")
+            return False  
+    
+    def eliminar_colaborador(self, id):
+        try:
+            self.c.execute("DELETE FROM Colaborador WHERE ID_Colaborador=?", (id,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error eliminando colaborador: {e}")
+            return False  
+    
+    def actualizar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad, id_colaborador):
+        try:
+            self.c.execute("UPDATE Colaborador SET Nombre=?, Correo=?, Telefono=?, ID_Rol=?, ID_Turno=?, ID_Disponibilidad=?, Modalidad=? WHERE ID_Colaborador=?", (nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad, id_colaborador))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error actualizando colaborador: {e}")
+            return False  
     
     def obtener_colaboradores(self):
         self.c.execute("SELECT * FROM Colaborador")
         return self.c.fetchall()
-    
-    def eliminar_colaborador(self, id):
-        self.c.execute("DELETE FROM Colaborador WHERE ID_Colaborador=?", (id,))
-        self.conn.commit()
-    
-    def actualizar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad, id_colaborador):
-        self.c.execute("UPDATE Colaborador SET Nombre=?, Correo=?, Telefono=?, ID_Rol=?, ID_Turno=?, ID_Disponibilidad=?, Modalidad=? WHERE ID_Colaborador=?", (nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad, id_colaborador))
-        self.conn.commit()
-    
     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):
