@@ -409,8 +409,7 @@ class Vista:
             self.entry_nombre.insert(0, values[1])  
             self.entry_descripcion.delete(0, tk.END)
             self.entry_descripcion.insert(0, values[2])
-        else:
-            messagebox.showerror("Error", "Debe seleccionar una disponibilidad")  
+        
     
     def eliminar_disponibilidad(self):
         id_disponibilidad = self.label_info_id.cget("text")
