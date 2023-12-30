@@ -41,6 +41,9 @@ class Controlador:
     def obtener_roles(self):
         return self.modelo.obtener_roles()
     
+    def obtener_id_roles(self):
+        return self.modelo.obtener_id_roles()
+    
     #--------DISPONIBILIDADES-----------
 
     def agregar_disponibilidad(self, nombre, descripcion):
@@ -57,6 +60,9 @@ class Controlador:
 
     def obtener_disponibilidades(self):
         return self.modelo.obtener_disponibilidades()
+    
+    def obtener_id_disponibilidades(self):
+        return self.modelo.obtener_id_disponibilidades()
     
     #--------TURNOS-----------
     

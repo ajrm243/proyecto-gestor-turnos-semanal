@@ -693,21 +693,30 @@ class Vista:
         self.label_telefono.place(x=120, y=140)
         self.entry_telefono = ttk.Entry(self.ventana_colaboradores)
         self.entry_telefono.place(x=230, y=140)
-        
+
+        ids_roles = self.controlador.obtener_id_roles()
+        self.id_rol_seleccionado = tk.StringVar()
+
+
         self.label_id_rol = ttk.Label(self.ventana_colaboradores, text="Rol:")
         self.label_id_rol.place(x=120, y=180)
-        self.entry_id_rol = ttk.Entry(self.ventana_colaboradores)
-        self.entry_id_rol.place(x=230, y=180)
+        self.combobox_id_rol = ttk.Combobox(self.ventana_colaboradores, state="readonly", textvariable=self.id_rol_seleccionado)
+        self.combobox_id_rol['values'] = tuple(ids_roles)
+        self.combobox_id_rol.place(x=230, y=180)
         
         self.label_id_turno = ttk.Label(self.ventana_colaboradores, text="Turno:")
         self.label_id_turno.place(x=120, y=220)
         self.entry_id_turno = ttk.Entry(self.ventana_colaboradores)
         self.entry_id_turno.place(x=230, y=220)
         
+        ids_disponibilidades = self.controlador.obtener_id_disponibilidades()
+        self.id_diponibilidad_seleccionado = tk.StringVar()
+
         self.label_id_disponibilidad = ttk.Label(self.ventana_colaboradores, text="Disponibilidad:")
         self.label_id_disponibilidad.place(x=120, y=220)
-        self.entry_id_disponibilidad = ttk.Entry(self.ventana_colaboradores)
-        self.entry_id_disponibilidad.place(x=230, y=220)
+        self.combobox_id_disponibilidad = ttk.Combobox(self.ventana_colaboradores, state="readonly", textvariable=self.id_diponibilidad_seleccionado)
+        self.combobox_id_disponibilidad['values'] = tuple(ids_disponibilidades)
+        self.combobox_id_disponibilidad.place(x=230, y=220)
         
         self.label_modalidad = ttk.Label(self.ventana_colaboradores, text="Modalidad:")
         self.label_modalidad.place(x=120, y=260)
@@ -758,9 +767,9 @@ class Vista:
         nombre = self.entry_nombre.get()
         correo = self.entry_correo.get()
         telefono = self.entry_telefono.get()
-        rol = self.entry_id_rol.get()
+        rol = self.combobox_id_rol.get()
         turno = self.entry_id_turno.get()
-        disponibilidad = self.entry_id_disponibilidad.get()
+        disponibilidad = self.id_diponibilidad_seleccionado.get()
         modalidad = self.entry_modalidad.get()
         label_values = (nombre, correo, telefono, rol, turno, disponibilidad, modalidad)
         print("Get values:", label_values)

@@ -90,6 +90,11 @@ class Modelo:
     def obtener_roles(self):
         self.c.execute("SELECT * FROM Rol")
         return self.c.fetchall()
+    
+    def obtener_id_roles(self):
+        self.c.execute("SELECT ID_Rol FROM Rol")
+        return self.c.fetchall()
+
 
     def eliminar_rol(self, id):
         self.c.execute("DELETE FROM Rol WHERE ID_Rol=?", (id,))
@@ -107,6 +112,10 @@ class Modelo:
 
     def obtener_disponibilidades(self):
         self.c.execute("SELECT * FROM Disponibilidad")
+        return self.c.fetchall()
+    
+    def obtener_id_disponibilidades(self):
+        self.c.execute("SELECT ID_Disponibilidad FROM Disponibilidad")
         return self.c.fetchall()
 
     def eliminar_disponibilidad(self, id):
