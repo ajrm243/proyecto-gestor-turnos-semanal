@@ -671,7 +671,7 @@ class Vista:
 
         self.ventana_colaboradores = tk.Tk()
         self.ventana_colaboradores.title("Opciones de Colaborador")
-        self.ventana_colaboradores.geometry('780x600')
+        self.ventana_colaboradores.geometry('780x620')
         self.ventana_colaboradores.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_colaboradores, text="Id:")
@@ -695,39 +695,39 @@ class Vista:
         self.entry_telefono.place(x=230, y=140)
 
         ids_roles = self.controlador.obtener_id_roles()
-        self.id_rol_seleccionado = tk.StringVar()
-
-
+        
         self.label_id_rol = ttk.Label(self.ventana_colaboradores, text="Rol:")
         self.label_id_rol.place(x=120, y=180)
-        self.combobox_id_rol = ttk.Combobox(self.ventana_colaboradores, state="readonly", textvariable=self.id_rol_seleccionado)
+        self.combobox_id_rol = ttk.Combobox(self.ventana_colaboradores)
         self.combobox_id_rol['values'] = tuple(ids_roles)
         self.combobox_id_rol.place(x=230, y=180)
         
+        ids_turnos = self.controlador.obtener_id_turnos()
+
         self.label_id_turno = ttk.Label(self.ventana_colaboradores, text="Turno:")
         self.label_id_turno.place(x=120, y=220)
-        self.entry_id_turno = ttk.Entry(self.ventana_colaboradores)
-        self.entry_id_turno.place(x=230, y=220)
+        self.combobox_id_turno = ttk.Combobox(self.ventana_colaboradores)
+        self.combobox_id_turno['values'] = tuple(ids_turnos)
+        self.combobox_id_turno.place(x=230, y=220)
         
         ids_disponibilidades = self.controlador.obtener_id_disponibilidades()
-        self.id_diponibilidad_seleccionado = tk.StringVar()
-
+        
         self.label_id_disponibilidad = ttk.Label(self.ventana_colaboradores, text="Disponibilidad:")
-        self.label_id_disponibilidad.place(x=120, y=220)
-        self.combobox_id_disponibilidad = ttk.Combobox(self.ventana_colaboradores, state="readonly", textvariable=self.id_diponibilidad_seleccionado)
+        self.label_id_disponibilidad.place(x=120, y=260)
+        self.combobox_id_disponibilidad = ttk.Combobox(self.ventana_colaboradores)
         self.combobox_id_disponibilidad['values'] = tuple(ids_disponibilidades)
-        self.combobox_id_disponibilidad.place(x=230, y=220)
+        self.combobox_id_disponibilidad.place(x=230, y=260)
         
         self.label_modalidad = ttk.Label(self.ventana_colaboradores, text="Modalidad:")
-        self.label_modalidad.place(x=120, y=260)
+        self.label_modalidad.place(x=120, y=300)
         self.entry_modalidad = ttk.Entry(self.ventana_colaboradores)
-        self.entry_modalidad.place(x=230, y=260)
+        self.entry_modalidad.place(x=230, y=300)
 
         self.crear_boton(self.ventana_colaboradores, x=480, y=90, text="Agregar Colaborador", command=self.agregar_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=480, y=130, text="Actualizar Colaborador", command=self.actualizar_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=480, y=170, text="Eliminar Colaborador", command=self.eliminar_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=480, y=210, text="Limpiar Datos", command=self.limpiar_datos_colaborador)
-        self.crear_boton(self.ventana_colaboradores, x=320, y=530, text="Regresar", command=self.regresar_colaboradores)
+        self.crear_boton(self.ventana_colaboradores, x=320, y=560, text="Regresar", command=self.regresar_colaboradores)
 
 
         self.tree = ttk.Treeview(self.ventana_colaboradores, columns=("ID", "Nombre", "Correo", "Telefono", "Rol", "Turno", "Disponibilidad", "Modalidad"), show="headings")
@@ -755,7 +755,7 @@ class Vista:
         self.tree.column("Modalidad", width=90, anchor="center")
         self.tree.heading("Modalidad", text="Modalidad")
         
-        self.tree.place(x=60, y=310, width=640, height=200)
+        self.tree.place(x=70, y=340, width=640, height=200)
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_colaboradores)
         self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
         self.tree.tag_configure("impar", background="white", foreground="black")
@@ -768,8 +768,8 @@ class Vista:
         correo = self.entry_correo.get()
         telefono = self.entry_telefono.get()
         rol = self.combobox_id_rol.get()
-        turno = self.entry_id_turno.get()
-        disponibilidad = self.id_diponibilidad_seleccionado.get()
+        turno = self.combobox_id_turno.get()
+        disponibilidad = self.combobox_id_disponibilidad.get()
         modalidad = self.entry_modalidad.get()
         label_values = (nombre, correo, telefono, rol, turno, disponibilidad, modalidad)
         print("Get values:", label_values)
@@ -782,9 +782,9 @@ class Vista:
             self.entry_nombre.delete(0, tk.END)
             self.entry_correo.delete(0, tk.END)
             self.entry_telefono.delete(0, tk.END)
-            self.entry_id_rol.delete(0, tk.END)
-            self.entry_id_turno.delete(0, tk.END)
-            self.entry_id_disponibilidad.delete(0, tk.END)
+            self.combobox_id_rol.delete(0, tk.END)
+            self.combobox_id_turno.delete(0, tk.END)
+            self.combobox_id_disponibilidad.delete(0, tk.END)
             self.entry_modalidad.delete(0, tk.END)
            
     def actualizar_lista_colaboradores(self):
@@ -806,12 +806,12 @@ class Vista:
             self.entry_correo.insert(0, values[2])
             self.entry_telefono.delete(0, tk.END)
             self.entry_telefono.insert(0, values[3])
-            self.entry_id_rol.delete(0, tk.END)
-            self.entry_id_rol.insert(0, values[4])
-            self.entry_id_turno.delete(0, tk.END)
-            self.entry_id_turno.insert(0, values[5])
-            self.entry_id_disponibilidad.delete(0, tk.END)
-            self.entry_id_disponibilidad.insert(0, values[6])
+            self.combobox_id_rol.delete(0, tk.END)
+            self.combobox_id_rol.insert(0, values[4])
+            self.combobox_id_turno.delete(0, tk.END)
+            self.combobox_id_turno.insert(0, values[5])
+            self.combobox_id_disponibilidad.delete(0, tk.END)
+            self.combobox_id_disponibilidad.insert(0, values[6])
             self.entry_modalidad.delete(0, tk.END)
             self.entry_modalidad.insert(0, values[7])
             
@@ -824,9 +824,9 @@ class Vista:
             self.entry_nombre.delete(0, tk.END)
             self.entry_correo.delete(0, tk.END)
             self.entry_telefono.delete(0, tk.END)
-            self.entry_id_rol.delete(0, tk.END)
-            self.entry_id_turno.delete(0, tk.END)
-            self.entry_id_disponibilidad.delete(0, tk.END)
+            self.combobox_id_rol.delete(0, tk.END)
+            self.combobox_id_turno.delete(0, tk.END)
+            self.combobox_id_disponibilidad.delete(0, tk.END)
             self.entry_modalidad.delete(0, tk.END)
 
     def actualizar_colaborador(self):
@@ -834,12 +834,12 @@ class Vista:
         nombre = self.entry_nombre.get()
         correo = self.entry_correo.get()
         telefono = self.entry_telefono.get()
-        rol = self.entry_id_rol.get()
-        turno = self.entry_id_turno.get()
-        disponibilidad = self.entry_id_disponibilidad.get()
+        rol = self.combobox_id_rol.get()
+        turno = self.combobox_id_turno.get()
+        disponibilidad = self.combobox_id_disponibilidad.get()
         modalidad = self.entry_modalidad.get()
         if id_colaborador:
-            self.controlador.agregar_colaborador(
+            self.controlador.actualizar_colaborador(
                 nombre, correo, telefono, rol, turno, disponibilidad, modalidad, id_colaborador
             )
             self.actualizar_lista_colaboradores()
@@ -847,9 +847,9 @@ class Vista:
             self.entry_nombre.delete(0, tk.END)
             self.entry_correo.delete(0, tk.END)
             self.entry_telefono.delete(0, tk.END)
-            self.entry_id_rol.delete(0, tk.END)
-            self.entry_id_turno.delete(0, tk.END)
-            self.entry_id_disponibilidad.delete(0, tk.END)
+            self.combobox_id_rol.delete(0, tk.END)
+            self.combobox_id_turno.delete(0, tk.END)
+            self.combobox_id_disponibilidad.delete(0, tk.END)
             self.entry_modalidad.delete(0, tk.END)
 
     def limpiar_datos_colaborador(self):     
@@ -858,9 +858,9 @@ class Vista:
         self.entry_nombre.delete(0, tk.END)
         self.entry_correo.delete(0, tk.END)
         self.entry_telefono.delete(0, tk.END)
-        self.entry_id_rol.delete(0, tk.END)
-        self.entry_id_turno.delete(0, tk.END)
-        self.entry_id_disponibilidad.delete(0, tk.END)
+        self.combobox_id_rol.delete(0, tk.END)
+        self.combobox_id_turno.delete(0, tk.END)
+        self.combobox_id_disponibilidad.delete(0, tk.END)
         self.entry_modalidad.delete(0, tk.END) 
 
     def regresar_colaboradores(self):

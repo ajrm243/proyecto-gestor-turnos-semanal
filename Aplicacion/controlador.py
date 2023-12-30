@@ -82,6 +82,10 @@ class Controlador:
         return self.modelo.obtener_turnos()
         #self.vista.actualizar_lista_colaboradores()
     
+    def obtener_id_turnos(self):
+        return self.modelo.obtener_id_turnos()
+
+
     #--------COLABORADORES-----------
     
     def agregar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad):

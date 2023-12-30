@@ -136,6 +136,10 @@ class Modelo:
         self.c.execute("SELECT * FROM Turno")
         return self.c.fetchall()
     
+    def obtener_id_turnos(self):
+        self.c.execute("SELECT ID_Turno FROM Turno")
+        return self.c.fetchall()
+    
     def eliminar_turno(self, id):
         self.c.execute("DELETE FROM Turno WHERE ID_Turno=?", (id,))
         self.conn.commit()
