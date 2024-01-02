@@ -46,7 +46,6 @@ class Vista:
         self.controlador.inicio_admin(usuario, password)
 
     def procesar_inicio_admin(self, resultado):
-        print("resultado:", resultado)
         if resultado:
             self.abrir_menuPrincipal()
         else:
@@ -273,7 +272,7 @@ class Vista:
     def agregar_rol(self):
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
-        if nombre and descripcion:
+        if nombre:
             estado_consulta = self.controlador.agregar_rol(nombre, descripcion)
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Rol agregado con éxito")
@@ -390,7 +389,7 @@ class Vista:
     def agregar_disponibilidad(self):
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
-        if nombre and descripcion:
+        if nombre:
             estado_consulta= self.controlador.agregar_disponibilidad(nombre, descripcion)
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Disponibilidad agregada con éxito")
@@ -468,7 +467,7 @@ class Vista:
 
         self.ventana_turnos = tk.Tk()
         self.ventana_turnos.title("Opciones de Turnos")
-        self.ventana_turnos.geometry('1000x620')
+        self.ventana_turnos.geometry('1450x900')
         self.ventana_turnos.resizable(width=False, height=False)
 
         self.label_id = ttk.Label(self.ventana_turnos, text="Id:")
@@ -550,48 +549,48 @@ class Vista:
         self.tree.heading("Nombre", text="Nombre")
         
         self.tree.column("Lunes Ingreso", width=90, anchor="center")
-        self.tree.heading("Lunes Ingreso", text="Lunes Ingreso")
+        self.tree.heading("Lunes Ingreso", text="Lun Ingreso")
         
         self.tree.column("Lunes Salida", width=90, anchor="center")
-        self.tree.heading("Lunes Salida", text="Lunes Salida")
+        self.tree.heading("Lunes Salida", text="Lun Salida")
         
         self.tree.column("Martes Ingreso", width=90, anchor="center")
-        self.tree.heading("Martes Ingreso", text="Martes Ingreso")
+        self.tree.heading("Martes Ingreso", text="Mar Ingreso")
         
         self.tree.column("Martes Salida", width=90, anchor="center")
-        self.tree.heading("Martes Salida", text="Martes Salida")
+        self.tree.heading("Martes Salida", text="Mar Salida")
         
         self.tree.column("Miércoles Ingreso", width=90, anchor="center")
-        self.tree.heading("Miércoles Ingreso", text="Miércoles Ingreso")
+        self.tree.heading("Miércoles Ingreso", text="Mié Ingreso")
         
         self.tree.column("Miércoles Salida", width=90, anchor="center")
-        self.tree.heading("Miércoles Salida", text="Miércoles Salida")
+        self.tree.heading("Miércoles Salida", text="Mié Salida")
 
         self.tree.column("Jueves Ingreso", width=90, anchor="center")
-        self.tree.heading("Jueves Ingreso", text="Jueves Ingreso")
+        self.tree.heading("Jueves Ingreso", text="Jue Ingreso")
 
         self.tree.column("Jueves Salida", width=90, anchor="center")
-        self.tree.heading("Jueves Salida", text="Jueves Salida")
+        self.tree.heading("Jueves Salida", text="Jue Salida")
 
         self.tree.column("Viernes Ingreso", width=90, anchor="center")
-        self.tree.heading("Viernes Ingreso", text="Viernes Ingreso")
+        self.tree.heading("Viernes Ingreso", text="Vie Ingreso")
 
         self.tree.column("Viernes Salida", width=90, anchor="center")
-        self.tree.heading("Viernes Salida", text="Viernes Salida")
+        self.tree.heading("Viernes Salida", text="Vie Salida")
 
         self.tree.column("Sábado Ingreso", width=90, anchor="center")
-        self.tree.heading("Sábado Ingreso", text="Sábado Ingreso")
+        self.tree.heading("Sábado Ingreso", text="Sáb Ingreso")
 
         self.tree.column("Sábado Salida", width=90, anchor="center")
-        self.tree.heading("Sábado Salida", text="Sábado Salida")
+        self.tree.heading("Sábado Salida", text="Sáb Salida")
 
         self.tree.column("Domingo Ingreso", width=90, anchor="center")
-        self.tree.heading("Domingo Ingreso", text="Domingo Ingreso")
+        self.tree.heading("Domingo Ingreso", text="Dom Ingreso")
 
         self.tree.column("Domingo Salida", width=90, anchor="center")
-        self.tree.heading("Domingo Salida", text="Domingo Salida")
+        self.tree.heading("Domingo Salida", text="Dom Salida")
         
-        self.tree.place(x=40, y=380, width=920, height=170)
+        self.tree.place(x=40, y=380, width=1400, height=170)
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_turnos)
         self.tree.tag_configure("par", background="#E3E4F3", foreground="black")
         self.tree.tag_configure("impar", background="white", foreground="black")
@@ -616,9 +615,7 @@ class Vista:
         domingo_ingreso = self.entry_domingo_ingreso.get()
         domingo_salida = self.entry_domingo_salida.get()
         label_values = (nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida)
-        print("Get values:", label_values)
         if nombre:
-            print("pase el if de los label!")
             estado_consulta = self.controlador.agregar_turno(
                 nombre, lunes_ingreso,lunes_salida, martes_ingreso, martes_salida, miercoles_ingreso, miercoles_salida, jueves_ingreso, jueves_salida, viernes_ingreso, viernes_salida, sabado_ingreso, sabado_salida, domingo_ingreso, domingo_salida
             )
@@ -891,7 +888,6 @@ class Vista:
         disponibilidad = self.combobox_id_disponibilidad.get()
         modalidad = self.combobox_modalidad.get()
         label_values = (nombre, correo, telefono, rol, turno, disponibilidad, modalidad)
-        print("Get values:", label_values)
         if nombre and correo and telefono and rol and turno and disponibilidad and modalidad:
             
             #Validacion datos de nombre y telefono
@@ -928,7 +924,6 @@ class Vista:
            
     def actualizar_lista_colaboradores(self):
         colaboradores = self.controlador.obtener_colaboradores()
-        print(colaboradores)
         self.tree.delete(*self.tree.get_children())
         for i, colaborador in enumerate(colaboradores):
             etiqueta_estilo = "par" if i % 2 == 0 else "impar"
@@ -1026,5 +1021,4 @@ class Vista:
     def abrir_ventana_explorador_archivos(self):
         tk.Tk().withdraw()
         filename = askopenfilename()
-        print("Filename:",filename)
         self.controlador.cargar_lista_colaboradores(filename)

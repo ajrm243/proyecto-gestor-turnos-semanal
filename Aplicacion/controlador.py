@@ -116,7 +116,6 @@ class Controlador:
         file = pd.ExcelFile(ruta)
         df = pd.read_excel(file, converters={'Telefono':str, 'Rol':int, 'Turno':int, 'Disponibilidad':int, 'Modalidad':int})
         for row in df.to_records(index=False):
-            #print(row["Nombre"], type(row["Nombre"]))
             self.modelo.agregar_colaborador(row["Nombre"], row["Correo"], row["Telefono"]
                                             , row["Rol"].item(), row["Turno"].item(), row["Disponibilidad"].item()
                                             , row["Modalidad"].item())
