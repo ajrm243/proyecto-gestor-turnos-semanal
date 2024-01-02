@@ -135,8 +135,8 @@ class Modelo:
         self.c.execute("SELECT * FROM Rol")
         return self.c.fetchall()
     
-    def obtener_id_roles(self):
-        self.c.execute("SELECT ID_Rol FROM Rol")
+    def obtener_nombre_roles(self):
+        self.c.execute("SELECT Nombre FROM Rol")
         return self.c.fetchall()    
 
     #-----------------DISPONIBILIDADES-------------------------
@@ -172,8 +172,8 @@ class Modelo:
         self.c.execute("SELECT * FROM Disponibilidad")
         return self.c.fetchall()
     
-    def obtener_id_disponibilidades(self):
-        self.c.execute("SELECT ID_Disponibilidad FROM Disponibilidad")
+    def obtener_nombre_disponibilidades(self):
+        self.c.execute("SELECT Nombre FROM Disponibilidad")
         return self.c.fetchall()     
 
     #-----------------TURNOS-------------------------
@@ -209,8 +209,8 @@ class Modelo:
         self.c.execute("SELECT * FROM Turno")
         return self.c.fetchall()
     
-    def obtener_id_turnos(self):
-        self.c.execute("SELECT ID_Turno FROM Turno")
+    def obtener_nombre_turnos(self):
+        self.c.execute("SELECT Nombre FROM Turno")
         return self.c.fetchall()
     
     #-----------------COLABORADORES-------------------------

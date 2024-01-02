@@ -49,8 +49,8 @@ class Controlador:
     def obtener_roles(self):
         return self.modelo.obtener_roles()
     
-    def obtener_id_roles(self):
-        return self.modelo.obtener_id_roles()
+    def obtener_nombre_roles(self):
+        return self.modelo.obtener_nombre_roles()
     
     #--------DISPONIBILIDADES-----------
 
@@ -69,8 +69,8 @@ class Controlador:
     def obtener_disponibilidades(self):
         return self.modelo.obtener_disponibilidades()
     
-    def obtener_id_disponibilidades(self):
-        return self.modelo.obtener_id_disponibilidades()
+    def obtener_nombre_disponibilidades(self):
+        return self.modelo.obtener_nombre_disponibilidades()
     
     #--------TURNOS-----------
     
@@ -88,10 +88,9 @@ class Controlador:
     
     def obtener_turnos(self):
         return self.modelo.obtener_turnos()
-        #self.vista.actualizar_lista_colaboradores()
     
-    def obtener_id_turnos(self):
-        return self.modelo.obtener_id_turnos()
+    def obtener_nombre_turnos(self):
+        return self.modelo.obtener_nombre_turnos()
 
 
     #--------COLABORADORES-----------

@@ -807,34 +807,34 @@ class Vista:
         self.entry_telefono = ttk.Entry(self.ventana_colaboradores)
         self.entry_telefono.place(x=230, y=140)
 
-        ids_roles = self.controlador.obtener_id_roles()
+        nombre_roles = self.controlador.obtener_nombre_roles()
         
         self.label_id_rol = ttk.Label(self.ventana_colaboradores, text="Rol:")
         self.label_id_rol.place(x=120, y=180)
         self.combobox_id_rol = ttk.Combobox(self.ventana_colaboradores, state="readonly")
-        self.combobox_id_rol['values'] = tuple(ids_roles)
+        self.combobox_id_rol['values'] = tuple(nombre_roles)
         self.combobox_id_rol.place(x=230, y=180)
         
-        ids_turnos = self.controlador.obtener_id_turnos()
+        nombre_turnos = self.controlador.obtener_nombre_turnos()
 
         self.label_id_turno = ttk.Label(self.ventana_colaboradores, text="Turno:")
         self.label_id_turno.place(x=120, y=220)
         self.combobox_id_turno = ttk.Combobox(self.ventana_colaboradores, state="readonly")
-        self.combobox_id_turno['values'] = tuple(ids_turnos)
+        self.combobox_id_turno['values'] = tuple(nombre_turnos)
         self.combobox_id_turno.place(x=230, y=220)
         
-        ids_disponibilidades = self.controlador.obtener_id_disponibilidades()
+        nombre_disponibilidades = self.controlador.obtener_nombre_disponibilidades()
         
         self.label_id_disponibilidad = ttk.Label(self.ventana_colaboradores, text="Disponibilidad:")
         self.label_id_disponibilidad.place(x=120, y=260)
         self.combobox_id_disponibilidad = ttk.Combobox(self.ventana_colaboradores, state="readonly")
-        self.combobox_id_disponibilidad['values'] = tuple(ids_disponibilidades)
+        self.combobox_id_disponibilidad['values'] = tuple(nombre_disponibilidades)
         self.combobox_id_disponibilidad.place(x=230, y=260)
         
         self.label_modalidad = ttk.Label(self.ventana_colaboradores, text="Modalidad:")
         self.label_modalidad.place(x=120, y=300)
         self.combobox_modalidad = ttk.Combobox(self.ventana_colaboradores, state="readonly")
-        self.combobox_modalidad['values'] = (1, 2) # hard wired porque solo consideramos presencial y virtual (wfh)
+        self.combobox_modalidad['values'] = ("Presencial", "Virtual") # hard wired porque solo consideramos presencial y virtual (wfh)
         self.combobox_modalidad.place(x=230, y=300)
         #self.entry_modalidad = ttk.Entry(self.ventana_colaboradores)
         #self.entry_modalidad.place(x=230, y=300)
