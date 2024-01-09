@@ -52,6 +52,10 @@ class Controlador:
     def obtener_nombre_roles(self):
         return self.modelo.obtener_nombre_roles()
     
+    def comprobar_nombre_rol(self, correo):
+        estado_consulta = self.modelo.comprobar_nombre_rol(correo)
+        return estado_consulta
+    
     #--------DISPONIBILIDADES-----------
 
     def agregar_disponibilidad(self, nombre, descripcion):
@@ -71,6 +75,10 @@ class Controlador:
     
     def obtener_nombre_disponibilidades(self):
         return self.modelo.obtener_nombre_disponibilidades()
+
+    def comprobar_nombre_disponibilidad(self, correo):
+        estado_consulta = self.modelo.comprobar_nombre_disponibilidad(correo)
+        return estado_consulta
     
     #--------TURNOS-----------
     
@@ -91,7 +99,11 @@ class Controlador:
     
     def obtener_nombre_turnos(self):
         return self.modelo.obtener_nombre_turnos()
-
+    
+    def comprobar_nombre_turno(self, correo):
+        estado_consulta = self.modelo.comprobar_nombre_turno(correo)
+        return estado_consulta
+    
 
     #--------COLABORADORES-----------
     
@@ -115,9 +127,22 @@ class Controlador:
         file = pd.ExcelFile(ruta)
         df = pd.read_excel(file, converters={'Telefono':str, 'Rol':int, 'Turno':int, 'Disponibilidad':int, 'Modalidad':int})
         for row in df.to_records(index=False):
-            self.modelo.agregar_colaborador(row["Nombre"], row["Correo"], row["Telefono"]
-                                            , row["Rol"].item(), row["Turno"].item(), row["Disponibilidad"].item()
-                                            , row["Modalidad"].item())
+            res_comprobacion = self.modelo.comprobar_correo_colaborador(row["Correo"])
+            if not res_comprobacion:
+                estado_consulta = self.modelo.agregar_colaborador(row["Nombre"], row["Correo"], row["Telefono"]
+                                                , row["Rol"].item(), row["Turno"].item(), row["Disponibilidad"].item()
+                                                , row["Modalidad"].item())
+                if (not estado_consulta):
+                    return False
+            else:
+                #Hay un colaborador que ya está en la base, se sigue
+                continue
+        return True
+    
+    def comprobar_correo_colaborador(self, correo):
+        estado_consulta = self.modelo.comprobar_correo_colaborador(correo)
+        #print(estado_consulta)
+        return estado_consulta
         
 
 #--------MAIN----------

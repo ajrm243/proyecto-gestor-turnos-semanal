@@ -137,7 +137,11 @@ class Modelo:
     
     def obtener_nombre_roles(self):
         self.c.execute("SELECT Nombre FROM Rol")
-        return self.c.fetchall()    
+        return self.c.fetchall()
+    
+    def comprobar_nombre_rol(self, nombre):
+        self.c.execute("SELECT 1 FROM Rol WHERE Nombre = ?", (nombre,))
+        return self.c.fetchall()
 
     #-----------------DISPONIBILIDADES-------------------------
 
@@ -174,7 +178,11 @@ class Modelo:
     
     def obtener_nombre_disponibilidades(self):
         self.c.execute("SELECT Nombre FROM Disponibilidad")
-        return self.c.fetchall()     
+        return self.c.fetchall()
+    
+    def comprobar_nombre_disponibilidad(self, nombre):
+        self.c.execute("SELECT 1 FROM Disponibilidad WHERE Nombre = ?", (nombre,))
+        return self.c.fetchall()
 
     #-----------------TURNOS-------------------------
         
@@ -213,6 +221,10 @@ class Modelo:
         self.c.execute("SELECT Nombre FROM Turno")
         return self.c.fetchall()
     
+    def comprobar_nombre_turno(self, nombre):
+        self.c.execute("SELECT 1 FROM Turno WHERE Nombre = ?", (nombre,))
+        return self.c.fetchall()
+    
     #-----------------COLABORADORES-------------------------
     
     def agregar_colaborador(self, nombre, correo, telefono, id_rol, id_turno, id_disponibilidad, modalidad):
@@ -245,6 +257,12 @@ class Modelo:
     def obtener_colaboradores(self):
         self.c.execute("SELECT * FROM Colaborador")
         return self.c.fetchall()
+    
+    # Para comprobar si existe el correo en la BD
+    def comprobar_correo_colaborador(self, correo):
+        self.c.execute("SELECT 1 FROM Colaborador WHERE Correo = ?", (correo,))
+        return self.c.fetchall()
+    
     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):
