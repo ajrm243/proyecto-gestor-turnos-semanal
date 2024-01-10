@@ -263,6 +263,12 @@ class Modelo:
         self.c.execute("SELECT 1 FROM Colaborador WHERE Correo = ?", (correo,))
         return self.c.fetchall()
     
+    #-------------------HORARIO----------------------------
+
+    def obtener_colaboradores_disponibles(self):
+        self.c.execute("SELECT * FROM Colaborador WHERE ID_Disponibilidad = 1")
+        return self.c.fetchall()
+    
     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):

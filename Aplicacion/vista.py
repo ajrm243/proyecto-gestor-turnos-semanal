@@ -74,7 +74,7 @@ class Vista:
         self.ventana_menuPrincipal.resizable(width=False, height=False)
 
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=110, text="Opciones de Colaborador", command=self.abrir_ventana_opcionesColaborador)
-        self.crear_boton(self.ventana_menuPrincipal, x=170, y=160, text="Opciones de Horario")
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=160, text="Opciones de Horario", command=self.abrir_ventana_opcionesHorario)
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=210, text="Opciones de Usuario", command=self.abrir_ventana_usuarios)
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=260, text="Salir", command=self.salir_aplicacion)
     
@@ -101,13 +101,16 @@ class Vista:
         self.ventana_opcionesColaborador.destroy()
         self.ventana_menuPrincipal.deiconify()
 
-    def abrir_ventana_horario(self):
+    def abrir_ventana_opcionesHorario(self):
         self.ventana_login.withdraw()
-        self.ventana_menuPrincipal = tk.Tk()
-        self.ventana_menuPrincipal.title("Opciones Horario")
+        self.ventana_opcionesHorario = tk.Tk()
+        self.ventana_opcionesHorario.title("Opciones Horario")
 
-        self.ventana_menuPrincipal.geometry('500x370')
-        self.ventana_menuPrincipal.resizable(width=False, height=False)
+        self.ventana_opcionesHorario.geometry('500x370')
+        self.ventana_opcionesHorario.resizable(width=False, height=False)
+
+        self.crear_boton(self.ventana_opcionesHorario, x=170, y=60, text="Generar Horario")
+        self.crear_boton(self.ventana_opcionesHorario, x=170, y=110, text="Visualizar Horario")
 #--------USUARIOS----------
         
     def abrir_ventana_usuarios(self):
