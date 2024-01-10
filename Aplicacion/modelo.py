@@ -265,8 +265,16 @@ class Modelo:
     
     #-------------------HORARIO----------------------------
 
-    def obtener_colaboradores_disponibles(self):
-        self.c.execute("SELECT * FROM Colaborador WHERE ID_Disponibilidad = 1")
+    def obtener_id_disponible(self):
+        self.c.execute("SELECT ID_Disponibilidad FROM Disponibilidad WHERE Nombre = 'Disponible'")
+        resultado = self.c.fetchone() 
+        if resultado:
+            return resultado[0]  
+        else:
+            return None 
+
+    def obtener_colaboradores_disponibles(self, id_disponible):
+        self.c.execute("SELECT * FROM Colaborador WHERE ID_Disponibilidad = ?",(id_disponible,))
         return self.c.fetchall()
     
     #-----------------OTROS-------------------------

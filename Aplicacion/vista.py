@@ -109,7 +109,7 @@ class Vista:
         self.ventana_opcionesHorario.geometry('500x370')
         self.ventana_opcionesHorario.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_opcionesHorario, x=170, y=60, text="Generar Horario")
+        self.crear_boton(self.ventana_opcionesHorario, x=170, y=60, text="Generar Horario", command=self.obtener_colaboradores_disponibles)
         self.crear_boton(self.ventana_opcionesHorario, x=170, y=110, text="Visualizar Horario")
 #--------USUARIOS----------
         
@@ -1032,7 +1032,11 @@ class Vista:
 
     def regresar_colaboradores(self):
         self.ventana_colaboradores.destroy()
-        self.ventana_opcionesColaborador.deiconify()    
+        self.ventana_opcionesColaborador.deiconify()   
+
+#-------HORARIO--------
+    def obtener_colaboradores_disponibles(self):
+        print(self.controlador.obtener_colaboradores_disponibles())
 
 #-------OTROS-----------
 

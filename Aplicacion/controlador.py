@@ -143,6 +143,13 @@ class Controlador:
         estado_consulta = self.modelo.comprobar_correo_colaborador(correo)
         #print(estado_consulta)
         return estado_consulta
+    
+#--------HORARIO-----------
+    
+    def obtener_colaboradores_disponibles(self):
+        id_disponible = self.modelo.obtener_id_disponible()
+        lista_colaboradores_disponibles = self.modelo.obtener_colaboradores_disponibles(id_disponible)
+        return lista_colaboradores_disponibles
         
 
 #--------MAIN----------
