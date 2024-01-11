@@ -263,6 +263,29 @@ class Modelo:
         self.c.execute("SELECT 1 FROM Colaborador WHERE Correo = ?", (correo,))
         return self.c.fetchall()
     
+    def filtrar_colaboradores(self, filtro, valor):
+        self.c.execute("SELECT * FROM Colaborador WHERE ? = ?", (filtro, valor))
+        return self.c.fetchall()
+    
+    def obtener_colaboradores_bonito(self):
+        self.c.execute("""
+                        SELECT 
+                            C.ID_Colaborador, C.Nombre, C.Correo, C.Telefono,
+                            R.Nombre AS Rol,
+                            T.Nombre AS Turno,
+                            D.Nombre AS Disponibilidad,
+                            CASE C.Modalidad
+                                WHEN 1 THEN "Presencial"
+                                WHEN 2 THEN "Virtual"
+                                ELSE "Desconocido"
+                            END AS Modalidad
+                            FROM Colaborador C
+                            INNER JOIN Rol R ON R.ID_Rol = C.ID_Rol 
+                            INNER JOIN Turno T ON T.ID_Turno = C.ID_Turno 
+                            INNER JOIN Disponibilidad D ON D.ID_Disponibilidad = C.ID_Disponibilidad 
+                       """)
+        return self.c.fetchall()
+    
     #-------------------HORARIO----------------------------
 
     def obtener_id_disponible(self):

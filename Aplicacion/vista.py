@@ -825,27 +825,36 @@ class Vista:
         self.entry_telefono.place(x=230, y=140)
 
         nombre_roles = self.controlador.obtener_nombre_roles()
+        roles_values = self.controlador.obtener_roles()
+        #print("roles", roles_values)
+        dict_roles = {tup[0] : tup[1] for tup in roles_values}
         
         self.label_id_rol = ttk.Label(self.ventana_colaboradores, text="Rol:")
         self.label_id_rol.place(x=120, y=180)
         self.combobox_id_rol = ttk.Combobox(self.ventana_colaboradores, state="readonly")
-        self.combobox_id_rol['values'] = tuple(nombre_roles)
+        self.combobox_id_rol['values'] = list(dict_roles.values())
         self.combobox_id_rol.place(x=230, y=180)
         
         nombre_turnos = self.controlador.obtener_nombre_turnos()
+        turnos_values = self.controlador.obtener_turnos()
+        #print("turnos", turnos_values)
+        dict_turnos = {tup[0] : tup[1] for tup in turnos_values}
 
         self.label_id_turno = ttk.Label(self.ventana_colaboradores, text="Turno:")
         self.label_id_turno.place(x=120, y=220)
         self.combobox_id_turno = ttk.Combobox(self.ventana_colaboradores, state="readonly")
-        self.combobox_id_turno['values'] = tuple(nombre_turnos)
+        self.combobox_id_turno['values'] = list(dict_turnos.values())
         self.combobox_id_turno.place(x=230, y=220)
         
         nombre_disponibilidades = self.controlador.obtener_nombre_disponibilidades()
+        disponibilidades_values = self.controlador.obtener_disponibilidades()
+        #print("disponibilidades", disponibilidades_values)
+        dict_disponibilidades = {tup[0] : tup[1] for tup in disponibilidades_values}
         
         self.label_id_disponibilidad = ttk.Label(self.ventana_colaboradores, text="Disponibilidad:")
         self.label_id_disponibilidad.place(x=120, y=260)
         self.combobox_id_disponibilidad = ttk.Combobox(self.ventana_colaboradores, state="readonly")
-        self.combobox_id_disponibilidad['values'] = tuple(nombre_disponibilidades)
+        self.combobox_id_disponibilidad['values'] = list(dict_disponibilidades.values())
         self.combobox_id_disponibilidad.place(x=230, y=260)
         
         self.label_modalidad = ttk.Label(self.ventana_colaboradores, text="Modalidad:")
@@ -897,16 +906,24 @@ class Vista:
         self.ventana_colaboradores.mainloop()
 
     def agregar_colaborador(self):
+        # Para la conversion de texto a ID
+        roles_values = self.controlador.obtener_roles()
+        dict_roles = {tup[0] : tup[1] for tup in roles_values}
+        turnos_values = self.controlador.obtener_turnos()
+        dict_turnos = {tup[0] : tup[1] for tup in turnos_values}
+        disponibilidades_values = self.controlador.obtener_disponibilidades()
+        dict_disponibilidades = {tup[0] : tup[1] for tup in disponibilidades_values}
+        # END
         nombre = self.entry_nombre.get()
         correo = self.entry_correo.get()
         telefono = self.entry_telefono.get()
-        rol = self.combobox_id_rol.get()
-        turno = self.combobox_id_turno.get()
-        disponibilidad = self.combobox_id_disponibilidad.get()
-        modalidad = self.combobox_modalidad.get()
+        rol = next((key for key, value in dict_roles.items() if value == self.combobox_id_rol.get()), None)
+        turno = next((key for key, value in dict_turnos.items() if value == self.combobox_id_turno.get()), None)
+        disponibilidad = next((key for key, value in dict_disponibilidades.items() if value == self.combobox_id_disponibilidad.get()), None)
+        mapeo_modalidad = {'Presencial': 1, 'Virtual': 2} # Para devolverle al SQL un 1 o 2 dependiendo de la modalidad que tiene el combobox
+        modalidad = mapeo_modalidad.get(self.combobox_modalidad.get(), None)
         label_values = (nombre, correo, telefono, rol, turno, disponibilidad, modalidad)
         if nombre and correo and telefono and rol and turno and disponibilidad and modalidad:
-            
             #Validacion datos de nombre y telefono
             regex_nombre = r"^[a-zA-Z ,.'-]+$"
             if not (re.fullmatch(regex_nombre, nombre)):
@@ -944,7 +961,7 @@ class Vista:
             messagebox.showerror("Error", "Debe rellenar todos los campos")
            
     def actualizar_lista_colaboradores(self):
-        colaboradores = self.controlador.obtener_colaboradores()
+        colaboradores = self.controlador.obtener_colaboradores_bonito()
         self.tree.delete(*self.tree.get_children())
         for i, colaborador in enumerate(colaboradores):
             etiqueta_estilo = "par" if i % 2 == 0 else "impar"
@@ -991,14 +1008,23 @@ class Vista:
             messagebox.showerror("Error", "Debe seleccionar un colaborador")
 
     def actualizar_colaborador(self):
+        # Para la conversion de texto a ID
+        roles_values = self.controlador.obtener_roles()
+        dict_roles = {tup[0] : tup[1] for tup in roles_values}
+        turnos_values = self.controlador.obtener_turnos()
+        dict_turnos = {tup[0] : tup[1] for tup in turnos_values}
+        disponibilidades_values = self.controlador.obtener_disponibilidades()
+        dict_disponibilidades = {tup[0] : tup[1] for tup in disponibilidades_values}
+        # END
         id_colaborador = self.label_info_id.cget("text")
         nombre = self.entry_nombre.get()
         correo = self.entry_correo.get()
         telefono = self.entry_telefono.get()
-        rol = self.combobox_id_rol.get()
-        turno = self.combobox_id_turno.get()
-        disponibilidad = self.combobox_id_disponibilidad.get()
-        modalidad = self.combobox_modalidad.get()
+        rol = next((key for key, value in dict_roles.items() if value == self.combobox_id_rol.get()), None)
+        turno = next((key for key, value in dict_turnos.items() if value == self.combobox_id_turno.get()), None)
+        disponibilidad = next((key for key, value in dict_disponibilidades.items() if value == self.combobox_id_disponibilidad.get()), None)
+        mapeo_modalidad = {'Presencial': 1, 'Virtual': 2} # Para devolverle al SQL un 1 o 2 dependiendo de la modalidad que tiene el combobox
+        modalidad = mapeo_modalidad.get(self.combobox_modalidad.get(), None)
         if id_colaborador:
             estado_consulta= self.controlador.actualizar_colaborador(
                 nombre, correo, telefono, rol, turno, disponibilidad, modalidad, id_colaborador

@@ -144,6 +144,12 @@ class Controlador:
         #print(estado_consulta)
         return estado_consulta
     
+    def filtrar_colaboradores(self, filtro, valor):
+        return self.modelo.filtrar_colaboradores(filtro, valor)
+    
+    def obtener_colaboradores_bonito(self):
+        return self.modelo.obtener_colaboradores_bonito()
+    
 #--------HORARIO-----------
     
     def obtener_colaboradores_disponibles(self):
