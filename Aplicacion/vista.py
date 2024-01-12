@@ -248,7 +248,7 @@ class Vista:
         self.entry_nombre = ttk.Entry(self.ventana_roles)
         self.entry_nombre.place(x=230, y=90)
 
-        self.label_descripcion = ttk.Label(self.ventana_roles, text="Descripcion:")
+        self.label_descripcion = ttk.Label(self.ventana_roles, text="Descripción:")
         self.label_descripcion.place(x=120, y=130)
         self.entry_descripcion = ttk.Entry(self.ventana_roles)
         self.entry_descripcion.place(x=230, y=130)
@@ -259,10 +259,10 @@ class Vista:
         self.crear_boton(self.ventana_roles, x=480, y=140, text="Limpiar Datos", command=self.limpiar_datos_rol)
         self.crear_boton(self.ventana_roles, x=330, y=470, text="Regresar", command=self.regresar_roles)
 
-        self.tree = ttk.Treeview(self.ventana_roles, columns=("ID", "Nombre", "Descripcion"), show="headings")
+        self.tree = ttk.Treeview(self.ventana_roles, columns=("ID", "Nombre", "Descripción"), show="headings")
         self.tree.heading("ID", text="ID")
         self.tree.heading("Nombre", text="Nombre")
-        self.tree.heading("Descripcion", text="Descripcion")
+        self.tree.heading("Descripción", text="Descripción")
         self.tree.place(x=100, y=210)
 
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_roles)
@@ -369,7 +369,7 @@ class Vista:
         self.entry_nombre = ttk.Entry(self.ventana_disponibilidades)
         self.entry_nombre.place(x=230, y=90)
 
-        self.label_descripcion = ttk.Label(self.ventana_disponibilidades, text="Descripcion:")
+        self.label_descripcion = ttk.Label(self.ventana_disponibilidades, text="Descripción:")
         self.label_descripcion.place(x=120, y=130)
         self.entry_descripcion = ttk.Entry(self.ventana_disponibilidades)
         self.entry_descripcion.place(x=230, y=130)
@@ -380,10 +380,10 @@ class Vista:
         self.crear_boton(self.ventana_disponibilidades, x=480, y=140, text="Limpiar Datos", command=self.limpiar_datos_rol)
         self.crear_boton(self.ventana_disponibilidades, x=330, y=470, text="Regresar", command=self.regresar_disponibilidades)
 
-        self.tree = ttk.Treeview(self.ventana_disponibilidades, columns=("ID", "Nombre", "Descripcion"), show="headings")
+        self.tree = ttk.Treeview(self.ventana_disponibilidades, columns=("ID", "Nombre", "Descripción"), show="headings")
         self.tree.heading("ID", text="ID")
         self.tree.heading("Nombre", text="Nombre")
-        self.tree.heading("Descripcion", text="Descripcion")
+        self.tree.heading("Descripción", text="Descripción")
         self.tree.place(x=100, y=210)
 
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_disponibilidades)
@@ -819,7 +819,7 @@ class Vista:
         self.entry_correo = ttk.Entry(self.ventana_colaboradores)
         self.entry_correo.place(x=230, y=100)
         
-        self.label_telefono = ttk.Label(self.ventana_colaboradores, text="Telefono:")
+        self.label_telefono = ttk.Label(self.ventana_colaboradores, text="Teléfono:")
         self.label_telefono.place(x=120, y=140)
         self.entry_telefono = ttk.Entry(self.ventana_colaboradores)
         self.entry_telefono.place(x=230, y=140)
@@ -883,7 +883,7 @@ class Vista:
         self.combobox_filtro_colaborador.place(x=480, y=260)
         self.combobox_filtro_colaborador.bind("<<ComboboxSelected>>", self.filtrar_lista_colaboradores)
 
-        self.tree = ttk.Treeview(self.ventana_colaboradores, columns=("ID", "Nombre", "Correo", "Telefono", "Rol", "Turno", "Disponibilidad", "Modalidad"), show="headings")
+        self.tree = ttk.Treeview(self.ventana_colaboradores, columns=("ID", "Nombre", "Correo", "Teléfono", "Rol", "Turno", "Disponibilidad", "Modalidad"), show="headings")
         self.tree.column("ID", width=50, anchor="center")
         self.tree.heading("ID", text="ID")
         
@@ -893,8 +893,8 @@ class Vista:
         self.tree.column("Correo", width=115, anchor="center")
         self.tree.heading("Correo", text="Correo")
         
-        self.tree.column("Telefono", width=80, anchor="center")
-        self.tree.heading("Telefono", text="Telefono")
+        self.tree.column("Teléfono", width=80, anchor="center")
+        self.tree.heading("Teléfono", text="Telefono")
         
         self.tree.column("Rol", width=50, anchor="center")
         self.tree.heading("Rol", text="Rol")
