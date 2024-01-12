@@ -171,11 +171,9 @@ class Controlador:
             if colaborador[5] == turno[0]:
                 return turno
 
-    def turnoT1_F():
-        return 
 
-    def informacion_turno(turno):
-        match turno:
+    def informacion_turno(self,nombre_turno):
+        match nombre_turno:
             case "T1_F":
                 return [['Lunes','NA','NA','NA','NA','NA'],
                         ['Martes','NA','NA','NA','NA','NA'],
@@ -415,9 +413,15 @@ class Controlador:
         lista_colaboradores_disponibles = self.obtener_colaboradores_disponibles()
         lista_turnos = self.modelo.obtener_turnos()
         if type(lista_colaboradores_disponibles) == list:
+            self.modelo.eliminar_horario()
             for colaborador in lista_colaboradores_disponibles:
                 turno = self.identificar_turno(colaborador,lista_turnos)
-                print(turno)
+                horario = self.informacion_turno(turno[1])
+                
+                for dia in horario:
+                    info_horario = [colaborador[0]]+dia
+                    print(info_horario)
+                    self.modelo.agregar_horario(info_horario)
 
         return lista_colaboradores_disponibles
 

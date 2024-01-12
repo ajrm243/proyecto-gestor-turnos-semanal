@@ -339,6 +339,25 @@ class Modelo:
         self.c.execute("SELECT * FROM Colaborador WHERE ID_Disponibilidad = ?",(id_disponible,))
         return self.c.fetchall()
     
+    def agregar_horario(self,info_horario):
+        try:
+            
+            self.c.execute("INSERT INTO Horario (ID_Colaborador, DiaSemana, Prof_1, Prof_2, Prof_3, Almuerzo, HorasExtr) VALUES(?, ?, ?, ?, ?, ?, ?)", (info_horario[0], info_horario[1], info_horario[2], info_horario[3], info_horario[4], info_horario[5], info_horario[6]))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error agregando horario: {e}")
+            return False  
+        
+    def eliminar_horario(self):
+        try:
+            self.c.execute("DELETE FROM Horario")
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error agregando horario: {e}")
+            return False  
+    
     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):
