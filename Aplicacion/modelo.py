@@ -263,8 +263,47 @@ class Modelo:
         self.c.execute("SELECT 1 FROM Colaborador WHERE Correo = ?", (correo,))
         return self.c.fetchall()
     
+    def obtener_filtros_colaborador(self):
+        self.c.execute("""
+                            SELECT 'Rol: ' || R.Nombre AS NombreDisplay, R.ID_Rol AS Valor
+                            FROM Rol R
+                            UNION
+                            SELECT 'Turno: ' || T.Nombre AS NombreDisplay, T.ID_turno AS Valor
+                            FROM Turno T
+                            UNION
+                            SELECT 'Disponibilidad: ' || D.Nombre AS NombreDisplay, D.ID_Disponibilidad AS Valor
+                            FROM Disponibilidad D
+                            UNION
+                            SELECT CASE C.Modalidad
+                                WHEN 1 THEN "Modalidad: Presencial"
+                                WHEN 2 THEN "Modalidad: Virtual"
+                            END AS NombreDisplay,
+                                CASE C.Modalidad
+                                WHEN 1 THEN 1
+                                WHEN 2 THEN 2
+                            END AS Valor
+                            FROM Colaborador C
+                       """)
+        return self.c.fetchall()
+    
     def filtrar_colaboradores(self, filtro, valor):
-        self.c.execute("SELECT * FROM Colaborador WHERE ? = ?", (filtro, valor))
+        self.c.execute(f"""
+                            SELECT 
+                                C.ID_Colaborador, C.Nombre, C.Correo, C.Telefono,
+                                R.Nombre AS Rol,
+                                T.Nombre AS Turno,
+                                D.Nombre AS Disponibilidad,
+                                CASE C.Modalidad
+                                    WHEN 1 THEN "Presencial"
+                                    WHEN 2 THEN "Virtual"
+                                    ELSE "Desconocido"
+                                END AS Modalidad
+                                FROM Colaborador C
+                                INNER JOIN Rol R ON R.ID_Rol = C.ID_Rol 
+                                INNER JOIN Turno T ON T.ID_Turno = C.ID_Turno 
+                                INNER JOIN Disponibilidad D ON D.ID_Disponibilidad = C.ID_Disponibilidad
+                            WHERE {filtro} = ?
+                       """, (valor,))
         return self.c.fetchall()
     
     def obtener_colaboradores_bonito(self):

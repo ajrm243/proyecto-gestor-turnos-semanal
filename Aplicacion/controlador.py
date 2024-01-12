@@ -144,6 +144,9 @@ class Controlador:
         #print(estado_consulta)
         return estado_consulta
     
+    def obtener_filtros_colaborador(self):
+        return self.modelo.obtener_filtros_colaborador()
+    
     def filtrar_colaboradores(self, filtro, valor):
         return self.modelo.filtrar_colaboradores(filtro, valor)
     

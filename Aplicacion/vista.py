@@ -870,7 +870,18 @@ class Vista:
         self.crear_boton(self.ventana_colaboradores, x=480, y=170, text="Eliminar Colaborador", command=self.eliminar_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=480, y=210, text="Limpiar Datos", command=self.limpiar_datos_colaborador)
         self.crear_boton(self.ventana_colaboradores, x=320, y=560, text="Regresar", command=self.regresar_colaboradores)
-
+        
+        # Filtros
+        filtros = self.controlador.obtener_filtros_colaborador()
+        #print("Filtros:", filtros)
+        dict_filtros = {'Todos': -1}
+        filtros_bd = {tup[0] : tup[1] for tup in filtros}
+        dict_filtros.update(filtros_bd)
+        #print("Dict:", dict_filtros)
+        self.combobox_filtro_colaborador = ttk.Combobox(self.ventana_colaboradores, state="readonly")
+        self.combobox_filtro_colaborador['values'] = list(dict_filtros.keys())
+        self.combobox_filtro_colaborador.place(x=480, y=260)
+        self.combobox_filtro_colaborador.bind("<<ComboboxSelected>>", self.filtrar_lista_colaboradores)
 
         self.tree = ttk.Treeview(self.ventana_colaboradores, columns=("ID", "Nombre", "Correo", "Telefono", "Rol", "Turno", "Disponibilidad", "Modalidad"), show="headings")
         self.tree.column("ID", width=50, anchor="center")
@@ -966,6 +977,36 @@ class Vista:
         for i, colaborador in enumerate(colaboradores):
             etiqueta_estilo = "par" if i % 2 == 0 else "impar"
             self.tree.insert("", "end", values=colaborador, tags=(etiqueta_estilo,))
+
+    def filtrar_lista_colaboradores(self, event):
+        filtro_seleccionado = self.combobox_filtro_colaborador.get()
+        if filtro_seleccionado == 'Todos':
+            self.actualizar_lista_colaboradores()
+        else:
+            # Hay que diferenciar el filtro del valor
+            filtros = self.controlador.obtener_filtros_colaborador()
+            dict_filtros = {'Todos': -1}
+            filtros_bd = {tup[0] : tup[1] for tup in filtros}
+            dict_filtros.update(filtros_bd)
+            
+            filtro = filtro_seleccionado.split(':')[0].strip() # Primero saber cuál tabla
+            match filtro:
+                case 'Rol':
+                    filtro = 'C.ID_Rol'
+                case 'Turno':
+                    filtro = 'C.ID_Turno'
+                case 'Disponibilidad':
+                    filtro = 'C.ID_Disponibilidad'
+                case 'Modalidad':
+                    filtro = 'C.Modalidad'
+            valor = dict_filtros.get(filtro_seleccionado) # el valor es el ID de la tabla del filtro
+            
+            print("Filtro y valor:", filtro, valor)
+            colaboradores_filtrados = self.controlador.filtrar_colaboradores(filtro, valor)
+            self.tree.delete(*self.tree.get_children())
+            for i, colaborador in enumerate(colaboradores_filtrados):
+                etiqueta_estilo = "par" if i % 2 == 0 else "impar"
+                self.tree.insert("", "end", values=colaborador, tags=(etiqueta_estilo,))
 
     def seleccionar_campos_colaboradores(self, event):
         item = self.tree.selection()
