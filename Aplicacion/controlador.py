@@ -158,7 +158,31 @@ class Controlador:
     def obtener_colaboradores_disponibles(self):
         id_disponible = self.modelo.obtener_id_disponible()
         lista_colaboradores_disponibles = self.modelo.obtener_colaboradores_disponibles(id_disponible)
+        #if len(lista_colaboradores_disponibles) >= 15
+        if len(lista_colaboradores_disponibles) >= 5:
+            print("Pasa")
+            return lista_colaboradores_disponibles
+        else:
+            print("No pasa")
+            return 0
+        
+    def identificar_turno(self,colaborador, lista_turnos):
+        for turno in lista_turnos:
+            if colaborador[5] == turno[0]:
+                return turno
+
+
+    def generar_horario(self):
+        lista_colaboradores_disponibles = self.obtener_colaboradores_disponibles()
+        lista_turnos = self.modelo.obtener_turnos()
+        if type(lista_colaboradores_disponibles) == list:
+            for colaborador in lista_colaboradores_disponibles:
+                turno = self.identificar_turno(colaborador,lista_turnos)
+                print(turno)
+
         return lista_colaboradores_disponibles
+
+        
         
 
 #--------MAIN----------

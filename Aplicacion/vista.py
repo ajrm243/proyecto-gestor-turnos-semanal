@@ -1103,7 +1103,7 @@ class Vista:
 
 #-------HORARIO--------
     def obtener_colaboradores_disponibles(self):
-        print(self.controlador.obtener_colaboradores_disponibles())
+        print(self.controlador.generar_horario())
 
 #-------OTROS-----------
 
