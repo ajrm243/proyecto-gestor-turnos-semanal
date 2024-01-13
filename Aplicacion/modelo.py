@@ -358,6 +358,9 @@ class Modelo:
             print(f"Error agregando horario: {e}")
             return False  
     
+    def obtener_horario_colaborador(self, id_colaborador):
+        self.c.execute("SELECT DiaSemana, Prof_1, Prof_2, Prof_3, Almuerzo, HorasExtr FROM Horario WHERE ID_Colaborador = ?", (id_colaborador,))
+        return self.c.fetchall()
     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):

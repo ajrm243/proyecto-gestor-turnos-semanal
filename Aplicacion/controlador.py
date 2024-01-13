@@ -425,6 +425,8 @@ class Controlador:
 
         return lista_colaboradores_disponibles
 
+    def obtener_horario_colaborador(self, id_colaborador):
+        return self.modelo.obtener_horario_colaborador(id_colaborador)
 
 #--------MAIN----------
 if __name__ == "__main__":

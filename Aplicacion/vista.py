@@ -110,7 +110,7 @@ class Vista:
         self.ventana_opcionesHorario.resizable(width=False, height=False)
 
         self.crear_boton(self.ventana_opcionesHorario, x=170, y=60, text="Generar Horario", command=self.obtener_colaboradores_disponibles)
-        self.crear_boton(self.ventana_opcionesHorario, x=170, y=110, text="Visualizar Horario")
+        self.crear_boton(self.ventana_opcionesHorario, x=170, y=110, text="Visualizar Horario", command=self.abrir_ventana_horario)
 #--------USUARIOS----------
         
     def abrir_ventana_usuarios(self):
@@ -1104,6 +1104,41 @@ class Vista:
 #-------HORARIO--------
     def obtener_colaboradores_disponibles(self):
         print(self.controlador.generar_horario())
+
+    def abrir_ventana_horario(self):
+        self.ventana_menuPrincipal.withdraw()
+
+        self.ventana_horario = tk.Tk()
+        self.ventana_horario.title("Horario")
+        self.ventana_horario.geometry('800x780')
+        self.ventana_horario.resizable(width=False, height=False)
+
+        self.campos_horario = ["", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
+        self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado","Domingo"]
+
+        self.tree = ttk.Treeview(self.ventana_horario, columns=self.campos_horario, show="headings", height=7)
+
+        
+        for col in self.campos_horario:
+            self.tree.heading(col, text=col)
+            self.tree.column(col, width=100)  
+
+        for dias_semana in self.dias_semana:
+            self.tree.insert("", "end", values=[dias_semana] + [""] * len(self.campos_horario))
+
+        self.rellenar_horario()
+        self.tree.place(x=10, y=210)
+
+
+        self.ventana_horario.mainloop()
+
+    def rellenar_horario(self):
+        horario_colaborador = self.controlador.obtener_horario_colaborador(100)
+        self.tree.delete(*self.tree.get_children())
+        for i, dia in enumerate(horario_colaborador):
+            
+            self.tree.insert("", "end", values=dia)
+        
 
 #-------OTROS-----------
 
