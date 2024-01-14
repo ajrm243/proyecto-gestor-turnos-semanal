@@ -317,25 +317,28 @@ class Vista:
     
     def eliminar_rol(self):
         id_rol = self.label_info_id.cget("text")
-        if id_rol:
-            estado_consulta=self.controlador.eliminar_rol(id_rol)
+        nombre = self.entry_nombre.get()
+
+        if id_rol and nombre not in ["A3", "A1", "A2"]:
+            estado_consulta = self.controlador.eliminar_rol(id_rol)
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Rol eliminado con éxito")
                 self.actualizar_lista_roles()
                 self.label_info_id.config(text="")
                 self.entry_nombre.delete(0, tk.END)
                 self.entry_descripcion.delete(0, tk.END)
-            else: 
+            else:
                 messagebox.showerror("Error", "Hubo un problema al eliminando el rol")
         else:
-            messagebox.showerror("Error", "Debe seleccionar un rol")
+            messagebox.showerror("Error", "Debe seleccionar un rol válido")
 
     def actualizar_rol(self):
         id_rol = self.label_info_id.cget("text")
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
-        if id_rol:
-            estado_consulta = self.controlador.actualizar_rol(id_rol,nombre,descripcion)
+
+        if id_rol and nombre not in ["A3", "A1", "A2"]:
+            estado_consulta = self.controlador.actualizar_rol(id_rol, nombre, descripcion)
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Rol actualizado con éxito")
                 self.actualizar_lista_roles()
@@ -345,7 +348,7 @@ class Vista:
             else:
                 messagebox.showerror("Error", "Hubo un problema al actualizar el rol")
         else:
-            messagebox.showerror("Error", "Debe seleccionar un rol")
+            messagebox.showerror("Error", "Debe seleccionar un rol válido")
 
     def limpiar_datos_rol(self):     
         self.label_info_id.config(text="")
@@ -439,7 +442,8 @@ class Vista:
     
     def eliminar_disponibilidad(self):
         id_disponibilidad = self.label_info_id.cget("text")
-        if id_disponibilidad:
+        nombre = self.entry_nombre.get()
+        if id_disponibilidad and nombre != "Disponible":
             estado_consulta = self.controlador.eliminar_disponibilidad(id_disponibilidad)
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Disponibilidad elimindada con éxito")
@@ -450,13 +454,13 @@ class Vista:
             else:
                 messagebox.showerror("Error", "Hubo un problema al eliminar disponibilidad")
         else:
-            messagebox.showerror("Error", "Debe seleccionar una disponibilidad")
+            messagebox.showerror("Error", "Debe seleccionar una disponibilidad válida")
 
     def actualizar_disponibilidad(self):
         id_disponibilidad = self.label_info_id.cget("text")
         nombre = self.entry_nombre.get()
         descripcion = self.entry_descripcion.get()
-        if id_disponibilidad:
+        if id_disponibilidad and nombre != "Disponible":
             estado_consulta = self.controlador.actualizar_disponibilidad(id_disponibilidad,nombre,descripcion)
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Disponibilidad actualizada con éxito")
@@ -467,7 +471,7 @@ class Vista:
             else:
                 messagebox.showerror("Error", "Hubo un problema al actualizar disponibilidad")
         else:
-            messagebox.showerror("Error", "Debe seleccionar una disponibilidad")
+            messagebox.showerror("Error", "Debe seleccionar una disponibilidad válida")
 
     def limpiar_datos_disponibilidad(self):     
         self.label_info_id.config(text="")
@@ -709,7 +713,14 @@ class Vista:
             
     def eliminar_turno(self):
         id_turno = self.label_info_id.cget("text")
-        if id_turno:
+        nombre = self.entry_nombre.get()
+        turnos_fijos = ["T1_F","T2_F","T3_F","T4_F","T5_F","T6_F",
+                        "TF1_FF","TF2_FN","TF3_FN","TF4_FN","TF7_FM",
+                        "TF8_FM","TF9_FM","TF10_FM","TF12_MN","TF13_MN",
+                        "TF14_FF","T1_M","T2_M","T3_M","T4_M","T5_M","T6_M",
+                        "HFC1","HFC2","HFC3","HFC4","HFC5"
+                        ]
+        if id_turno and nombre not in turnos_fijos:
             estado_consulta =  self.controlador.eliminar_turno(id_turno)
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Turno eliminado con éxito")
@@ -733,7 +744,7 @@ class Vista:
             else:
                 messagebox.showerror("Error", "Hubo un problema al aliminar el turno")
         else:
-            messagebox.showerror("Error", "Debe seleccionar un turno")
+            messagebox.showerror("Error", "Debe seleccionar un turno válido")
 
     def actualizar_turno(self):
         id_turno = self.label_info_id.cget("text")
