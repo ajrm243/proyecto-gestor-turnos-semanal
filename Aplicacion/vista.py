@@ -1174,8 +1174,9 @@ class Vista:
 
         self.crear_boton(self.ventana_horario, x=570, y=90, text="Visualizar Horario", command=self.rellenar_horario)
         self.crear_boton(self.ventana_horario, x=570, y=130, text="Actualizar Horario", command=self.actualizar_horario)
-        self.crear_boton(self.ventana_horario, x=570, y=170, text="Reporte General")
-        self.crear_boton(self.ventana_horario, x=570, y=210, text="Reporte Individual")
+        self.crear_boton(self.ventana_horario, x=570, y=170, text="Reporte General", command=self.generar_archivo_horario_completo)
+        self.crear_boton(self.ventana_horario, x=570, y=210, text="Reporte Individual", command=self.generar_archivo_horario_individual)
+        self.crear_boton(self.ventana_horario, x=570, y=250, text="Limpiar Datos", command=self.limpiar_datos_horario)
 
         self.campos_horario = ["","Hora Ingreso","Hora Salida", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
         self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado","Domingo"]
@@ -1211,15 +1212,15 @@ class Vista:
             self.entry_salida.config(state="readonly")
             self.entry_prof1.delete(0, tk.END)
             self.entry_prof1.insert(0, values[3])  
-            self.entry_prof1.config(state="readonly")
+            #self.entry_prof1.config(state="readonly")
             self.entry_prof2.delete(0, tk.END)
             self.entry_prof2.insert(0, values[4])  
-            self.entry_prof2.config(state="readonly")
+            #self.entry_prof2.config(state="readonly")
             self.entry_prof3.delete(0, tk.END)
             self.entry_prof3.insert(0, values[5])  
             self.entry_almuerzo.delete(0, tk.END)
             self.entry_almuerzo.insert(0, values[6])  
-            self.entry_almuerzo.config(state="readonly")
+            #self.entry_almuerzo.config(state="readonly")
             self.entry_horasExtra.delete(0, tk.END)
             self.entry_horasExtra.insert(0, values[7])  
 
@@ -1258,6 +1259,26 @@ class Vista:
         for i, dia in enumerate(horario_colaborador):
             
             self.tree.insert("", "end", values=dia)
+    
+    def limpiar_datos_horario(self):     
+        #self.actualizar_horario()
+        self.label_info_dia.config(text="")
+        self.entry_ingreso.delete(0, tk.END)
+        self.entry_salida.delete(0, tk.END)
+        self.entry_prof1.delete(0, tk.END)
+        self.entry_prof2.delete(0, tk.END)
+        self.entry_prof3.delete(0, tk.END)  
+        self.entry_almuerzo.delete(0, tk.END)
+        self.entry_horasExtra.delete(0, tk.END)
+
+    def generar_archivo_horario_completo(self):
+        self.controlador.generar_archivo_horario_completo()
+
+    def generar_archivo_horario_individual(self):
+        seleccion = self.combobox_colaborador.get()
+        id_colaborador = int(seleccion.split(" ")[0])
+        self.controlador.generar_archivo_horario_individual(id_colaborador)
+
         
 
 #-------OTROS-----------

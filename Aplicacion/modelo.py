@@ -420,7 +420,78 @@ class Modelo:
             return True
         except Exception as e:
             print(f"Error actualizando colaborador: {e}")
-            return False  
+            return False
+
+    def obtener_horario_completo(self):
+        self.c.execute('''SELECT
+                            C.ID_Colaborador,
+                            C.Nombre AS Nombre_Colaborador,
+                            H.DiaSemana,
+                            CASE H.DiaSemana
+                                WHEN 'Lunes' THEN T.Lunes_Ingreso
+                                WHEN 'Martes' THEN T.Martes_Ingreso
+                                WHEN 'Miércoles' THEN T.Miercoles_Ingreso
+                                WHEN 'Jueves' THEN T.Jueves_Ingreso
+                                WHEN 'Viernes' THEN T.Viernes_Ingreso
+                                WHEN 'Sábado' THEN T.Sabado_Ingreso
+                                WHEN 'Domingo' THEN T.Domingo_Ingreso
+                                ELSE NULL
+                            END AS Ingreso_Dia,
+                            CASE H.DiaSemana
+                                WHEN 'Lunes' THEN T.Lunes_Salida
+                                WHEN 'Martes' THEN T.Martes_Salida
+                                WHEN 'Miércoles' THEN T.Miercoles_Salida
+                                WHEN 'Jueves' THEN T.Jueves_Salida
+                                WHEN 'Viernes' THEN T.Viernes_Salida
+                                WHEN 'Sábado' THEN T.Sabado_Salida
+                                WHEN 'Domingo' THEN T.Domingo_Salida
+                                ELSE NULL
+                            END AS Salida_Dia,
+                            H.Prof_1,
+                            H.Prof_2,
+                            H.Prof_3,
+                            H.Almuerzo,
+                            H.HorasExtr
+                        FROM Horario H
+                        JOIN Colaborador C ON H.ID_Colaborador = C.ID_Colaborador
+                        JOIN Turno T ON C.ID_Turno = T.ID_Turno;''')
+        return self.c.fetchall()
+
+    def obtener_horario_individual(self, id_colaborador):
+        self.c.execute('''SELECT
+                            C.ID_Colaborador,
+                            C.Nombre AS Nombre_Colaborador,
+                            H.DiaSemana,
+                            CASE H.DiaSemana
+                                WHEN 'Lunes' THEN T.Lunes_Ingreso
+                                WHEN 'Martes' THEN T.Martes_Ingreso
+                                WHEN 'Miércoles' THEN T.Miercoles_Ingreso
+                                WHEN 'Jueves' THEN T.Jueves_Ingreso
+                                WHEN 'Viernes' THEN T.Viernes_Ingreso
+                                WHEN 'Sábado' THEN T.Sabado_Ingreso
+                                WHEN 'Domingo' THEN T.Domingo_Ingreso
+                                ELSE NULL
+                            END AS Ingreso_Dia,
+                            CASE H.DiaSemana
+                                WHEN 'Lunes' THEN T.Lunes_Salida
+                                WHEN 'Martes' THEN T.Martes_Salida
+                                WHEN 'Miércoles' THEN T.Miercoles_Salida
+                                WHEN 'Jueves' THEN T.Jueves_Salida
+                                WHEN 'Viernes' THEN T.Viernes_Salida
+                                WHEN 'Sábado' THEN T.Sabado_Salida
+                                WHEN 'Domingo' THEN T.Domingo_Salida
+                                ELSE NULL
+                            END AS Salida_Dia,
+                            H.Prof_1,
+                            H.Prof_2,
+                            H.Prof_3,
+                            H.Almuerzo,
+                            H.HorasExtr
+                        FROM Horario H
+                        JOIN Colaborador C ON H.ID_Colaborador = C.ID_Colaborador
+                        JOIN Turno T ON C.ID_Turno = T.ID_Turno
+                        WHERE C.ID_Colaborador = ?''',(id_colaborador,))
+        return self.c.fetchall()  
     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):
