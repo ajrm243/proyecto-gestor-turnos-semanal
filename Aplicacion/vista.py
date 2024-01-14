@@ -1107,13 +1107,19 @@ class Vista:
 
     def abrir_ventana_horario(self):
         self.ventana_menuPrincipal.withdraw()
-
         self.ventana_horario = tk.Tk()
         self.ventana_horario.title("Horario")
-        self.ventana_horario.geometry('800x780')
+        self.ventana_horario.geometry('880x400')
         self.ventana_horario.resizable(width=False, height=False)
 
-        self.campos_horario = ["", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
+        datos_tuplas = self.controlador.obtener_colaboradores_nombre_id()
+        self.id_seleccionado = tk.StringVar()
+        self.combobox_colaborador = ttk.Combobox(self.ventana_horario, values=datos_tuplas, state="readonly")
+        self.combobox_colaborador.place(x=150, y=30)
+        self.boton_visualizar_horario = ttk.Button(self.ventana_horario, text="Visualizar Horario", command=self.rellenar_horario)
+        self.boton_visualizar_horario.place(x=380, y=30)
+
+        self.campos_horario = ["","Hora Ingreso","Hora Salida", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
         self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado","Domingo"]
 
         self.tree = ttk.Treeview(self.ventana_horario, columns=self.campos_horario, show="headings", height=7)
@@ -1126,14 +1132,16 @@ class Vista:
         for dias_semana in self.dias_semana:
             self.tree.insert("", "end", values=[dias_semana] + [""] * len(self.campos_horario))
 
-        self.rellenar_horario()
-        self.tree.place(x=10, y=210)
+        
+        self.tree.place(x=50, y=130)
 
 
         self.ventana_horario.mainloop()
 
     def rellenar_horario(self):
-        horario_colaborador = self.controlador.obtener_horario_colaborador(100)
+        seleccion = self.combobox_colaborador.get()
+        id_colaborador = int(seleccion.split(" ")[0])
+        horario_colaborador = self.controlador.obtener_horario_colaborador2(id_colaborador)
         self.tree.delete(*self.tree.get_children())
         for i, dia in enumerate(horario_colaborador):
             

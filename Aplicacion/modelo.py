@@ -258,6 +258,10 @@ class Modelo:
         self.c.execute("SELECT * FROM Colaborador")
         return self.c.fetchall()
     
+    def obtener_colaboradores_nombre_id(self):
+        self.c.execute("SELECT ID_Colaborador, Nombre FROM Colaborador")
+        return self.c.fetchall()
+    
     # Para comprobar si existe el correo en la BD
     def comprobar_correo_colaborador(self, correo):
         self.c.execute("SELECT 1 FROM Colaborador WHERE Correo = ?", (correo,))
@@ -360,6 +364,42 @@ class Modelo:
     
     def obtener_horario_colaborador(self, id_colaborador):
         self.c.execute("SELECT DiaSemana, Prof_1, Prof_2, Prof_3, Almuerzo, HorasExtr FROM Horario WHERE ID_Colaborador = ?", (id_colaborador,))
+        return self.c.fetchall()
+    
+    def obtener_horario_colaborador2(self, id_colaborador):
+        self.c.execute("""
+                        SELECT
+                            H.DiaSemana,
+                            CASE H.DiaSemana
+                                WHEN 'Lunes' THEN T.Lunes_Ingreso
+                                WHEN 'Martes' THEN T.Martes_Ingreso
+                                WHEN 'Miercoles' THEN T.Miercoles_Ingreso
+                                WHEN 'Jueves' THEN T.Jueves_Ingreso
+                                WHEN 'Viernes' THEN T.Viernes_Ingreso
+                                WHEN 'Sábado' THEN T.Sabado_Ingreso
+                                WHEN 'Domingo' THEN T.Domingo_Ingreso
+                                ELSE NULL
+                            END AS Ingreso_Dia,
+                            CASE H.DiaSemana
+                                WHEN 'Lunes' THEN T.Lunes_Salida
+                                WHEN 'Martes' THEN T.Martes_Salida
+                                WHEN 'Miercoles' THEN T.Miercoles_Salida
+                                WHEN 'Jueves' THEN T.Jueves_Salida
+                                WHEN 'Viernes' THEN T.Viernes_Salida
+                                WHEN 'Sábado' THEN T.Sabado_Salida
+                                WHEN 'Domingo' THEN T.Domingo_Salida
+                                ELSE NULL
+                            END AS Salida_Dia,
+                            H.Prof_1,
+                            H.Prof_2,
+                            H.Prof_3,
+                            H.Almuerzo,
+                            H.HorasExtr
+                            FROM Horario H
+                            INNER JOIN Colaborador C ON H.ID_Colaborador = C.ID_Colaborador
+                            INNER JOIN Turno T ON C.ID_Turno = T.ID_Turno
+                            WHERE C.ID_Colaborador=?
+                       """, (id_colaborador,))
         return self.c.fetchall()
     #-----------------OTROS-------------------------
 

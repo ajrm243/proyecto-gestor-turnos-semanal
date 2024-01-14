@@ -153,6 +153,9 @@ class Controlador:
     def obtener_colaboradores_bonito(self):
         return self.modelo.obtener_colaboradores_bonito()
     
+    def obtener_colaboradores_nombre_id(self):
+        return self.modelo.obtener_colaboradores_nombre_id()
+    
 #--------HORARIO-----------
     
     def obtener_colaboradores_disponibles(self):
@@ -427,6 +430,9 @@ class Controlador:
 
     def obtener_horario_colaborador(self, id_colaborador):
         return self.modelo.obtener_horario_colaborador(id_colaborador)
+    
+    def obtener_horario_colaborador2(self, id_colaborador):
+        return self.modelo.obtener_horario_colaborador2(id_colaborador)
 
 #--------MAIN----------
 if __name__ == "__main__":
