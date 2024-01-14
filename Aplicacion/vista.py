@@ -1184,10 +1184,12 @@ class Vista:
         self.combobox_colaborador.place(x=570, y=60)
 
         self.crear_boton(self.ventana_horario, x=570, y=90, text="Visualizar Horario", command=self.rellenar_horario)
-        self.crear_boton(self.ventana_horario, x=570, y=130, text="Actualizar Horario", command=self.actualizar_horario)
+        self.crear_boton(self.ventana_horario, x=570, y=130, text="Limpiar Datos", command=self.limpiar_datos_horario)
         self.crear_boton(self.ventana_horario, x=570, y=170, text="Reporte General", command=self.generar_archivo_horario_completo)
         self.crear_boton(self.ventana_horario, x=570, y=210, text="Reporte Individual", command=self.generar_archivo_horario_individual)
-        self.crear_boton(self.ventana_horario, x=570, y=250, text="Limpiar Datos", command=self.limpiar_datos_horario)
+        
+        if tipo_usuario == "administrador":
+            self.crear_boton(self.ventana_horario, x=570, y=250, text="Actualizar Horario", command=self.actualizar_horario)
 
         self.campos_horario = ["","Hora Ingreso","Hora Salida", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
         self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado","Domingo"]
