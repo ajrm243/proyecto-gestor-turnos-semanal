@@ -36,7 +36,7 @@ class Vista:
 
     def procesar_inicio_usuario(self, resultado):
         if resultado:
-            self.abrir_ventana_horario() #cambiar a la ventana de usuario cuando esté lista
+            self.abrir_ventana_horario("usuario") #cambiar a la ventana de usuario cuando esté lista
         else:
             messagebox.showerror("Error", "Credenciales incorrectas")
 
@@ -79,7 +79,7 @@ class Vista:
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=260, text="Salir", command=self.salir_aplicacion)
     
     def salir_aplicacion(self):
-        self.ventana_menuPrincipal.quit()
+        self.ventana_menuPrincipal.destroy()
         
     #Ventana opciones de colaborador
     def abrir_ventana_opcionesColaborador(self):
@@ -100,17 +100,24 @@ class Vista:
     def regresar_opcionesColaborador(self):
         self.ventana_opcionesColaborador.destroy()
         self.ventana_menuPrincipal.deiconify()
+    
 
     def abrir_ventana_opcionesHorario(self):
-        self.ventana_login.withdraw()
+        self.ventana_menuPrincipal.withdraw()
         self.ventana_opcionesHorario = tk.Tk()
         self.ventana_opcionesHorario.title("Opciones Horario")
 
         self.ventana_opcionesHorario.geometry('500x370')
         self.ventana_opcionesHorario.resizable(width=False, height=False)
 
-        self.crear_boton(self.ventana_opcionesHorario, x=170, y=60, text="Generar Horario", command=self.obtener_colaboradores_disponibles)
-        self.crear_boton(self.ventana_opcionesHorario, x=170, y=110, text="Visualizar Horario", command=self.abrir_ventana_horario)
+        self.crear_boton(self.ventana_opcionesHorario, x=170, y=110, text="Generar Horario", command=self.obtener_colaboradores_disponibles)
+        self.crear_boton(self.ventana_opcionesHorario, x=170, y=160, text="Visualizar Horario", command=lambda: self.abrir_ventana_horario("administrador"))
+        self.crear_boton(self.ventana_opcionesHorario, x=170, y=210, text="Regresar", command=self.regresar_menuPrincipal)
+
+    def regresar_menuPrincipal(self):
+        self.ventana_opcionesHorario.destroy()
+        self.ventana_menuPrincipal.deiconify()
+
 #--------USUARIOS----------
         
     def abrir_ventana_usuarios(self):
@@ -1105,38 +1112,47 @@ class Vista:
     def obtener_colaboradores_disponibles(self):
         print(self.controlador.generar_horario())
 
-    def abrir_ventana_horario(self):
-        self.ventana_menuPrincipal.withdraw()
+    def abrir_ventana_horario(self, tipo_usuario):
+        if tipo_usuario == "usuario":
+            self.ventana_login.withdraw()
+        elif tipo_usuario == "administrador":
+            self.ventana_opcionesHorario.withdraw()
+
         self.ventana_horario = tk.Tk()
         self.ventana_horario.title("Horario")
-        self.ventana_horario.geometry('880x400')
+        self.ventana_horario.geometry('900x400')
         self.ventana_horario.resizable(width=False, height=False)
+
+        self.label_colaborador = ttk.Label(self.ventana_horario, text="Colaborador:")
+        self.label_colaborador.place(x=120, y=40)
 
         datos_tuplas = self.controlador.obtener_colaboradores_nombre_id()
         self.id_seleccionado = tk.StringVar()
         self.combobox_colaborador = ttk.Combobox(self.ventana_horario, values=datos_tuplas, state="readonly")
-        self.combobox_colaborador.place(x=150, y=30)
-        self.boton_visualizar_horario = ttk.Button(self.ventana_horario, text="Visualizar Horario", command=self.rellenar_horario)
-        self.boton_visualizar_horario.place(x=380, y=30)
+        self.combobox_colaborador.place(x=220, y=40)
+
+        self.crear_boton(self.ventana_horario, x=420, y=30, text="Visualizar Horario", command=self.rellenar_horario)
+        self.crear_boton(self.ventana_horario, x=620, y=30, text="Generar Reporte")
 
         self.campos_horario = ["","Hora Ingreso","Hora Salida", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
         self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado","Domingo"]
 
         self.tree = ttk.Treeview(self.ventana_horario, columns=self.campos_horario, show="headings", height=7)
-
-        
         for col in self.campos_horario:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=100)  
 
         for dias_semana in self.dias_semana:
             self.tree.insert("", "end", values=[dias_semana] + [""] * len(self.campos_horario))
-
-        
         self.tree.place(x=50, y=130)
-
-
+        if tipo_usuario =="administrador":
+            self.crear_boton(self.ventana_horario, x=380, y=330, text="Regresar", command=self.regresar_Horario)
         self.ventana_horario.mainloop()
+
+    def regresar_Horario(self):
+        self.ventana_horario.destroy()
+        self.ventana_menuPrincipal.deiconify()
+    
 
     def rellenar_horario(self):
         seleccion = self.combobox_colaborador.get()
