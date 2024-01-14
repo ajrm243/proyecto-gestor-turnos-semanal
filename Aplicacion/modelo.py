@@ -401,6 +401,26 @@ class Modelo:
                             WHERE C.ID_Colaborador=?
                        """, (id_colaborador,))
         return self.c.fetchall()
+    
+    def actualizar_horario(self, id_colaborador, dia_semana, prof1, prof2, prof3, almuerzo, horas_extra):
+        try:
+            self.c.execute("""
+                            UPDATE Horario
+                            SET
+                                Prof_1 = ?,
+                                Prof_2 = ?,
+                                Prof_3 = ?,
+                                Almuerzo = ?,
+                                HorasExtr = ?
+                            WHERE
+                                ID_Colaborador = ? AND
+                                DiaSemana = ?;
+                            """, ( prof1, prof2, prof3, almuerzo, horas_extra,id_colaborador, dia_semana))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error actualizando colaborador: {e}")
+            return False  
     #-----------------OTROS-------------------------
 
     def cerrar_conexion(self):

@@ -433,6 +433,10 @@ class Controlador:
     
     def obtener_horario_colaborador2(self, id_colaborador):
         return self.modelo.obtener_horario_colaborador2(id_colaborador)
+    
+    def actualizar_horario(self, id_colaborador, dia_semana, prof1, prof2, prof3, almuerzo, horas_extra):
+        estado_consulta = self.modelo.actualizar_horario(id_colaborador, dia_semana, prof1, prof2, prof3, almuerzo, horas_extra)
+        return estado_consulta
 
 #--------MAIN----------
 if __name__ == "__main__":

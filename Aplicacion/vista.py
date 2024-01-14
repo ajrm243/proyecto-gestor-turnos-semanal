@@ -1120,19 +1120,62 @@ class Vista:
 
         self.ventana_horario = tk.Tk()
         self.ventana_horario.title("Horario")
-        self.ventana_horario.geometry('900x400')
+        self.ventana_horario.geometry('900x620')
         self.ventana_horario.resizable(width=False, height=False)
 
+        self.label_dia = ttk.Label(self.ventana_horario, text="Dia Semana:")
+        self.label_dia.place(x=170, y=20)
+        self.label_info_dia = ttk.Label(self.ventana_horario, text="")
+        self.label_info_dia.place(x=280, y=20)
+
+        self.label_ingreso = ttk.Label(self.ventana_horario, text="Ingreso :")
+        self.label_ingreso.place(x=170, y=60)
+        self.entry_ingreso = ttk.Entry(self.ventana_horario)
+        self.entry_ingreso.place(x=280, y=60)
+        
+
+        self.label_salida = ttk.Label(self.ventana_horario, text="Salida :")
+        self.label_salida.place(x=170, y=100)
+        self.entry_salida = ttk.Entry(self.ventana_horario)
+        self.entry_salida.place(x=280, y=100)
+
+        self.label_prof1 = ttk.Label(self.ventana_horario, text="Profiláctico 1:")
+        self.label_prof1.place(x=170, y=140)
+        self.entry_prof1 = ttk.Entry(self.ventana_horario)
+        self.entry_prof1.place(x=280, y=140)
+
+        self.label_prof2 = ttk.Label(self.ventana_horario, text="Profiláctico 2:")
+        self.label_prof2.place(x=170, y=180)
+        self.entry_prof2 = ttk.Entry(self.ventana_horario)
+        self.entry_prof2.place(x=280, y=180)
+        
+        self.label_prof3 = ttk.Label(self.ventana_horario, text="Profiláctico 3:")
+        self.label_prof3.place(x=170, y=220)
+        self.entry_prof3 = ttk.Entry(self.ventana_horario)
+        self.entry_prof3.place(x=280, y=220)
+
+        self.label_almuerzo = ttk.Label(self.ventana_horario, text="Almuerzo:")
+        self.label_almuerzo.place(x=170, y=260)
+        self.entry_almuerzo = ttk.Entry(self.ventana_horario)
+        self.entry_almuerzo.place(x=280, y=260)
+
+        self.label_horasExtra = ttk.Label(self.ventana_horario, text="Horas Extra:")
+        self.label_horasExtra.place(x=170, y=300)
+        self.entry_horasExtra = ttk.Entry(self.ventana_horario)
+        self.entry_horasExtra.place(x=280, y=300)
+
         self.label_colaborador = ttk.Label(self.ventana_horario, text="Colaborador:")
-        self.label_colaborador.place(x=120, y=40)
+        self.label_colaborador.place(x=570, y=40)
 
-        datos_tuplas = self.controlador.obtener_colaboradores_nombre_id()
+        datos_colaborador = self.controlador.obtener_colaboradores_nombre_id()
         self.id_seleccionado = tk.StringVar()
-        self.combobox_colaborador = ttk.Combobox(self.ventana_horario, values=datos_tuplas, state="readonly")
-        self.combobox_colaborador.place(x=220, y=40)
+        self.combobox_colaborador = ttk.Combobox(self.ventana_horario, values=datos_colaborador, state="readonly")
+        self.combobox_colaborador.place(x=570, y=60)
 
-        self.crear_boton(self.ventana_horario, x=420, y=30, text="Visualizar Horario", command=self.rellenar_horario)
-        self.crear_boton(self.ventana_horario, x=620, y=30, text="Generar Reporte")
+        self.crear_boton(self.ventana_horario, x=570, y=90, text="Visualizar Horario", command=self.rellenar_horario)
+        self.crear_boton(self.ventana_horario, x=570, y=130, text="Actualizar Horario", command=self.actualizar_horario)
+        self.crear_boton(self.ventana_horario, x=570, y=170, text="Reporte General")
+        self.crear_boton(self.ventana_horario, x=570, y=210, text="Reporte Individual")
 
         self.campos_horario = ["","Hora Ingreso","Hora Salida", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
         self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado","Domingo"]
@@ -1144,15 +1187,68 @@ class Vista:
 
         for dias_semana in self.dias_semana:
             self.tree.insert("", "end", values=[dias_semana] + [""] * len(self.campos_horario))
-        self.tree.place(x=50, y=130)
+        self.tree.place(x=50, y=360)
+        self.tree.bind("<<TreeviewSelect>>", self.seleccionar_campos_horario)
+
         if tipo_usuario =="administrador":
-            self.crear_boton(self.ventana_horario, x=380, y=330, text="Regresar", command=self.regresar_Horario)
+            self.crear_boton(self.ventana_horario, x=380, y=550, text="Regresar", command=self.regresar_Horario)
         self.ventana_horario.mainloop()
 
     def regresar_Horario(self):
         self.ventana_horario.destroy()
         self.ventana_menuPrincipal.deiconify()
-    
+
+    def seleccionar_campos_horario(self, event):
+        item = self.tree.selection()
+        if item:
+            values = self.tree.item(item, "values")
+            self.label_info_dia.config(text = values[0])
+            self.entry_ingreso.delete(0, tk.END)
+            self.entry_ingreso.insert(0, values[1]) 
+            self.entry_ingreso.config(state="readonly")
+            self.entry_salida.delete(0, tk.END)
+            self.entry_salida.insert(0, values[2]) 
+            self.entry_salida.config(state="readonly")
+            self.entry_prof1.delete(0, tk.END)
+            self.entry_prof1.insert(0, values[3])  
+            self.entry_prof1.config(state="readonly")
+            self.entry_prof2.delete(0, tk.END)
+            self.entry_prof2.insert(0, values[4])  
+            self.entry_prof2.config(state="readonly")
+            self.entry_prof3.delete(0, tk.END)
+            self.entry_prof3.insert(0, values[5])  
+            self.entry_almuerzo.delete(0, tk.END)
+            self.entry_almuerzo.insert(0, values[6])  
+            self.entry_almuerzo.config(state="readonly")
+            self.entry_horasExtra.delete(0, tk.END)
+            self.entry_horasExtra.insert(0, values[7])  
+
+    def actualizar_horario(self):
+        seleccion = self.combobox_colaborador.get()
+        id_colaborador = int(seleccion.split(" ")[0])
+        dia_semana = self.label_info_dia.cget("text")
+        prof1 = self.entry_prof1.get()
+        prof2 = self.entry_prof2.get()
+        prof3 = self.entry_prof3.get()
+        almuerzo = self.entry_almuerzo.get()
+        horas_extra = self.entry_horasExtra.get()
+        if id_colaborador:
+            estado_consulta = self.controlador.actualizar_horario(id_colaborador, dia_semana, prof1, prof2, prof3, almuerzo, horas_extra)
+            if estado_consulta:
+                messagebox.showinfo("Éxito", "Horario actualizado con éxito")
+                self.rellenar_horario()
+                self.entry_ingreso.delete(0, tk.END)
+                self.entry_salida.delete(0, tk.END)
+                self.entry_prof1.delete(0, tk.END)
+                self.entry_prof2.delete(0, tk.END)
+                self.entry_prof3.delete(0, tk.END)
+                self.entry_almuerzo.delete(0, tk.END)
+                self.entry_horasExtra.delete(0, tk.END)
+                 
+            else:
+                messagebox.showerror("Error", "Hubo un problema al actualizar el horario")
+        else:
+            messagebox.showerror("Error", "Debe seleccionar un dia de la semana")
 
     def rellenar_horario(self):
         seleccion = self.combobox_colaborador.get()
