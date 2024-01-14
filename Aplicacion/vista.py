@@ -1130,14 +1130,14 @@ class Vista:
 
         self.label_ingreso = ttk.Label(self.ventana_horario, text="Ingreso :")
         self.label_ingreso.place(x=170, y=60)
-        self.entry_ingreso = ttk.Entry(self.ventana_horario)
-        self.entry_ingreso.place(x=280, y=60)
+        self.label_info_ingreso = ttk.Label(self.ventana_horario, text="")
+        self.label_info_ingreso.place(x=280, y=60)
         
 
         self.label_salida = ttk.Label(self.ventana_horario, text="Salida :")
         self.label_salida.place(x=170, y=100)
-        self.entry_salida = ttk.Entry(self.ventana_horario)
-        self.entry_salida.place(x=280, y=100)
+        self.label_info_salida = ttk.Label(self.ventana_horario, text="")
+        self.label_info_salida.place(x=280, y=100)
 
         self.label_prof1 = ttk.Label(self.ventana_horario, text="Profiláctico 1:")
         self.label_prof1.place(x=170, y=140)
@@ -1204,12 +1204,8 @@ class Vista:
         if item:
             values = self.tree.item(item, "values")
             self.label_info_dia.config(text = values[0])
-            self.entry_ingreso.delete(0, tk.END)
-            self.entry_ingreso.insert(0, values[1]) 
-            self.entry_ingreso.config(state="readonly")
-            self.entry_salida.delete(0, tk.END)
-            self.entry_salida.insert(0, values[2]) 
-            self.entry_salida.config(state="readonly")
+            self.label_info_ingreso.config(text = values[1])
+            self.label_info_salida.config(text = values[2])
             self.entry_prof1.delete(0, tk.END)
             self.entry_prof1.insert(0, values[3])  
             #self.entry_prof1.config(state="readonly")
@@ -1238,8 +1234,8 @@ class Vista:
             if estado_consulta:
                 messagebox.showinfo("Éxito", "Horario actualizado con éxito")
                 self.rellenar_horario()
-                self.entry_ingreso.delete(0, tk.END)
-                self.entry_salida.delete(0, tk.END)
+                #self.entry_ingreso.delete(0, tk.END)
+                #self.entry_salida.delete(0, tk.END)
                 self.entry_prof1.delete(0, tk.END)
                 self.entry_prof2.delete(0, tk.END)
                 self.entry_prof3.delete(0, tk.END)
@@ -1263,8 +1259,8 @@ class Vista:
     def limpiar_datos_horario(self):     
         #self.actualizar_horario()
         self.label_info_dia.config(text="")
-        self.entry_ingreso.delete(0, tk.END)
-        self.entry_salida.delete(0, tk.END)
+        self.label_info_ingreso.config(text="")
+        self.label_info_salida.config(text="")
         self.entry_prof1.delete(0, tk.END)
         self.entry_prof2.delete(0, tk.END)
         self.entry_prof3.delete(0, tk.END)  
