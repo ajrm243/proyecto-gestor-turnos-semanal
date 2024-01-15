@@ -1121,7 +1121,11 @@ class Vista:
 
 #-------HORARIO--------
     def obtener_colaboradores_disponibles(self):
-        print(self.controlador.generar_horario())
+        lista_colaboradores_disponibles = self.controlador.generar_horario()
+        if type(lista_colaboradores_disponibles) == list:
+            messagebox.showinfo("Éxito", "Horario generado con éxito")
+        else:
+            messagebox.showerror("Error", "No hay colaboradores disponibles suficientes para generar horario")
 
     def abrir_ventana_horario(self, tipo_usuario):
         if tipo_usuario == "usuario":
