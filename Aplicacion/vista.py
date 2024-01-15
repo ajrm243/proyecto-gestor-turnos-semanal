@@ -76,10 +76,15 @@ class Vista:
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=110, text="Opciones de Colaborador", command=self.abrir_ventana_opcionesColaborador)
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=160, text="Opciones de Horario", command=self.abrir_ventana_opcionesHorario)
         self.crear_boton(self.ventana_menuPrincipal, x=170, y=210, text="Opciones de Usuario", command=self.abrir_ventana_usuarios)
-        self.crear_boton(self.ventana_menuPrincipal, x=170, y=260, text="Salir", command=self.salir_aplicacion)
+        self.crear_boton(self.ventana_menuPrincipal, x=170, y=260, text="Salir", command=lambda:self.salir_aplicacion("administrador"))
     
-    def salir_aplicacion(self):
-        self.ventana_menuPrincipal.destroy()
+    def salir_aplicacion(self, tipo_usuario):
+        if tipo_usuario == "administrador":
+            self.ventana_menuPrincipal.destroy()
+            self.ventana_login.deiconify()
+        else:
+            self.ventana_horario.destroy()
+            self.ventana_login.deiconify()
         
     #Ventana opciones de colaborador
     def abrir_ventana_opcionesColaborador(self):
@@ -1147,7 +1152,6 @@ class Vista:
         self.label_ingreso.place(x=170, y=60)
         self.label_info_ingreso = ttk.Label(self.ventana_horario, text="")
         self.label_info_ingreso.place(x=280, y=60)
-        
 
         self.label_salida = ttk.Label(self.ventana_horario, text="Salida :")
         self.label_salida.place(x=170, y=100)
@@ -1210,6 +1214,8 @@ class Vista:
 
         if tipo_usuario =="administrador":
             self.crear_boton(self.ventana_horario, x=380, y=550, text="Regresar", command=self.regresar_Horario)
+        else:
+            self.crear_boton(self.ventana_horario, x=380, y=550, text="Regresar", command=lambda: self.salir_aplicacion("usuario"))
         self.ventana_horario.mainloop()
 
     def regresar_Horario(self):
@@ -1285,12 +1291,23 @@ class Vista:
         self.entry_horasExtra.delete(0, tk.END)
 
     def generar_archivo_horario_completo(self):
-        self.controlador.generar_archivo_horario_completo()
+        exito = self.controlador.generar_archivo_horario_completo()
+        if exito:
+            messagebox.showinfo("Éxito", "Archivo horario completo generado con éxito.")
+        else:
+            messagebox.showerror("Error", "Error al generar el archivo horario completo.")
 
     def generar_archivo_horario_individual(self):
         seleccion = self.combobox_colaborador.get()
-        id_colaborador = int(seleccion.split(" ")[0])
-        self.controlador.generar_archivo_horario_individual(id_colaborador)
+        try:
+            id_colaborador = int(seleccion.split(" ")[0])
+            exito = self.controlador.generar_archivo_horario_individual(id_colaborador)
+            if exito:
+                messagebox.showinfo("Éxito", f"Archivo horario individual para el colaborador {id_colaborador} generado con éxito.")
+            else:
+                messagebox.showerror("Error", f"Error al generar el archivo horario individual para el colaborador {id_colaborador}.")
+        except ValueError:
+            messagebox.showerror("Error", "Selecciona un colaborador válido.")
 
         
 

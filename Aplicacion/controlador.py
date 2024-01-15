@@ -442,46 +442,56 @@ class Controlador:
         return estado_consulta
     
     def generar_archivo_horario_completo(self):
-        datos = self.modelo.obtener_horario_completo()
-        i = -1
-        id_colaborador, colaborador, diaSemana, ingreso, salida, prof_1, prof_2, prof_3, almuerzo, horasExtr = [], [], [], [], [], [], [], [], [], []
-        for dato in datos:
-            i = i+1
-            id_colaborador.append(datos[i][0])
-            colaborador.append(datos[i][1])
-            diaSemana.append(datos[i][2])
-            ingreso.append(datos[i][3])
-            salida.append(datos[i][4])
-            prof_1.append(datos[i][5])
-            prof_2.append(datos[i][6])
-            prof_3.append(datos[i][7])
-            almuerzo.append(datos[i][8])
-            horasExtr.append(datos[i][9])
-        fecha = str(datetime.now().strftime('%d-%m-%Y'))
-        datos = {"ID Colaborador": id_colaborador, "Nombre":colaborador,"Día":diaSemana,"Ingreso":ingreso,"Salida":salida,"Profiláctico 1":prof_1, "Profiláctico 2":prof_2, "Profiláctico 3": prof_3, "Almuerzo":almuerzo, "Horas Extra":horasExtr}
-        df = pd.DataFrame(datos,columns = ["ID Colaborador", "Nombre","Día","Ingreso","Salida","Profiláctico 1", "Profiláctico 2", "Profiláctico 3", "Almuerzo","Horas Extra"])
-        df.to_excel((f'HORARIO SEMANAL {fecha}.xlsx'))
+        try:
+            datos = self.modelo.obtener_horario_completo()
+            i = -1
+            id_colaborador, colaborador, diaSemana, ingreso, salida, prof_1, prof_2, prof_3, almuerzo, horasExtr = [], [], [], [], [], [], [], [], [], []
+            for dato in datos:
+                i = i+1
+                id_colaborador.append(datos[i][0])
+                colaborador.append(datos[i][1])
+                diaSemana.append(datos[i][2])
+                ingreso.append(datos[i][3])
+                salida.append(datos[i][4])
+                prof_1.append(datos[i][5])
+                prof_2.append(datos[i][6])
+                prof_3.append(datos[i][7])
+                almuerzo.append(datos[i][8])
+                horasExtr.append(datos[i][9])
+            fecha = str(datetime.now().strftime('%d-%m-%Y'))
+            datos = {"ID Colaborador": id_colaborador, "Nombre":colaborador,"Día":diaSemana,"Ingreso":ingreso,"Salida":salida,"Profiláctico 1":prof_1, "Profiláctico 2":prof_2, "Profiláctico 3": prof_3, "Almuerzo":almuerzo, "Horas Extra":horasExtr}
+            df = pd.DataFrame(datos,columns = ["ID Colaborador", "Nombre","Día","Ingreso","Salida","Profiláctico 1", "Profiláctico 2", "Profiláctico 3", "Almuerzo","Horas Extra"])
+            df.to_excel((f'HORARIO SEMANAL {fecha}.xlsx'))
+            return True
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
 
     def generar_archivo_horario_individual(self, id_colaborador):
-        datos = self.modelo.obtener_horario_individual(id_colaborador)
-        i = -1
-        ids_colaborador, colaborador, diaSemana, ingreso, salida, prof_1, prof_2, prof_3, almuerzo, horasExtr = [], [], [], [], [], [], [], [], [], []
-        for dato in datos:
-            i = i+1
-            ids_colaborador.append(datos[i][0])
-            colaborador.append(datos[i][1])
-            diaSemana.append(datos[i][2])
-            ingreso.append(datos[i][3])
-            salida.append(datos[i][4])
-            prof_1.append(datos[i][5])
-            prof_2.append(datos[i][6])
-            prof_3.append(datos[i][7])
-            almuerzo.append(datos[i][8])
-            horasExtr.append(datos[i][9])
-        fecha = str(datetime.now().strftime('%d-%m-%Y'))
-        datos = {"ID Colaborador": ids_colaborador, "Nombre":colaborador,"Día":diaSemana,"Ingreso":ingreso,"Salida":salida,"Profiláctico 1":prof_1, "Profiláctico 2":prof_2, "Profiláctico 3": prof_3, "Almuerzo":almuerzo, "Horas Extra":horasExtr}
-        df = pd.DataFrame(datos,columns = ["ID Colaborador", "Nombre","Día","Ingreso","Salida","Profiláctico 1", "Profiláctico 2", "Profiláctico 3", "Almuerzo","Horas Extra"])
-        df.to_excel((f'HORARIO {id_colaborador} {colaborador[0]} {fecha}.xlsx'))
+        try:
+            datos = self.modelo.obtener_horario_individual(id_colaborador)
+            i = -1
+            ids_colaborador, colaborador, diaSemana, ingreso, salida, prof_1, prof_2, prof_3, almuerzo, horasExtr = [], [], [], [], [], [], [], [], [], []
+            for dato in datos:
+                i = i+1
+                ids_colaborador.append(datos[i][0])
+                colaborador.append(datos[i][1])
+                diaSemana.append(datos[i][2])
+                ingreso.append(datos[i][3])
+                salida.append(datos[i][4])
+                prof_1.append(datos[i][5])
+                prof_2.append(datos[i][6])
+                prof_3.append(datos[i][7])
+                almuerzo.append(datos[i][8])
+                horasExtr.append(datos[i][9])
+            fecha = str(datetime.now().strftime('%d-%m-%Y'))
+            datos = {"ID Colaborador": ids_colaborador, "Nombre":colaborador,"Día":diaSemana,"Ingreso":ingreso,"Salida":salida,"Profiláctico 1":prof_1, "Profiláctico 2":prof_2, "Profiláctico 3": prof_3, "Almuerzo":almuerzo, "Horas Extra":horasExtr}
+            df = pd.DataFrame(datos,columns = ["ID Colaborador", "Nombre","Día","Ingreso","Salida","Profiláctico 1", "Profiláctico 2", "Profiláctico 3", "Almuerzo","Horas Extra"])
+            df.to_excel((f'HORARIO {id_colaborador} {colaborador[0]} {fecha}.xlsx'))
+            return True
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
 
 #--------MAIN----------
 if __name__ == "__main__":
