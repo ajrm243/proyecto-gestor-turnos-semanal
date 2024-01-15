@@ -376,7 +376,7 @@ class Modelo:
                                 WHEN 'Miercoles' THEN T.Miercoles_Ingreso
                                 WHEN 'Jueves' THEN T.Jueves_Ingreso
                                 WHEN 'Viernes' THEN T.Viernes_Ingreso
-                                WHEN 'Sábado' THEN T.Sabado_Ingreso
+                                WHEN 'Sabado' THEN T.Sabado_Ingreso
                                 WHEN 'Domingo' THEN T.Domingo_Ingreso
                                 ELSE NULL
                             END AS Ingreso_Dia,
@@ -386,7 +386,7 @@ class Modelo:
                                 WHEN 'Miercoles' THEN T.Miercoles_Salida
                                 WHEN 'Jueves' THEN T.Jueves_Salida
                                 WHEN 'Viernes' THEN T.Viernes_Salida
-                                WHEN 'Sábado' THEN T.Sabado_Salida
+                                WHEN 'Sabado' THEN T.Sabado_Salida
                                 WHEN 'Domingo' THEN T.Domingo_Salida
                                 ELSE NULL
                             END AS Salida_Dia,
@@ -430,20 +430,20 @@ class Modelo:
                             CASE H.DiaSemana
                                 WHEN 'Lunes' THEN T.Lunes_Ingreso
                                 WHEN 'Martes' THEN T.Martes_Ingreso
-                                WHEN 'Miércoles' THEN T.Miercoles_Ingreso
+                                WHEN 'Miercoles' THEN T.Miercoles_Ingreso
                                 WHEN 'Jueves' THEN T.Jueves_Ingreso
                                 WHEN 'Viernes' THEN T.Viernes_Ingreso
-                                WHEN 'Sábado' THEN T.Sabado_Ingreso
+                                WHEN 'Sabado' THEN T.Sabado_Ingreso
                                 WHEN 'Domingo' THEN T.Domingo_Ingreso
                                 ELSE NULL
                             END AS Ingreso_Dia,
                             CASE H.DiaSemana
                                 WHEN 'Lunes' THEN T.Lunes_Salida
                                 WHEN 'Martes' THEN T.Martes_Salida
-                                WHEN 'Miércoles' THEN T.Miercoles_Salida
+                                WHEN 'Miercoles' THEN T.Miercoles_Salida
                                 WHEN 'Jueves' THEN T.Jueves_Salida
                                 WHEN 'Viernes' THEN T.Viernes_Salida
-                                WHEN 'Sábado' THEN T.Sabado_Salida
+                                WHEN 'Sabado' THEN T.Sabado_Salida
                                 WHEN 'Domingo' THEN T.Domingo_Salida
                                 ELSE NULL
                             END AS Salida_Dia,
@@ -465,20 +465,20 @@ class Modelo:
                             CASE H.DiaSemana
                                 WHEN 'Lunes' THEN T.Lunes_Ingreso
                                 WHEN 'Martes' THEN T.Martes_Ingreso
-                                WHEN 'Miércoles' THEN T.Miercoles_Ingreso
+                                WHEN 'Miercoles' THEN T.Miercoles_Ingreso
                                 WHEN 'Jueves' THEN T.Jueves_Ingreso
                                 WHEN 'Viernes' THEN T.Viernes_Ingreso
-                                WHEN 'Sábado' THEN T.Sabado_Ingreso
+                                WHEN 'Sabado' THEN T.Sabado_Ingreso
                                 WHEN 'Domingo' THEN T.Domingo_Ingreso
                                 ELSE NULL
                             END AS Ingreso_Dia,
                             CASE H.DiaSemana
                                 WHEN 'Lunes' THEN T.Lunes_Salida
                                 WHEN 'Martes' THEN T.Martes_Salida
-                                WHEN 'Miércoles' THEN T.Miercoles_Salida
+                                WHEN 'Miercoles' THEN T.Miercoles_Salida
                                 WHEN 'Jueves' THEN T.Jueves_Salida
                                 WHEN 'Viernes' THEN T.Viernes_Salida
-                                WHEN 'Sábado' THEN T.Sabado_Salida
+                                WHEN 'Sabado' THEN T.Sabado_Salida
                                 WHEN 'Domingo' THEN T.Domingo_Salida
                                 ELSE NULL
                             END AS Salida_Dia,

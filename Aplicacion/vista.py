@@ -1192,7 +1192,7 @@ class Vista:
             self.crear_boton(self.ventana_horario, x=570, y=250, text="Actualizar Horario", command=self.actualizar_horario)
 
         self.campos_horario = ["","Hora Ingreso","Hora Salida", "Profiláctico 1", "Profiláctico 2","Profiláctico 3", "Almuerzo", "Horas Extra"]
-        self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sábado","Domingo"]
+        self.dias_semana = ["","Lunes", "Martes", "Miércoles", "Jueves", "Viernes","Sabado","Domingo"]
 
         self.tree = ttk.Treeview(self.ventana_horario, columns=self.campos_horario, show="headings", height=7)
         for col in self.campos_horario:
