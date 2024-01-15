@@ -155,7 +155,8 @@ class Controlador:
         return self.modelo.obtener_colaboradores_bonito()
     
     def obtener_colaboradores_nombre_id(self):
-        return self.modelo.obtener_colaboradores_nombre_id()
+        id_disponible = self.modelo.obtener_id_disponible()
+        return self.modelo.obtener_colaboradores_nombre_id(id_disponible)
     
 #--------HORARIO-----------
     

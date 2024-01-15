@@ -258,8 +258,8 @@ class Modelo:
         self.c.execute("SELECT * FROM Colaborador")
         return self.c.fetchall()
     
-    def obtener_colaboradores_nombre_id(self):
-        self.c.execute("SELECT ID_Colaborador, Nombre FROM Colaborador")
+    def obtener_colaboradores_nombre_id(self, id_disponibilidad):
+        self.c.execute("SELECT ID_Colaborador, Nombre FROM Colaborador WHERE ID_Disponibilidad = ?", (id_disponibilidad,))
         return self.c.fetchall()
     
     # Para comprobar si existe el correo en la BD
