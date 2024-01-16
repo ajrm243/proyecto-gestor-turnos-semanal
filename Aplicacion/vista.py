@@ -849,7 +849,6 @@ class Vista:
 
         nombre_roles = self.controlador.obtener_nombre_roles()
         roles_values = self.controlador.obtener_roles()
-        #print("roles", roles_values)
         dict_roles = {tup[0] : tup[1] for tup in roles_values}
         
         self.label_id_rol = ttk.Label(self.ventana_colaboradores, text="Rol:")
@@ -860,7 +859,6 @@ class Vista:
         
         nombre_turnos = self.controlador.obtener_nombre_turnos()
         turnos_values = self.controlador.obtener_turnos()
-        #print("turnos", turnos_values)
         dict_turnos = {tup[0] : tup[1] for tup in turnos_values}
 
         self.label_id_turno = ttk.Label(self.ventana_colaboradores, text="Turno:")
@@ -871,7 +869,6 @@ class Vista:
         
         nombre_disponibilidades = self.controlador.obtener_nombre_disponibilidades()
         disponibilidades_values = self.controlador.obtener_disponibilidades()
-        #print("disponibilidades", disponibilidades_values)
         dict_disponibilidades = {tup[0] : tup[1] for tup in disponibilidades_values}
         
         self.label_id_disponibilidad = ttk.Label(self.ventana_colaboradores, text="Disponibilidad:")
@@ -896,11 +893,9 @@ class Vista:
         
         # Filtros
         filtros = self.controlador.obtener_filtros_colaborador()
-        #print("Filtros:", filtros)
         dict_filtros = {'Todos': -1}
         filtros_bd = {tup[0] : tup[1] for tup in filtros}
         dict_filtros.update(filtros_bd)
-        #print("Dict:", dict_filtros)
         self.combobox_filtro_colaborador = ttk.Combobox(self.ventana_colaboradores, state="readonly")
         self.combobox_filtro_colaborador['values'] = list(dict_filtros.keys())
         self.combobox_filtro_colaborador.place(x=480, y=260)
@@ -972,7 +967,7 @@ class Vista:
                 messagebox.showerror("Error", "Por favor digite un número de teléfono válido")
                 return
             res_comprobacion_correo = self.controlador.comprobar_correo_colaborador(correo)
-            #print(res_comprobacion_correo)
+        
             if not res_comprobacion_correo:
                 estado_consulta = self.controlador.agregar_colaborador(
                     nombre, correo, telefono, rol, turno, disponibilidad, modalidad
@@ -1024,7 +1019,7 @@ class Vista:
                     filtro = 'C.Modalidad'
             valor = dict_filtros.get(filtro_seleccionado) # el valor es el ID de la tabla del filtro
             
-            print("Filtro y valor:", filtro, valor)
+            
             colaboradores_filtrados = self.controlador.filtrar_colaboradores(filtro, valor)
             self.tree.delete(*self.tree.get_children())
             for i, colaborador in enumerate(colaboradores_filtrados):

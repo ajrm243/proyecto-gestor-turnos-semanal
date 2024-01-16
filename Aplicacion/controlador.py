@@ -125,24 +125,27 @@ class Controlador:
         #self.vista.actualizar_lista_colaboradores()
     
     def cargar_lista_colaboradores(self, ruta):
-        file = pd.ExcelFile(ruta)
-        df = pd.read_excel(file, converters={'Telefono':str, 'Rol':int, 'Turno':int, 'Disponibilidad':int, 'Modalidad':int})
-        for row in df.to_records(index=False):
-            res_comprobacion = self.modelo.comprobar_correo_colaborador(row["Correo"])
-            if not res_comprobacion:
-                estado_consulta = self.modelo.agregar_colaborador(row["Nombre"], row["Correo"], row["Telefono"]
-                                                , row["Rol"].item(), row["Turno"].item(), row["Disponibilidad"].item()
-                                                , row["Modalidad"].item())
-                if (not estado_consulta):
-                    return False
-            else:
-                #Hay un colaborador que ya está en la base, se sigue
-                continue
+        try:
+            file = pd.ExcelFile(ruta)
+            df = pd.read_excel(file, converters={'Telefono':str, 'Rol':int, 'Turno':int, 'Disponibilidad':int, 'Modalidad':int})
+            for row in df.to_records(index=False):
+                res_comprobacion = self.modelo.comprobar_correo_colaborador(row["Correo"])
+                if not res_comprobacion:
+                    estado_consulta = self.modelo.agregar_colaborador(row["Nombre"], row["Correo"], row["Telefono"]
+                                                    , row["Rol"].item(), row["Turno"].item(), row["Disponibilidad"].item()
+                                                    , row["Modalidad"].item())
+                    if (not estado_consulta):
+                        return False
+                else:
+                    #Hay un colaborador que ya está en la base, se sigue
+                    continue
+        except:
+                return True
+        
         return True
     
     def comprobar_correo_colaborador(self, correo):
         estado_consulta = self.modelo.comprobar_correo_colaborador(correo)
-        #print(estado_consulta)
         return estado_consulta
     
     def obtener_filtros_colaborador(self):
@@ -164,11 +167,8 @@ class Controlador:
         id_disponible = self.modelo.obtener_id_disponible()
         lista_colaboradores_disponibles = self.modelo.obtener_colaboradores_disponibles(id_disponible)
         if len(lista_colaboradores_disponibles) >= 15:
-        #if len(lista_colaboradores_disponibles) >= 5:
-            print("Pasa")
             return lista_colaboradores_disponibles
         else:
-            print("No pasa")
             return 0
         
     def identificar_turno(self,colaborador, lista_turnos):
@@ -426,7 +426,6 @@ class Controlador:
                 
                 for dia in horario:
                     info_horario = [colaborador[0]]+dia
-                    print(info_horario)
                     self.modelo.agregar_horario(info_horario)
 
         return lista_colaboradores_disponibles
