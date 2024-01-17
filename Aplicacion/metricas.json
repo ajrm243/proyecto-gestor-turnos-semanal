@@ -1,0 +1,944 @@
+{
+    "files": {
+        "controlador.py": {
+            "block_positions": [
+                {
+                    "end": 487,
+                    "methods": [
+                        {
+                            "end": 17,
+                            "name": "inicio_usuario",
+                            "start": 14,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 21,
+                            "name": "inicio_admin",
+                            "start": 18,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 25,
+                            "name": "agregar_usuario",
+                            "start": 22,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 29,
+                            "name": "eliminar_usuario",
+                            "start": 26,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 33,
+                            "name": "actualizar_usuario",
+                            "start": 30,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 37,
+                            "name": "obtener_usuarios",
+                            "start": 34,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 41,
+                            "name": "agregar_rol",
+                            "start": 38,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 45,
+                            "name": "actualizar_rol",
+                            "start": 42,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 49,
+                            "name": "eliminar_rol",
+                            "start": 46,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 52,
+                            "name": "obtener_roles",
+                            "start": 50,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 55,
+                            "name": "obtener_nombre_roles",
+                            "start": 53,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 61,
+                            "name": "comprobar_nombre_rol",
+                            "start": 56,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 65,
+                            "name": "agregar_disponibilidad",
+                            "start": 62,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 69,
+                            "name": "actualizar_disponibilidad",
+                            "start": 66,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 73,
+                            "name": "eliminar_disponibilidad",
+                            "start": 70,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 76,
+                            "name": "obtener_disponibilidades",
+                            "start": 74,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 79,
+                            "name": "obtener_nombre_disponibilidades",
+                            "start": 77,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 85,
+                            "name": "comprobar_nombre_disponibilidad",
+                            "start": 80,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 89,
+                            "name": "agregar_turno",
+                            "start": 86,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 93,
+                            "name": "actualizar_turno",
+                            "start": 90,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 97,
+                            "name": "eliminar_turno",
+                            "start": 94,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 100,
+                            "name": "obtener_turnos",
+                            "start": 98,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 103,
+                            "name": "obtener_nombre_turnos",
+                            "start": 101,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 110,
+                            "name": "comprobar_nombre_turno",
+                            "start": 104,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 114,
+                            "name": "agregar_colaborador",
+                            "start": 111,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 118,
+                            "name": "actualizar_colaborador",
+                            "start": 115,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 122,
+                            "name": "eliminar_colaborador",
+                            "start": 119,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 126,
+                            "name": "obtener_colaboradores",
+                            "start": 123,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 130,
+                            "name": "cargar_lista_colaboradores",
+                            "start": 127,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 150,
+                            "name": "comprobar_correo_colaborador",
+                            "start": 147,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 153,
+                            "name": "obtener_filtros_colaborador",
+                            "start": 151,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 156,
+                            "name": "filtrar_colaboradores",
+                            "start": 154,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 159,
+                            "name": "obtener_colaboradores_bonito",
+                            "start": 157,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 165,
+                            "name": "obtener_colaboradores_nombre_id",
+                            "start": 160,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 173,
+                            "name": "obtener_colaboradores_disponibles",
+                            "start": 166,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 179,
+                            "name": "identificar_turno",
+                            "start": 174,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 416,
+                            "name": "informacion_turno",
+                            "start": 180,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 432,
+                            "name": "generar_horario",
+                            "start": 417,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 435,
+                            "name": "obtener_horario_colaborador",
+                            "start": 433,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 438,
+                            "name": "obtener_horario_colaborador2",
+                            "start": 436,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 442,
+                            "name": "actualizar_horario",
+                            "start": 439,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 461,
+                            "name": "generar_archivo_horario_completo",
+                            "start": 443,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 487,
+                            "name": "generar_archivo_horario_individual",
+                            "start": 469,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Controlador",
+                    "start": 7,
+                    "type": "Class"
+                }
+            ],
+            "comments": 11,
+            "language": "Python",
+            "mccabe": 15,
+            "ratio_comment_to_code": 0.03,
+            "sloc": 431
+        },
+        "modelo.py": {
+            "block_positions": [
+                {
+                    "end": 301,
+                    "methods": [
+                        {
+                            "end": 32,
+                            "name": "inicio_usuario",
+                            "start": 26,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 41,
+                            "name": "agregar_usuario",
+                            "start": 33,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 50,
+                            "name": "eliminar_usuario",
+                            "start": 42,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 59,
+                            "name": "actualizar_usuario",
+                            "start": 51,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 65,
+                            "name": "obtener_usuarios",
+                            "start": 60,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 74,
+                            "name": "agregar_rol",
+                            "start": 66,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 83,
+                            "name": "eliminar_rol",
+                            "start": 75,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 92,
+                            "name": "actualizar_rol",
+                            "start": 84,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 96,
+                            "name": "obtener_roles",
+                            "start": 93,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 100,
+                            "name": "obtener_nombre_roles",
+                            "start": 97,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 106,
+                            "name": "comprobar_nombre_rol",
+                            "start": 101,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 115,
+                            "name": "agregar_disponibilidad",
+                            "start": 107,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 124,
+                            "name": "eliminar_disponibilidad",
+                            "start": 116,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 133,
+                            "name": "actualizar_disponibilidad",
+                            "start": 125,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 137,
+                            "name": "obtener_disponibilidades",
+                            "start": 134,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 141,
+                            "name": "obtener_nombre_disponibilidades",
+                            "start": 138,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 147,
+                            "name": "comprobar_nombre_disponibilidad",
+                            "start": 142,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 156,
+                            "name": "agregar_turno",
+                            "start": 148,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 165,
+                            "name": "eliminar_turno",
+                            "start": 157,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 174,
+                            "name": "actualizar_turno",
+                            "start": 166,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 178,
+                            "name": "obtener_turnos",
+                            "start": 175,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 182,
+                            "name": "obtener_nombre_turnos",
+                            "start": 179,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 188,
+                            "name": "comprobar_nombre_turno",
+                            "start": 183,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 197,
+                            "name": "agregar_colaborador",
+                            "start": 189,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 206,
+                            "name": "eliminar_colaborador",
+                            "start": 198,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 215,
+                            "name": "actualizar_colaborador",
+                            "start": 207,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 219,
+                            "name": "obtener_colaboradores",
+                            "start": 216,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 224,
+                            "name": "obtener_colaboradores_nombre_id",
+                            "start": 220,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 228,
+                            "name": "comprobar_correo_colaborador",
+                            "start": 225,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 232,
+                            "name": "obtener_filtros_colaborador",
+                            "start": 229,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 236,
+                            "name": "filtrar_colaboradores",
+                            "start": 233,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 242,
+                            "name": "obtener_colaboradores_bonito",
+                            "start": 237,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 250,
+                            "name": "obtener_id_disponible",
+                            "start": 243,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 254,
+                            "name": "obtener_colaboradores_disponibles",
+                            "start": 251,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 264,
+                            "name": "agregar_horario",
+                            "start": 255,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 273,
+                            "name": "eliminar_horario",
+                            "start": 265,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 277,
+                            "name": "obtener_horario_colaborador",
+                            "start": 274,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 281,
+                            "name": "obtener_horario_colaborador2",
+                            "start": 278,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 290,
+                            "name": "actualizar_horario",
+                            "start": 282,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 294,
+                            "name": "obtener_horario_completo",
+                            "start": 291,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 299,
+                            "name": "obtener_horario_individual",
+                            "start": 295,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 301,
+                            "name": "cerrar_conexion",
+                            "start": 300,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Modelo",
+                    "start": 3,
+                    "type": "Class"
+                }
+            ],
+            "comments": 10,
+            "language": "Python",
+            "mccabe": 4,
+            "ratio_comment_to_code": 0.04,
+            "sloc": 235
+        },
+        "vista.py": {
+            "block_positions": [
+                {
+                    "end": 1319,
+                    "methods": [
+                        {
+                            "end": 36,
+                            "name": "inicio_usuario",
+                            "start": 32,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 42,
+                            "name": "procesar_inicio_usuario",
+                            "start": 37,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 47,
+                            "name": "inicio_admin",
+                            "start": 43,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 54,
+                            "name": "procesar_inicio_admin",
+                            "start": 48,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 67,
+                            "name": "crear_boton",
+                            "start": 55,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 80,
+                            "name": "abrir_menuPrincipal",
+                            "start": 68,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 89,
+                            "name": "salir_aplicacion",
+                            "start": 81,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 104,
+                            "name": "abrir_ventana_opcionesColaborador",
+                            "start": 90,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 109,
+                            "name": "regresar_opcionesColaborador",
+                            "start": 105,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 121,
+                            "name": "abrir_ventana_opcionesHorario",
+                            "start": 110,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 127,
+                            "name": "regresar_menuPrincipal",
+                            "start": 122,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 169,
+                            "name": "abrir_ventana_usuarios",
+                            "start": 128,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 184,
+                            "name": "agregar_usuario",
+                            "start": 170,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 191,
+                            "name": "actualizar_lista_usuarios",
+                            "start": 185,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 201,
+                            "name": "seleccionar_campos_usuarios",
+                            "start": 192,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 216,
+                            "name": "eliminar_usuario",
+                            "start": 202,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 233,
+                            "name": "actualizar_usuario",
+                            "start": 217,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 238,
+                            "name": "limpiar_datos_usuario",
+                            "start": 234,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 244,
+                            "name": "regresar_usuarios",
+                            "start": 239,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 286,
+                            "name": "abrir_ventana_roles",
+                            "start": 245,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 305,
+                            "name": "agregar_rol",
+                            "start": 287,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 312,
+                            "name": "actualizar_lista_roles",
+                            "start": 306,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 322,
+                            "name": "seleccionar_campos_roles",
+                            "start": 313,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 339,
+                            "name": "eliminar_rol",
+                            "start": 323,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 357,
+                            "name": "actualizar_rol",
+                            "start": 340,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 362,
+                            "name": "limpiar_datos_rol",
+                            "start": 358,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 368,
+                            "name": "regresar_roles",
+                            "start": 363,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 410,
+                            "name": "abrir_ventana_disponibilidades",
+                            "start": 369,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 429,
+                            "name": "agregar_disponibilidad",
+                            "start": 411,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 436,
+                            "name": "actualizar_lista_disponibilidades",
+                            "start": 430,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 447,
+                            "name": "seleccionar_campos_disponibilidades",
+                            "start": 437,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 463,
+                            "name": "eliminar_disponibilidad",
+                            "start": 448,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 480,
+                            "name": "actualizar_disponibilidad",
+                            "start": 464,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 485,
+                            "name": "limpiar_datos_disponibilidad",
+                            "start": 481,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 491,
+                            "name": "regresar_disponibilidades",
+                            "start": 486,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 627,
+                            "name": "abrir_ventana_turnos",
+                            "start": 492,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 675,
+                            "name": "agregar_turno",
+                            "start": 628,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 682,
+                            "name": "actualizar_lista_turnos",
+                            "start": 676,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 718,
+                            "name": "seleccionar_campos_turnos",
+                            "start": 683,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 753,
+                            "name": "eliminar_turno",
+                            "start": 719,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 798,
+                            "name": "actualizar_turno",
+                            "start": 754,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 816,
+                            "name": "limpiar_datos_turno",
+                            "start": 799,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 821,
+                            "name": "regresar_turnos",
+                            "start": 817,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 936,
+                            "name": "abrir_ventana_colaboradores",
+                            "start": 822,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 991,
+                            "name": "agregar_colaborador",
+                            "start": 937,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 998,
+                            "name": "actualizar_lista_colaboradores",
+                            "start": 992,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1006,
+                            "name": "filtrar_lista_colaboradores",
+                            "start": 999,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1048,
+                            "name": "seleccionar_campos_colaboradores",
+                            "start": 1029,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1068,
+                            "name": "eliminar_colaborador",
+                            "start": 1049,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1106,
+                            "name": "actualizar_colaborador",
+                            "start": 1069,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1117,
+                            "name": "limpiar_datos_colaborador",
+                            "start": 1107,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1122,
+                            "name": "regresar_colaboradores",
+                            "start": 1118,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1129,
+                            "name": "obtener_colaboradores_disponibles",
+                            "start": 1123,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1215,
+                            "name": "abrir_ventana_horario",
+                            "start": 1130,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1219,
+                            "name": "regresar_Horario",
+                            "start": 1216,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1240,
+                            "name": "seleccionar_campos_horario",
+                            "start": 1220,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1267,
+                            "name": "actualizar_horario",
+                            "start": 1241,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1276,
+                            "name": "rellenar_horario",
+                            "start": 1268,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1287,
+                            "name": "limpiar_datos_horario",
+                            "start": 1277,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1294,
+                            "name": "generar_archivo_horario_completo",
+                            "start": 1288,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1310,
+                            "name": "generar_archivo_horario_individual",
+                            "start": 1295,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1313,
+                            "name": "iniciar_aplicacion",
+                            "start": 1311,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 1319,
+                            "name": "abrir_ventana_explorador_archivos",
+                            "start": 1314,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Vista",
+                    "start": 7,
+                    "type": "Class"
+                }
+            ],
+            "comments": 34,
+            "language": "Python",
+            "mccabe": 145,
+            "ratio_comment_to_code": 0.03,
+            "sloc": 1103
+        }
+    }
+}
+
